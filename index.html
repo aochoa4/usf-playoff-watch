@@ -778,11 +778,12 @@ if (typeof module !== "undefined") module.exports = MODEL;
       const ft = h("table", {}, h("thead", {}, h("tr", {}, h("th", { text: "USF final pts" }), h("th", { class: "r", text: "Chance" }), h("th", { text: "Top 4 if so" }))));
       const ftb = h("tbody");
       const nameCodes = (s) => s.replace(/\b(POR|DEN|PAC|SEA|USD|SCU|USF|SMC|LMU)\b/g, (c) => SHORT[c]);
+      const verb = (s) => s.replace(/\bloses\b/g, "lose").replace(/\bdraws\b/g, "draw").replace(/\bwins out\b/g, "win out");
       fin.forEach((x) => {
         const range = x.best && x.worst && x.best.top4 - x.worst.top4 >= 0.04
           ? h("div", { class: "route small muted tab" },
-              h("div", { text: pct(x.worst.top4) + " if USF " + nameCodes(x.worst.label) }),
-              h("div", { text: pct(x.best.top4) + " if USF " + nameCodes(x.best.label) }))
+              h("div", { text: "Worst: " + verb(nameCodes(x.worst.label)) + " (" + pct(x.worst.top4) + ")" }),
+              h("div", { text: "Best: " + verb(nameCodes(x.best.label)) + " (" + pct(x.best.top4) + ")" }))
           : null;
         ftb.append(h("tr", out.line === x.pts ? { class: "cut" } : {},
           h("td", {}, h("span", { class: "final-score", text: String(x.pts) }), out.line === x.pts ? [" ", h("span", { class: "cutlabel", text: "the line" })] : null),
@@ -809,7 +810,7 @@ if (typeof module !== "undefined") module.exports = MODEL;
         h("div", { class: "card" }, h("h3", { text: "One game at a time" }), h("div", { class: "scroll" }, gt),
           h("p", { class: "small muted", text: "Win, draw and loss are USF's chances in that game. The last three columns change only that one game and leave USF's other games undecided. A win over Portland scores higher than a win at LMU because it leaves the easier games still to play." })),
         h("div", { class: "card" }, h("h3", { text: "Where USF could finish" }), h("div", { class: "scroll" }, ft),
-          h("p", { class: "small muted", text: "The bar averages every way of reaching that total. The lines under it show the worst and best routes, since dropping points to Pacific or Seattle U hurts more than dropping them to Portland or LMU." }))));
+          h("p", { class: "small muted", text: "Each total can be reached more than one way. Twelve points means three wins and one loss, but the loss could come in any of the four games. The bar averages all of them. Worst and best show which dropped game hurts most and least: giving points to a rival for fourth, like Pacific or Seattle U, hurts more than giving them to Portland or LMU." }))));
       frag.append(sec);
     }
 
