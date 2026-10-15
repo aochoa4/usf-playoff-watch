@@ -95,6 +95,11 @@ tr.cut td { border-bottom: 2px dashed var(--gold); }
 .pill.final { background: var(--line); color: var(--ink); }
 .pill.lock { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold); }
 .pill.hot { background: var(--green-soft); color: var(--green); }
+.delta { font-size: 0.75rem; font-weight: 600; color: var(--gold); margin-left: 4px; }
+.move { font-size: 0.72rem; font-weight: 600; margin-left: 6px; }
+.move.up { color: var(--good); }
+.move.down { color: var(--bad); }
+tr.wi td:first-child { box-shadow: inset 3px 0 0 var(--gold); }
 
 .meter { position: relative; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; min-width: 80px; }
 .meter > span { position: absolute; inset: 0 auto 0 0; background: var(--green); border-radius: 4px; }
@@ -722,6 +727,27 @@ function makeModel(LEAGUE) {
       left: left[i], max: pts[i] + 3 * left[i],
     }));
 
+    // Table with the what-if results added. What-ifs carry a result but no score, so goal difference stays real.
+    const isLock = (o) => o === "H" || o === "D" || o === "A";
+    const locked = remaining.filter((g) => isLock(whatIf[g.id]));
+    const pPts = pts.slice(), pW = w.slice(), pL = l.slice(), pT = t.slice(), pGd = gd.slice();
+    const pH2h = new Float64Array(h2h), pLeft = left.slice(), wiCount = new Array(N).fill(0);
+    locked.forEach((g) => {
+      const o = whatIf[g.id];
+      pLeft[g.h]--; pLeft[g.a]--; wiCount[g.h]++; wiCount[g.a]++;
+      if (o === "H") { pPts[g.h] += 3; pW[g.h]++; pL[g.a]++; pH2h[g.h * N + g.a] += 3; }
+      else if (o === "A") { pPts[g.a] += 3; pW[g.a]++; pL[g.h]++; pH2h[g.a * N + g.h] += 3; }
+      else { pPts[g.h]++; pPts[g.a]++; pT[g.h]++; pT[g.a]++; pH2h[g.h * N + g.a]++; pH2h[g.a * N + g.h]++; }
+    });
+    const nowPos = {};
+    standings.forEach((s) => (nowPos[s.code] = s.pos));
+    const projected = locked.length === 0 ? null : rank(pPts, pGd, pH2h, (i) => -i).map((i, k) => ({
+      code: TEAMS[i].code, name: TEAMS[i].name, pos: k + 1, gp: pW[i] + pL[i] + pT[i],
+      w: pW[i], l: pL[i], t: pT[i], pts: pPts[i], gd: pGd[i],
+      left: pLeft[i], max: pPts[i] + 3 * pLeft[i],
+      added: pPts[i] - pts[i], whatIfs: wiCount[i], was: nowPos[TEAMS[i].code],
+    }));
+
     // Ratings from every game: conference (weight 1) and nonconference (weight ncWeight)
     const oppIdx = {}, oppNames = [];
     nonconf.forEach((x) => { if (oppIdx[x.opp] === undefined) { oppIdx[x.opp] = N + oppNames.length; oppNames.push(x.opp); } });
@@ -757,9 +783,14 @@ function makeModel(LEAGUE) {
         const g = remaining[k];
         let hg, ag;
         const lock = whatIf[g.id];
-        if (lock === "H") { hg = 1; ag = 0; }
-        else if (lock === "D") { hg = 0; ag = 0; }
-        else if (lock === "A") { hg = 0; ag = 1; }
+        if (isLock(lock)) {
+          // A locked result still gets a realistic score: draw scorelines until one matches the result,
+          // so a locked win is worth the same goal difference as the wins the simulation produces itself.
+          const ok = () => (lock === "H" ? hg > ag : lock === "A" ? hg < ag : hg === ag);
+          let tries = 0;
+          do { hg = poisson(lams[k][0], r); ag = poisson(lams[k][1], r); } while (!ok() && ++tries < 400);
+          if (!ok()) { hg = lock === "H" ? 1 : 0; ag = lock === "A" ? 1 : 0; }
+        }
         else { hg = poisson(lams[k][0], r); ag = poisson(lams[k][1], r); }
         GD[g.h] += hg - ag; GD[g.a] += ag - hg;
         let o;
@@ -811,11 +842,12 @@ function makeModel(LEAGUE) {
 
     // Win-out path: USF wins its remaining games in date order.
     const usfK = [];
-    remaining.forEach((g, k) => { if (g.h === USF || g.a === USF) usfK.push(k); });
+    // USF games already locked by a what-if are settled, so the path and routes cover the open ones.
+    remaining.forEach((g, k) => { if ((g.h === USF || g.a === USF) && !isLock(whatIf[g.id])) usfK.push(k); });
     const winPath = [];
     {
       const mask = new Uint8Array(nS).fill(1);
-      let ptsAfter = pts[USF];
+      let ptsAfter = pPts[USF];
       usfK.forEach((k) => {
         const g = remaining[k];
         const winCode = g.h === USF ? 0 : 2;
@@ -882,7 +914,7 @@ function makeModel(LEAGUE) {
     // Winning out is the one route to the maximum total, so its exact figure stands in for a thin sample.
     const lastStep = winPath[winPath.length - 1];
     if (lastStep && lastStep.top4 != null) {
-      const maxPts = pts[USF] + 3 * left[USF];
+      const maxPts = pPts[USF] + 3 * pLeft[USF];
       const row = finals.find((x) => x.pts === maxPts);
       if (!row) finals.unshift({ pts: maxPts, share: lastStep.n / nS, top4: lastStep.top4, n: lastStep.n, best: null, worst: null, exact: true });
       else if (row.n < 150) { row.top4 = lastStep.top4; row.exact = true; }
@@ -896,9 +928,10 @@ function makeModel(LEAGUE) {
     });
 
     return {
-      standings, top4, seeds, usfGames, swings, finals, winPath, ratings, winOutSwings,
+      standings, projected, whatIfCount: locked.length, top4, seeds, usfGames, swings, finals, winPath, ratings, winOutSwings,
       line: line === undefined ? null : line,
-      usf: { pts: pts[USF], left: left[USF], max: pts[USF] + 3 * left[USF] },
+      usf: { pts: pPts[USF], left: pLeft[USF], max: pPts[USF] + 3 * pLeft[USF] },
+      usfNow: { pts: pts[USF], left: left[USF], max: pts[USF] + 3 * left[USF] },
       played: played.length, remaining: R, sims: nS, nonconfCount: nonconf.length,
       allGames: remaining.map((g, k) => ({ id: g.id, probs: probs[k], xg: lams[k] })),
     };
@@ -1075,7 +1108,7 @@ if (typeof module !== "undefined") module.exports = makeModel;
 
     // ---- summary tiles ----
     const nextGame = out.usfGames.filter((g) => !g.lock)[0] || out.usfGames[0];
-    const usfRow = out.standings.find((s) => s.code === "USF");
+    const usfRow = out.usf;  // includes any what-if results
     const lineRow = out.line !== null ? out.finals.find((x) => x.pts === out.line) : null;
     const tiles = h("div", { class: "tiles" },
       h("div", { class: "tile lead" },
@@ -1083,7 +1116,7 @@ if (typeof module !== "undefined") module.exports = makeModel;
         h("span", { class: "num", text: out.remaining === 0 && out.top4.USF === 1 ? "In" : out.remaining === 0 && out.top4.USF === 0 ? "Out" : pct(out.top4.USF) }),
         h("span", { class: "sub", text: out.remaining === 0 ? "Final table" : "Across " + out.sims.toLocaleString() + " simulated seasons" })),
       h("div", { class: "tile" },
-        h("span", { class: "label", text: "Points" }),
+        h("span", { class: "label", text: nLocks ? "Points with what-ifs" : "Points" }),
         h("span", { class: "num", text: String(usfRow.pts) }),
         h("span", { class: "sub", text: usfRow.left + (usfRow.left === 1 ? " game" : " games") + " left · max " + usfRow.max })),
       h("div", { class: "tile" },
@@ -1141,7 +1174,7 @@ if (typeof module !== "undefined") module.exports = makeModel;
       // Win-out path: cumulative odds as USF stacks wins in date order
       const pathCard = h("div", { class: "card" }, h("h3", { text: "If USF wins out" }));
       const steps = h("div", { class: "path" },
-        h("div", { class: "step now" }, h("span", { class: "steplab", text: "Today" }), h("span", { class: "stepnum tab", text: pct(out.top4.USF) }), h("span", { class: "stepsub tab", text: out.usf.pts + " pts" })));
+        h("div", { class: "step now" }, h("span", { class: "steplab", text: nLocks ? "With what-ifs" : "Today" }), h("span", { class: "stepnum tab", text: pct(out.top4.USF) }), h("span", { class: "stepsub tab", text: out.usf.pts + " pts" })));
       out.winPath.forEach((p) => {
         const home = p.home === "USF";
         steps.append(h("div", { class: "step" },
@@ -1184,26 +1217,31 @@ if (typeof module !== "undefined") module.exports = makeModel;
 
     // ---- table ----
     {
+      const proj = out.projected;
       const sec = h("section", { id: "table" }, h("div", { class: "sechead" }, h("h2", { text: "Conference table" }),
-        h("span", { class: "small muted", text: "Top four make the tournament" })));
+        h("span", { class: "small muted", text: proj ? "With " + out.whatIfCount + (out.whatIfCount === 1 ? " what-if result" : " what-if results") + " added" : "Top four make the tournament" })));
       const t = h("table", {}, h("thead", {}, h("tr", {},
         h("th", { class: "r", text: "#" }), h("th", { text: "Team" }), h("th", { class: "r", text: "W-L-T" }), h("th", { class: "r", text: "Pts" }),
         h("th", { class: "r", text: "GD" }), h("th", { class: "r", text: "Left" }), h("th", { class: "r", text: "Max" }), h("th", { text: "Top 4" }))));
       const tb = h("tbody");
-      out.standings.forEach((s) => {
-        const cls = [s.code === "USF" ? "usf" : "", s.pos === 4 ? "cut" : ""].join(" ").trim();
+      (proj || out.standings).forEach((s) => {
+        const cls = [s.code === "USF" ? "usf" : "", s.pos === 4 ? "cut" : "", s.whatIfs ? "wi" : ""].join(" ").trim();
+        const moved = proj && s.was !== s.pos
+          ? h("span", { class: "move tab " + (s.pos < s.was ? "up" : "down"), title: "Was " + s.was + " before the what-ifs", text: (s.pos < s.was ? "▲" : "▼") + Math.abs(s.was - s.pos) })
+          : null;
         tb.append(h("tr", cls ? { class: cls } : {},
           h("td", { class: "r", text: String(s.pos) }),
-          h("td", {}, s.name, s.pos === 4 ? [" ", h("span", { class: "cutlabel", text: "tournament line" })] : null),
+          h("td", {}, s.name, moved, s.pos === 4 ? [" ", h("span", { class: "cutlabel", text: "tournament line" })] : null),
           h("td", { class: "r", text: s.w + "-" + s.l + "-" + s.t }),
-          h("td", { class: "r", text: String(s.pts) }),
+          h("td", { class: "r" }, String(s.pts), proj && s.added > 0 ? h("span", { class: "delta", text: "+" + s.added }) : null),
           h("td", { class: "r", text: (s.gd > 0 ? "+" : "") + s.gd }),
           h("td", { class: "r", text: String(s.left) }),
           h("td", { class: "r", text: String(s.max) }),
           h("td", {}, meter(out.top4[s.code]))));
       });
       t.append(tb);
-      sec.append(h("div", { class: "card" }, h("div", { class: "scroll" }, t)));
+      sec.append(h("div", { class: "card" }, h("div", { class: "scroll" }, t),
+        proj ? h("p", { class: "small muted", text: "Gold-edged rows have a what-if result. The small number after the points is what the what-ifs added. Goal difference counts real scores only. Clear the what-ifs to see the real table." }) : null));
       frag.append(sec);
     }
 
