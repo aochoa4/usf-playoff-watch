@@ -1,0 +1,1102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>USF Playoff Watch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one scoreboard column. Summary strip, then what USF needs, who to root for,
+   the table with the tournament line, and the fixture list where scores get entered. */
+:root {
+  --bg: #f4f6f2;
+  --panel: #ffffff;
+  --ink: #15211b;
+  --muted: #5d6a62;
+  --line: #d7ded8;
+  --green: #0b5d41;
+  --green-soft: #e3efe8;
+  --gold: #94690a;
+  --gold-soft: #fbf1d6;
+  --good: #1f7a4d;
+  --warn: #a8670a;
+  --bad: #b0412e;
+  --bar: #c9d8cf;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1613; --panel: #16201b; --ink: #e5ece7; --muted: #9aa89f; --line: #2a3832;
+    --green: #5cc896; --green-soft: #1b3127; --gold: #e8b84a; --gold-soft: #33290f;
+    --good: #5cc896; --warn: #e8b84a; --bad: #ef7d68; --bar: #2f4a3d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1613; --panel: #16201b; --ink: #e5ece7; --muted: #9aa89f; --line: #2a3832;
+  --green: #5cc896; --green-soft: #1b3127; --gold: #e8b84a; --gold-soft: #33290f;
+  --good: #5cc896; --warn: #e8b84a; --bad: #ef7d68; --bar: #2f4a3d; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 48px;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, .num { font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1; margin: 0; font-weight: 700; letter-spacing: 0.01em; text-wrap: balance; }
+h2 { font-size: 1.55rem; margin: 0; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); font-weight: 600; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+.tab { font-variant-numeric: tabular-nums; }
+header { display: flex; flex-direction: column; gap: 8px; }
+.lede { max-width: 62ch; color: var(--muted); }
+.statusrow { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 0.85rem; color: var(--muted); }
+.toggle { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.toggle input { width: 16px; height: 16px; accent-color: var(--green); }
+
+.scenario { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 14px; border-radius: 8px;
+  background: var(--gold-soft); border: 1px solid var(--gold); font-size: 0.9rem; }
+.scenario strong { font-weight: 600; }
+
+section { display: flex; flex-direction: column; gap: 14px; }
+.sechead { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tile .label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.tile .num { font-size: 2.6rem; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tile .num.text { font-size: 1.9rem; }
+.tile.lead { background: var(--green); border-color: var(--green); color: var(--bg); }
+.tile.lead .label, .tile.lead .sub { color: var(--bg); opacity: 0.85; }
+.tile .sub { font-size: 0.85rem; color: var(--muted); }
+
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.r, td.r { text-align: right; }
+tr.usf td { background: var(--green-soft); font-weight: 600; }
+tr.cut td { border-bottom: 2px dashed var(--gold); }
+.cutlabel { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+.pct { font-weight: 600; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; }
+.pill.final { background: var(--line); color: var(--ink); }
+.pill.lock { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold); }
+.pill.hot { background: var(--green-soft); color: var(--green); }
+
+.meter { position: relative; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; min-width: 80px; }
+.meter > span { position: absolute; inset: 0 auto 0 0; background: var(--green); border-radius: 4px; }
+.cell-meter { display: flex; gap: 10px; align-items: center; }
+.cell-meter .meter { flex: 1; }
+.cell-meter .pct { width: 3.2em; text-align: right; }
+
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+.roots { display: flex; flex-direction: column; gap: 0; }
+.root { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.root:last-child { border-bottom: 0; }
+.root .who { font-weight: 600; }
+.root .detail { grid-column: 1 / -1; font-size: 0.85rem; color: var(--muted); }
+.swing { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--green); text-align: right; }
+
+.path { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.step { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-right: 1px solid var(--line); min-width: 0; }
+.step:last-child { border-right: 0; }
+.step.now { background: var(--green-soft); }
+.steplab { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+.stepnum { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; line-height: 1.05; }
+.stepsub { font-size: 0.78rem; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { font: inherit; font-size: 0.82rem; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--bg); font-weight: 600; }
+.chips button:hover { border-color: var(--green); }
+.edge-usf { color: var(--good); font-weight: 600; }
+.edge-them { color: var(--bad); font-weight: 600; }
+.route { margin-top: 4px; line-height: 1.35; white-space: normal; }
+.day { display: flex; flex-direction: column; }
+.dayhead { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; letter-spacing: 0.03em; padding: 10px 0 4px; border-bottom: 1px solid var(--ink); }
+.fx { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.fx.usf { background: linear-gradient(90deg, var(--green-soft), transparent 70%); }
+.fx .time { font-size: 0.82rem; color: var(--muted); }
+.fx .teams { font-weight: 500; min-width: 0; }
+.fx .teams .at { color: var(--muted); font-weight: 400; }
+.fx .odds { font-size: 0.8rem; color: var(--muted); }
+.fx .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
+@media (max-width: 640px) {
+  .fx { grid-template-columns: 3.8rem minmax(0, 1fr); }
+  .fx .controls { grid-column: 1 / -1; justify-content: flex-start; }
+}
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { font: inherit; font-size: 0.78rem; padding: 4px 9px; background: var(--panel); color: var(--ink); border: 0; border-right: 1px solid var(--line); cursor: pointer; min-width: 2.8rem; }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--gold); color: var(--bg); font-weight: 600; }
+.seg button:hover { background: var(--gold-soft); }
+.seg button[aria-pressed="true"]:hover { background: var(--gold); }
+.score { display: inline-flex; gap: 4px; align-items: center; }
+.score input { width: 2.6rem; font: inherit; font-size: 0.9rem; padding: 3px 4px; text-align: center; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); color: var(--ink); }
+.score .dash { color: var(--muted); }
+.btn { font: inherit; font-size: 0.8rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--green); background: var(--green); color: var(--bg); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--green); }
+.btn.quiet { background: transparent; color: var(--muted); border-color: var(--line); font-weight: 500; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.final-score { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+details { border-top: 1px solid var(--line); }
+summary { cursor: pointer; padding: 10px 0; font-weight: 600; }
+.empty { padding: 24px; text-align: center; color: var(--muted); background: var(--panel); border: 1px dashed var(--line); border-radius: 8px; }
+.note { font-size: 0.85rem; color: var(--muted); max-width: 72ch; }
+.err { color: var(--bad); font-size: 0.85rem; }
+@media (prefers-reduced-motion: no-preference) { .meter > span { transition: width 0.4s ease; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">WCC Men's Soccer · 2026</span>
+    <h1>USF Playoff Watch</h1>
+    <p class="lede">The top four in the conference table after Nov 6 make the WCC Tournament. Semifinals are Nov 11 and the final is Nov 14, with the higher seed hosting each round.</p>
+    <div class="statusrow">
+      <span id="status">Loading scores…</span>
+      <label class="toggle" for="credit"><input type="checkbox" id="credit" checked> Rate USF as if it beat Saint Mary's and Santa Clara</label>
+    </div>
+  </header>
+
+  <div id="scenario" class="scenario" hidden>
+    <strong id="scenarioText">What-if active</strong>
+    <span class="muted small">Locked results are hypothetical. They change the odds below but are not saved as scores.</span>
+    <button class="btn ghost" id="clearWhatIf" type="button">Clear what-ifs</button>
+  </div>
+
+  <div id="app">
+    <div class="empty" id="emptyState">Loading the table, USF's odds and the results to root for.</div>
+  </div>
+
+  <p class="note" id="method">How the odds work: each team starts from its shots on goal for and against per game, because in this season's games that predicted results better than goals did. Scores from every Division I game then adjust that starting point. Conference games count fully and nonconference games count three-quarters, and opponents several WCC teams played, like Cal, UC Davis and Creighton, tie the teams together. Seattle U's shot numbers weren't available, so its rating comes from its scores. Home teams get about 40% more expected goals. The ratings give expected goals for both sides of every remaining game, which give the odds of every scoreline, and the rest of the season is then played out 20,000 times. Tested on the 90 games already played, teams this model made roughly 64% favorites won about 64% of the time. Ties in the table go to head-to-head points, then conference goal difference. The WCC's official soccer tiebreakers may differ, so treat close calls with care. Every percentage is rough, give or take about 5 points.</p>
+</div>
+
+<script id="snapshot">
+var SNAPSHOT = {"label":"scores as of Oct 14","results":{"0926-USF-SMC":{"ag":1,"hg":1},"0926-DEN-USD":{"ag":0,"hg":0},"0926-LMU-POR":{"ag":0,"hg":4},"0926-SCU-SEA":{"ag":0,"hg":0},"0930-USD-LMU":{"ag":2,"hg":1},"0930-SMC-POR":{"ag":0,"hg":5},"0930-SEA-PAC":{"ag":3,"hg":3},"0930-USF-SCU":{"ag":1,"hg":1},"1003-LMU-DEN":{"ag":1,"hg":2},"1003-SMC-SEA":{"ag":2,"hg":4},"1003-USD-USF":{"ag":2,"hg":2},"1003-SCU-PAC":{"ag":1,"hg":2},"1010-PAC-SMC":{"ag":2,"hg":1},"1010-USF-DEN":{"ag":1,"hg":2},"1010-POR-USD":{"ag":5,"hg":4},"1010-LMU-SCU":{"ag":0,"hg":2}},"nonconf":[{"team":"DEN","opp":"Cal Poly","date":"2026-08-20","site":"H","gf":2,"ga":2},{"team":"DEN","opp":"Stanford","date":"2026-08-23","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"UCLA","date":"2026-08-28","site":"A","gf":0,"ga":3},{"team":"DEN","opp":"California Baptist","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"DEN","opp":"Tulsa","date":"2026-09-04","site":"H","gf":3,"ga":0},{"team":"DEN","opp":"Indiana","date":"2026-09-07","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"West Virginia","date":"2026-09-11","site":"A","gf":0,"ga":5},{"team":"DEN","opp":"Creighton","date":"2026-09-22","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Michigan","date":"2026-08-20","site":"A","gf":0,"ga":0},{"team":"LMU","opp":"UC Irvine","date":"2026-08-24","site":"A","gf":1,"ga":3},{"team":"LMU","opp":"SMU","date":"2026-08-28","site":"A","gf":0,"ga":2},{"team":"LMU","opp":"UNLV","date":"2026-09-02","site":"H","gf":1,"ga":0},{"team":"LMU","opp":"Cal Poly","date":"2026-09-07","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"California Baptist","date":"2026-09-11","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Cal State Fullerton","date":"2026-09-16","site":"A","gf":0,"ga":0},{"team":"PAC","opp":"Utah Valley","date":"2026-08-20","site":"A","gf":1,"ga":2},{"team":"PAC","opp":"Utah Tech","date":"2026-08-23","site":"A","gf":3,"ga":2},{"team":"PAC","opp":"UC Davis","date":"2026-08-27","site":"H","gf":3,"ga":3},{"team":"PAC","opp":"UC Irvine","date":"2026-08-30","site":"H","gf":0,"ga":3},{"team":"PAC","opp":"UC San Diego","date":"2026-09-05","site":"A","gf":0,"ga":1},{"team":"PAC","opp":"San Jose State","date":"2026-09-10","site":"A","gf":2,"ga":2},{"team":"PAC","opp":"Cal State Northridge","date":"2026-09-13","site":"H","gf":1,"ga":3},{"team":"PAC","opp":"Sacramento State","date":"2026-09-17","site":"A","gf":2,"ga":4},{"team":"PAC","opp":"California Baptist","date":"2026-09-20","site":"A","gf":0,"ga":2},{"team":"PAC","opp":"California","date":"2026-09-25","site":"H","gf":0,"ga":3},{"team":"POR","opp":"California","date":"2026-08-21","site":"H","gf":0,"ga":0},{"team":"POR","opp":"Washington","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"POR","opp":"Princeton","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"POR","opp":"Wisconsin","date":"2026-09-05","site":"H","gf":1,"ga":2},{"team":"POR","opp":"Southern Oregon","date":"2026-09-08","site":"H","gf":4,"ga":1},{"team":"POR","opp":"Oregon State","date":"2026-09-13","site":"H","gf":0,"ga":0},{"team":"POR","opp":"New Hampshire","date":"2026-09-19","site":"H","gf":2,"ga":0},{"team":"POR","opp":"Michigan","date":"2026-10-04","site":"A","gf":2,"ga":1},{"team":"SCU","opp":"Cleveland State","date":"2026-08-20","site":"H","gf":2,"ga":1},{"team":"SCU","opp":"Fordham","date":"2026-08-23","site":"H","gf":2,"ga":0},{"team":"SCU","opp":"California","date":"2026-08-27","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Utah Valley","date":"2026-08-30","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Loyola Chicago","date":"2026-09-04","site":"N","gf":2,"ga":3},{"team":"SCU","opp":"Creighton","date":"2026-09-07","site":"A","gf":1,"ga":4},{"team":"SCU","opp":"Stanford","date":"2026-09-15","site":"A","gf":0,"ga":1},{"team":"SCU","opp":"San Diego State","date":"2026-09-20","site":"H","gf":2,"ga":1},{"team":"SEA","opp":"Saint Louis","date":"2026-08-20","site":"A","gf":0,"ga":4},{"team":"SEA","opp":"Michigan State","date":"2026-08-23","site":"A","gf":1,"ga":2},{"team":"SEA","opp":"Cal State Fullerton","date":"2026-08-31","site":"H","gf":7,"ga":1},{"team":"SEA","opp":"UC Davis","date":"2026-09-03","site":"H","gf":6,"ga":1},{"team":"SEA","opp":"Western Michigan","date":"2026-09-13","site":"A","gf":3,"ga":0},{"team":"SEA","opp":"Lindenwood","date":"2026-09-20","site":"H","gf":1,"ga":1},{"team":"SEA","opp":"Oregon State","date":"2026-09-23","site":"A","gf":1,"ga":3},{"team":"SMC","opp":"Wisconsin","date":"2026-08-20","site":"A","gf":0,"ga":5},{"team":"SMC","opp":"Marquette","date":"2026-08-23","site":"A","gf":0,"ga":2},{"team":"SMC","opp":"Sacramento State","date":"2026-08-27","site":"H","gf":2,"ga":1},{"team":"SMC","opp":"San Jose State","date":"2026-08-30","site":"A","gf":2,"ga":4},{"team":"SMC","opp":"Marist","date":"2026-09-04","site":"H","gf":1,"ga":4},{"team":"SMC","opp":"Air Force","date":"2026-09-07","site":"H","gf":2,"ga":2},{"team":"SMC","opp":"Creighton","date":"2026-09-10","site":"A","gf":3,"ga":3},{"team":"SMC","opp":"Omaha","date":"2026-09-13","site":"A","gf":2,"ga":1},{"team":"SMC","opp":"UC Davis","date":"2026-09-19","site":"H","gf":2,"ga":2},{"team":"USD","opp":"Washington","date":"2026-08-20","site":"A","gf":2,"ga":1},{"team":"USD","opp":"Liberty","date":"2026-08-23","site":"H","gf":3,"ga":1},{"team":"USD","opp":"Stanford","date":"2026-08-27","site":"A","gf":0,"ga":1},{"team":"USD","opp":"UC Santa Barbara","date":"2026-08-31","site":"A","gf":1,"ga":1},{"team":"USD","opp":"California Baptist","date":"2026-09-05","site":"A","gf":2,"ga":1},{"team":"USD","opp":"UC Irvine","date":"2026-09-08","site":"A","gf":2,"ga":1},{"team":"USD","opp":"San Diego State","date":"2026-09-13","site":"H","gf":2,"ga":1},{"team":"USD","opp":"Kansas City","date":"2026-09-20","site":"A","gf":0,"ga":1},{"team":"USF","opp":"Wake Forest","date":"2026-08-20","site":"A","gf":2,"ga":4},{"team":"USF","opp":"UNC Greensboro","date":"2026-08-23","site":"A","gf":0,"ga":0},{"team":"USF","opp":"Creighton","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"USF","opp":"Kansas City","date":"2026-08-30","site":"A","gf":3,"ga":2},{"team":"USF","opp":"Air Force","date":"2026-09-04","site":"H","gf":2,"ga":0},{"team":"USF","opp":"Marist","date":"2026-09-07","site":"H","gf":1,"ga":4},{"team":"USF","opp":"UC Davis","date":"2026-09-12","site":"A","gf":6,"ga":0},{"team":"USF","opp":"California","date":"2026-09-16","site":"H","gf":3,"ga":2},{"team":"USF","opp":"Cal State Bakersfield","date":"2026-09-20","site":"A","gf":1,"ga":2}],"stats":{"asOf":"2026-10-13","teams":{"DEN":{"gp":11,"goals":11,"goals_against":21,"shots":100,"sog":44,"opp_shots":190,"opp_sog":75,"corners":35,"opp_corners":64,"saves":54,"opp_saves":33},"LMU":{"gp":11,"goals":4,"goals_against":17,"shots":100,"sog":37,"opp_shots":139,"opp_sog":52,"corners":37,"opp_corners":49,"saves":35,"opp_saves":32},"PAC":{"gp":13,"goals":19,"goals_against":30,"shots":102,"sog":52,"opp_shots":207,"opp_sog":98,"corners":48,"opp_corners":81,"saves":68,"opp_saves":33},"POR":{"gp":11,"goals":25,"goals_against":14,"shots":172,"sog":80,"opp_shots":100,"opp_sog":47,"corners":66,"opp_corners":37,"saves":33,"opp_saves":56},"SCU":{"gp":12,"goals":13,"goals_against":15,"shots":156,"sog":50,"opp_shots":156,"opp_sog":67,"corners":54,"opp_corners":61,"saves":52,"opp_saves":37},"SMC":{"gp":13,"goals":18,"goals_against":36,"shots":157,"sog":52,"opp_shots":181,"opp_sog":79,"corners":65,"opp_corners":59,"saves":43,"opp_saves":34},"USD":{"gp":12,"goals":20,"goals_against":16,"shots":166,"sog":57,"opp_shots":139,"opp_sog":40,"corners":69,"opp_corners":60,"saves":24,"opp_saves":37},"USF":{"gp":13,"goals":25,"goals_against":24,"shots":200,"sog":90,"opp_shots":154,"opp_sog":66,"corners":79,"opp_corners":63,"saves":42,"opp_saves":65}}}};
+</script>
+<script>
+// ---- Model: ratings from every D1 game + Monte Carlo of the WCC regular season ----
+const MODEL = (() => {
+  const TEAMS = [
+    { code: "POR", name: "Portland" },
+    { code: "DEN", name: "Denver" },
+    { code: "PAC", name: "Pacific" },
+    { code: "SEA", name: "Seattle U" },
+    { code: "USD", name: "San Diego" },
+    { code: "SCU", name: "Santa Clara" },
+    { code: "USF", name: "San Francisco" },
+    { code: "SMC", name: "Saint Mary's" },
+    { code: "LMU", name: "LMU" },
+  ];
+  const N = TEAMS.length;
+  const IDX = {};
+  TEAMS.forEach((t, i) => (IDX[t.code] = i));
+  const USF = IDX.USF;
+
+  // Full conference schedule. Times are Pacific.
+  const F = (date, time, away, home) => ({
+    id: date.slice(5).replace("-", "") + "-" + away + "-" + home, date, time, away, home,
+  });
+  const FIXTURES = [
+    F("2026-09-26", "", "USF", "SMC"), F("2026-09-26", "", "DEN", "USD"),
+    F("2026-09-26", "", "LMU", "POR"), F("2026-09-26", "", "SCU", "SEA"),
+    F("2026-09-30", "", "USD", "LMU"), F("2026-09-30", "", "SMC", "POR"),
+    F("2026-09-30", "", "SEA", "PAC"), F("2026-09-30", "", "USF", "SCU"),
+    F("2026-10-03", "", "LMU", "DEN"), F("2026-10-03", "", "SMC", "SEA"),
+    F("2026-10-03", "", "USD", "USF"), F("2026-10-03", "", "SCU", "PAC"),
+    F("2026-10-10", "", "PAC", "SMC"), F("2026-10-10", "", "USF", "DEN"),
+    F("2026-10-10", "", "POR", "USD"), F("2026-10-10", "", "LMU", "SCU"),
+    F("2026-10-17", "6:00 PM", "SEA", "LMU"), F("2026-10-17", "7:00 PM", "USD", "PAC"),
+    F("2026-10-17", "7:00 PM", "SMC", "SCU"), F("2026-10-17", "7:00 PM", "DEN", "POR"),
+    F("2026-10-21", "3:00 PM", "DEN", "SMC"), F("2026-10-21", "7:00 PM", "SCU", "USD"),
+    F("2026-10-21", "7:00 PM", "POR", "SEA"), F("2026-10-21", "7:00 PM", "PAC", "USF"),
+    F("2026-10-24", "2:00 PM", "PAC", "DEN"), F("2026-10-24", "7:00 PM", "SCU", "POR"),
+    F("2026-10-24", "7:00 PM", "SEA", "USF"),
+    F("2026-10-25", "1:00 PM", "LMU", "SMC"),
+    F("2026-10-31", "6:00 PM", "USF", "LMU"), F("2026-10-31", "7:00 PM", "USD", "SEA"),
+    F("2026-10-31", "7:00 PM", "POR", "PAC"), F("2026-10-31", "7:00 PM", "DEN", "SCU"),
+    F("2026-11-06", "5:00 PM", "SEA", "DEN"), F("2026-11-06", "6:00 PM", "PAC", "LMU"),
+    F("2026-11-06", "7:00 PM", "POR", "USF"), F("2026-11-06", "7:00 PM", "SMC", "USD"),
+  ];
+
+  // Settings chosen by back-testing on the 90 games already played (leave-one-out):
+  // shots on goal predict better than goals in this sample, and home field is worth more than first assumed.
+  const CFG = {
+    home: 0.35,         // home-field edge, log-goals (about 40% more goals at home)
+    ridge: 40,          // pull toward the shots-based starting point
+    ridgeNoShots: 2.5,  // teams with no shot data lean on their scores instead
+    ncWeight: 0.75,     // nonconference games count a bit less than conference games
+    shotK: 0.75,        // how much shots on goal shape the starting point
+    sims: 20000,
+    creditIds: ["0926-USF-SMC", "0930-USF-SCU"], // draws counted as USF 1-0 wins when rating teams
+  };
+  // Opponents outside Division I start below average.
+  const NON_D1 = { "Southern Oregon": -0.8 };
+  const ALIAS = { "Cal Baptist": "California Baptist" };
+
+  function rng(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6d2b79f5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Starting point for each WCC team from shots on goal for and against per game.
+  function shotPrior(stats) {
+    const att = new Array(N).fill(0), def = new Array(N).fill(0);
+    const rows = TEAMS.map((t) => (stats && stats[t.code]) || null)
+      .map((s) => (s && s.gp && s.sog != null && s.opp_sog != null ? { f: s.sog / s.gp, a: s.opp_sog / s.gp } : null));
+    const has = rows.map(Boolean);
+    const have = rows.filter(Boolean);
+    if (!have.length) return { att, def, has };
+    const mf = have.reduce((x, r) => x + r.f, 0) / have.length;
+    const ma = have.reduce((x, r) => x + r.a, 0) / have.length;
+    rows.forEach((r, i) => {
+      if (!r) return;
+      att[i] = CFG.shotK * Math.log(r.f / mf);
+      def[i] = CFG.shotK * Math.log(ma / r.a);
+    });
+    return { att, def, has };
+  }
+
+  // Penalized Poisson fit by coordinate-wise Newton steps.
+  // games: {h, a, hg, ag, w, ha} with ha = home edge applied (0 at neutral sites)
+  function fit(nTeams, games, pAtt, pDef, ridge) {
+    let b = Math.log(1.4);
+    const att = new Float64Array(nTeams), def = new Float64Array(nTeams);
+    for (let i = 0; i < nTeams; i++) { att[i] = pAtt[i]; def[i] = pDef[i]; }
+    const byTeam = Array.from({ length: nTeams }, () => []);
+    games.forEach((g, k) => { byTeam[g.h].push(k); byTeam[g.a].push(k); });
+    const lh = (g) => Math.exp(b + g.ha + att[g.h] - def[g.a]);
+    const la = (g) => Math.exp(b + att[g.a] - def[g.h]);
+    for (let sweep = 0; sweep < 300; sweep++) {
+      let gr = 0, he = 0;
+      games.forEach((g) => { const x = lh(g), y = la(g); gr += g.w * (g.hg - x + g.ag - y); he += g.w * (x + y); });
+      b += gr / he;
+      for (let i = 0; i < nTeams; i++) {
+        const R = ridge[i];
+        gr = -2 * R * (att[i] - pAtt[i]); he = 2 * R;
+        byTeam[i].forEach((k) => {
+          const g = games[k];
+          if (g.h === i) { const x = lh(g); gr += g.w * (g.hg - x); he += g.w * x; }
+          if (g.a === i) { const y = la(g); gr += g.w * (g.ag - y); he += g.w * y; }
+        });
+        att[i] += gr / he;
+        gr = -2 * R * (def[i] - pDef[i]); he = 2 * R;
+        byTeam[i].forEach((k) => {
+          const g = games[k];
+          if (g.a === i) { const x = lh(g); gr += g.w * (x - g.hg); he += g.w * x; }
+          if (g.h === i) { const y = la(g); gr += g.w * (y - g.ag); he += g.w * y; }
+        });
+        def[i] += gr / he;
+      }
+    }
+    return { b, att, def };
+  }
+
+  function rates(p, h, a) {
+    return [Math.exp(p.b + CFG.home + p.att[h] - p.def[a]), Math.exp(p.b + p.att[a] - p.def[h])];
+  }
+
+  function pmf(lam, k) {
+    let p = Math.exp(-lam);
+    for (let i = 1; i <= k; i++) p *= lam / i;
+    return p;
+  }
+
+  function matchProbs(lh, la) {
+    let hw = 0, d = 0, aw = 0;
+    for (let i = 0; i < 13; i++) for (let j = 0; j < 13; j++) {
+      const p = pmf(lh, i) * pmf(la, j);
+      if (i > j) hw += p; else if (i === j) d += p; else aw += p;
+    }
+    return { H: hw, D: d, A: aw };
+  }
+
+  function poisson(lam, r) {
+    const L = Math.exp(-lam);
+    let k = 0, p = 1;
+    do { k++; p *= r(); } while (p > L);
+    return k - 1;
+  }
+
+  // Order teams: points, then head-to-head points among the tied group, then goal difference, then a draw.
+  function rank(pts, gd, h2h, tieKey) {
+    const ids = [...Array(N).keys()].sort((x, y) => pts[y] - pts[x]);
+    const out = [];
+    for (let s = 0; s < N;) {
+      let e = s;
+      while (e < N && pts[ids[e]] === pts[ids[s]]) e++;
+      const grp = ids.slice(s, e);
+      if (grp.length > 1) {
+        const key = {};
+        grp.forEach((i) => {
+          let m = 0;
+          grp.forEach((j) => { if (j !== i) m += h2h[i * N + j]; });
+          key[i] = [m, gd[i], tieKey(i)];
+        });
+        grp.sort((x, y) => key[y][0] - key[x][0] || key[y][1] - key[x][1] || key[y][2] - key[x][2]);
+      }
+      out.push(...grp);
+      s = e;
+    }
+    return out;
+  }
+
+  function valid(r) {
+    return r && Number.isInteger(r.hg) && Number.isInteger(r.ag) && r.hg >= 0 && r.ag >= 0;
+  }
+
+  // Clean list of nonconference games: {team (WCC code), opp (name), date, site H/A/N, gf, ga}
+  function cleanNonconf(list) {
+    return (list || []).filter((x) => x && IDX[x.team] !== undefined && typeof x.opp === "string" &&
+      Number.isInteger(x.gf) && Number.isInteger(x.ga) && ["H", "A", "N"].includes(x.site))
+      .map((x) => ({ ...x, opp: ALIAS[x.opp] || x.opp }));
+  }
+
+  function run(results, whatIf, opts = {}) {
+    const credit = opts.credit !== false;
+    const nS = opts.sims || CFG.sims;
+    const nonconf = cleanNonconf(opts.nonconf);
+    const played = [], remaining = [];
+    FIXTURES.forEach((f) => {
+      const r = results[f.id];
+      if (valid(r)) played.push({ ...f, h: IDX[f.home], a: IDX[f.away], hg: r.hg, ag: r.ag });
+      else remaining.push({ ...f, h: IDX[f.home], a: IDX[f.away] });
+    });
+
+    // Current table
+    const pts = new Array(N).fill(0), gf = new Array(N).fill(0), ga = new Array(N).fill(0);
+    const w = new Array(N).fill(0), l = new Array(N).fill(0), t = new Array(N).fill(0);
+    const h2h = new Float64Array(N * N), left = new Array(N).fill(0);
+    played.forEach((g) => {
+      gf[g.h] += g.hg; ga[g.h] += g.ag; gf[g.a] += g.ag; ga[g.a] += g.hg;
+      if (g.hg > g.ag) { pts[g.h] += 3; w[g.h]++; l[g.a]++; h2h[g.h * N + g.a] += 3; }
+      else if (g.hg < g.ag) { pts[g.a] += 3; w[g.a]++; l[g.h]++; h2h[g.a * N + g.h] += 3; }
+      else { pts[g.h]++; pts[g.a]++; t[g.h]++; t[g.a]++; h2h[g.h * N + g.a]++; h2h[g.a * N + g.h]++; }
+    });
+    remaining.forEach((g) => { left[g.h]++; left[g.a]++; });
+    const gd = gf.map((x, i) => x - ga[i]);
+    const nowOrder = rank(pts, gd, h2h, (i) => -i);
+    const standings = nowOrder.map((i, k) => ({
+      code: TEAMS[i].code, name: TEAMS[i].name, pos: k + 1, gp: w[i] + l[i] + t[i],
+      w: w[i], l: l[i], t: t[i], pts: pts[i], gf: gf[i], ga: ga[i], gd: gd[i],
+      left: left[i], max: pts[i] + 3 * left[i],
+    }));
+
+    // Ratings from every game: conference (weight 1) and nonconference (weight ncWeight)
+    const oppIdx = {}, oppNames = [];
+    nonconf.forEach((x) => { if (oppIdx[x.opp] === undefined) { oppIdx[x.opp] = N + oppNames.length; oppNames.push(x.opp); } });
+    const nT = N + oppNames.length;
+    const sp = shotPrior(opts.stats);
+    const pAtt = new Array(nT).fill(0), pDef = new Array(nT).fill(0);
+    for (let i = 0; i < N; i++) { pAtt[i] = sp.att[i]; pDef[i] = sp.def[i]; }
+    oppNames.forEach((nm, k) => { const v = NON_D1[nm]; if (v) { pAtt[N + k] = v / 2; pDef[N + k] = v / 2; } });
+    const fitGames = played.map((g) => {
+      const c = credit && CFG.creditIds.includes(g.id);
+      return { h: g.h, a: g.a, hg: c ? (g.h === USF ? 1 : 0) : g.hg, ag: c ? (g.a === USF ? 1 : 0) : g.ag, w: 1, ha: CFG.home };
+    });
+    nonconf.forEach((x) => {
+      const ti = IDX[x.team], oi = oppIdx[x.opp];
+      if (x.site === "A") fitGames.push({ h: oi, a: ti, hg: x.ga, ag: x.gf, w: CFG.ncWeight, ha: CFG.home });
+      else fitGames.push({ h: ti, a: oi, hg: x.gf, ag: x.ga, w: CFG.ncWeight, ha: x.site === "H" ? CFG.home : 0 });
+    });
+    const ridge = new Array(nT).fill(CFG.ridge);
+    for (let i = 0; i < N; i++) if (!sp.has[i]) ridge[i] = CFG.ridgeNoShots;
+    const params = fit(nT, fitGames, pAtt, pDef, ridge);
+    const lams = remaining.map((g) => rates(params, g.h, g.a));
+    const probs = lams.map(([lh, la]) => matchProbs(lh, la));
+
+    // Simulate
+    const R = remaining.length;
+    const outc = new Int8Array(nS * R);       // 0 home win, 1 draw, 2 away win
+    const pos = new Uint8Array(nS * N);
+    const usfPts = new Uint8Array(nS);
+    const r = rng(20261014);
+    const P = new Array(N), GD = new Array(N), HH = new Float64Array(N * N);
+    const tb = new Float64Array(N);
+    for (let s = 0; s < nS; s++) {
+      for (let i = 0; i < N; i++) { P[i] = pts[i]; GD[i] = gd[i]; tb[i] = r(); }
+      HH.set(h2h);
+      for (let k = 0; k < R; k++) {
+        const g = remaining[k];
+        let hg, ag;
+        const lock = whatIf[g.id];
+        if (lock === "H") { hg = 1; ag = 0; }
+        else if (lock === "D") { hg = 0; ag = 0; }
+        else if (lock === "A") { hg = 0; ag = 1; }
+        else { hg = poisson(lams[k][0], r); ag = poisson(lams[k][1], r); }
+        GD[g.h] += hg - ag; GD[g.a] += ag - hg;
+        let o;
+        if (hg > ag) { P[g.h] += 3; HH[g.h * N + g.a] += 3; o = 0; }
+        else if (hg < ag) { P[g.a] += 3; HH[g.a * N + g.h] += 3; o = 2; }
+        else { P[g.h]++; P[g.a]++; HH[g.h * N + g.a]++; HH[g.a * N + g.h]++; o = 1; }
+        outc[s * R + k] = o;
+      }
+      const ord = rank(P, GD, HH, (i) => tb[i]);
+      ord.forEach((ti, k) => (pos[s * N + ti] = k + 1));
+      usfPts[s] = P[USF];
+    }
+
+    // Aggregate
+    const top4 = {}, seeds = {};
+    TEAMS.forEach((tm, i) => {
+      let c = 0;
+      const sd = new Array(N).fill(0);
+      for (let s = 0; s < nS; s++) { const p = pos[s * N + i]; sd[p - 1]++; if (p <= 4) c++; }
+      top4[tm.code] = c / nS;
+      seeds[tm.code] = sd.map((x) => x / nS);
+    });
+    const usfIn = (s) => pos[s * N + USF] <= 4;
+
+    const condTop4 = (k) => {
+      const c = [0, 0, 0], n = [0, 0, 0];
+      for (let s = 0; s < nS; s++) { const o = outc[s * R + k]; n[o]++; if (usfIn(s)) c[o]++; }
+      return { H: n[0] ? c[0] / n[0] : null, D: n[1] ? c[1] / n[1] : null, A: n[2] ? c[2] / n[2] : null,
+               nH: n[0], nD: n[1], nA: n[2] };
+    };
+
+    const usfGames = [], swings = [];
+    remaining.forEach((g, k) => {
+      const ct = condTop4(k);
+      const isUSF = g.h === USF || g.a === USF;
+      const row = { ...g, probs: probs[k], xg: lams[k], top4If: ct, lock: whatIf[g.id] || null };
+      if (isUSF) usfGames.push(row);
+      else if (!row.lock) {
+        const vals = ["H", "D", "A"].filter((o) => ct["n" + o] >= 150).map((o) => [o, ct[o]]);
+        if (vals.length >= 2) {
+          vals.sort((x, y) => y[1] - x[1]);
+          row.best = vals[0][0];
+          row.swing = vals[0][1] - vals[vals.length - 1][1];
+          swings.push(row);
+        }
+      }
+    });
+    swings.sort((x, y) => y.swing - x.swing);
+
+    // Win-out path: USF wins its remaining games in date order.
+    const usfK = [];
+    remaining.forEach((g, k) => { if (g.h === USF || g.a === USF) usfK.push(k); });
+    const winPath = [];
+    {
+      const mask = new Uint8Array(nS).fill(1);
+      let ptsAfter = pts[USF];
+      usfK.forEach((k) => {
+        const g = remaining[k];
+        const winCode = g.h === USF ? 0 : 2;
+        let n = 0, c = 0;
+        for (let s = 0; s < nS; s++) {
+          if (mask[s] && outc[s * R + k] !== winCode) mask[s] = 0;
+          if (mask[s]) { n++; if (usfIn(s)) c++; }
+        }
+        ptsAfter += 3;
+        winPath.push({ id: g.id, date: g.date, home: g.home, away: g.away, ptsAfter, n, top4: n >= 150 ? c / n : null });
+      });
+    }
+
+    // Final points, and how much the route there matters (which games were dropped).
+    const fin = {}, routes = {};
+    for (let s = 0; s < nS; s++) {
+      const f = usfPts[s];
+      fin[f] = fin[f] || [0, 0];
+      fin[f][0]++; if (usfIn(s)) fin[f][1]++;
+      let key = "";
+      usfK.forEach((k) => {
+        const g = remaining[k], o = outc[s * R + k];
+        key += o === 1 ? "D" : (o === 0) === (g.h === USF) ? "W" : "L";
+      });
+      const rk = f + "|" + key;
+      routes[rk] = routes[rk] || [0, 0];
+      routes[rk][0]++; if (usfIn(s)) routes[rk][1]++;
+    }
+    const routeLabel = (key) => {
+      const parts = [];
+      [...key].forEach((c, j) => {
+        if (c === "W") return;
+        const g = remaining[usfK[j]];
+        const opp = g.h === USF ? g.away : g.home;
+        const home = g.h === USF;
+        parts.push(c === "D" ? (home ? "draws with " : "draws at ") + opp : (home ? "loses to " : "loses at ") + opp);
+      });
+      return parts.length ? parts.join(" and ") : "wins out";
+    };
+    const finals = Object.keys(fin).map(Number).sort((a, b) => b - a).map((f) => {
+      const rs = Object.entries(routes).filter(([k, v]) => k.startsWith(f + "|") && v[0] >= 150)
+        .map(([k, v]) => ({ key: k.split("|")[1], label: routeLabel(k.split("|")[1]), top4: v[1] / v[0], n: v[0] }))
+        .sort((a, b) => b.top4 - a.top4);
+      return { pts: f, share: fin[f][0] / nS, top4: fin[f][1] / fin[f][0], n: fin[f][0],
+               best: rs.length > 1 ? rs[0] : null, worst: rs.length > 1 ? rs[rs.length - 1] : null };
+    });
+    const line = finals.filter((x) => x.n >= 100 && x.top4 >= 0.5).map((x) => x.pts).sort((a, b) => a - b)[0];
+
+    // Strength vs an average opponent at a neutral site, in goals per game
+    const ratings = TEAMS.map((tm, i) => {
+      const xf = Math.exp(params.b + params.att[i]), xa = Math.exp(params.b - params.def[i]);
+      return { code: tm.code, att: params.att[i], def: params.def[i], xf, xa, net: xf - xa };
+    });
+
+    return {
+      standings, top4, seeds, usfGames, swings, finals, winPath, ratings,
+      line: line === undefined ? null : line,
+      usf: { pts: pts[USF], left: left[USF], max: pts[USF] + 3 * left[USF] },
+      played: played.length, remaining: R, sims: nS, nonconfCount: nonconf.length,
+      allGames: remaining.map((g, k) => ({ id: g.id, probs: probs[k], xg: lams[k] })),
+    };
+  }
+
+  return { TEAMS, IDX, FIXTURES, CFG, ALIAS, run, valid, cleanNonconf };
+})();
+if (typeof module !== "undefined") module.exports = MODEL;
+
+</script>
+<script>
+(() => {
+  const M = MODEL;
+  const NAME = Object.fromEntries(M.TEAMS.map((t) => [t.code, t.name]));
+  const SHORT = { POR: "Portland", DEN: "Denver", PAC: "Pacific", SEA: "Seattle U", USD: "San Diego", SCU: "Santa Clara", USF: "USF", SMC: "Saint Mary's", LMU: "LMU" };
+  const FX = Object.fromEntries(M.FIXTURES.map((f) => [f.id, f]));
+
+  let results = {};
+  let loaded = false;
+  let db = null;
+  let canWrite = null;
+  let editing = new Set();
+  let whatIf = {};
+  let credit = true;
+  let lastUpdated = null;
+  let writeError = "";
+  let staticLabel = "";
+  let nonconf = [];
+  let stats = null;
+  let statsAsOf = "";
+  let compTeam = null;
+
+  try { const w = JSON.parse(localStorage.getItem("usfwatch.whatif") || "{}"); if (w && typeof w === "object") whatIf = w; } catch (e) {}
+  try { const c = localStorage.getItem("usfwatch.credit"); if (c !== null) credit = c === "1"; } catch (e) {}
+  document.getElementById("credit").checked = credit;
+
+  const saveLocal = () => {
+    try { localStorage.setItem("usfwatch.whatif", JSON.stringify(whatIf)); localStorage.setItem("usfwatch.credit", credit ? "1" : "0"); } catch (e) {}
+  };
+
+  // ---- tiny DOM helper ----
+  function h(tag, attrs, ...kids) {
+    const el = document.createElement(tag);
+    if (attrs) for (const [k, v] of Object.entries(attrs)) {
+      if (v === null || v === undefined || v === false) continue;
+      if (k === "class") el.className = v;
+      else if (k === "text") el.textContent = v;
+      else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+      else if (k === "style") el.setAttribute("style", v);
+      else el.setAttribute(k, v === true ? "" : v);
+    }
+    for (const kid of kids.flat()) {
+      if (kid === null || kid === undefined || kid === false) continue;
+      el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+    }
+    return el;
+  }
+  const pct = (x) => (x === null || x === undefined ? "—" : x >= 0.995 && x < 1 ? ">99%" : x > 0 && x < 0.005 ? "<1%" : Math.round(x * 100) + "%");
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const fmtDate = (iso, long) => {
+    const [y, m, d] = iso.split("-").map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    return (long ? DAYS[dt.getUTCDay()] + " " : "") + MONTHS[m - 1] + " " + d;
+  };
+  const meter = (x) => h("div", { class: "cell-meter" },
+    h("div", { class: "meter", role: "img", "aria-label": pct(x) }, h("span", { style: "width:" + Math.round((x || 0) * 100) + "%" })),
+    h("span", { class: "pct", text: pct(x) }));
+
+  // outcome label for a fixture: H = home win, D = draw, A = away win
+  const outcomeTeam = (f, o) => (o === "H" ? SHORT[f.home] + " win" : o === "A" ? SHORT[f.away] + " win" : "Draw");
+
+  // ---- writes ----
+  async function saveScore(f, ag, hg) {
+    writeError = "";
+    if (!db) return;
+    try {
+      await db.doc("results/" + f.id).set({ away: f.away, home: f.home, ag, hg, updatedAt: new Date().toISOString(), source: "page" });
+      editing.delete(f.id);
+      if (whatIf[f.id]) { delete whatIf[f.id]; saveLocal(); }
+    } catch (e) {
+      writeError = e && e.code === "invalid_argument" ? "You can view this tracker but not change its scores." : "That score didn't save. Try again in a moment.";
+      if (e && e.code === "invalid_argument") canWrite = false;
+      schedule();
+    }
+  }
+  async function clearScore(f) {
+    writeError = "";
+    if (!db) return;
+    try { await db.doc("results/" + f.id).delete(); editing.delete(f.id); }
+    catch (e) { writeError = "That score couldn't be removed. Try again in a moment."; schedule(); }
+  }
+
+  // ---- render ----
+  let pending = false;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    setTimeout(() => { pending = false; render(); }, 0);
+  }
+
+  function scoreEntry(f, existing) {
+    const idA = "a-" + f.id, idH = "h-" + f.id;
+    const inA = h("input", { id: idA, type: "number", min: "0", max: "20", inputmode: "numeric", "aria-label": SHORT[f.away] + " goals", value: existing ? existing.ag : "" });
+    const inH = h("input", { id: idH, type: "number", min: "0", max: "20", inputmode: "numeric", "aria-label": SHORT[f.home] + " goals", value: existing ? existing.hg : "" });
+    const save = h("button", { class: "btn", type: "button", text: "Save score" });
+    const check = () => { save.disabled = !(inA.value !== "" && inH.value !== ""); };
+    inA.addEventListener("input", check); inH.addEventListener("input", check); check();
+    save.addEventListener("click", () => {
+      const ag = parseInt(inA.value, 10), hg = parseInt(inH.value, 10);
+      if (Number.isInteger(ag) && Number.isInteger(hg) && ag >= 0 && hg >= 0) { save.disabled = true; save.textContent = "Saving…"; saveScore(f, ag, hg); }
+    });
+    const kids = [h("span", { class: "score" }, inA, h("span", { class: "dash", text: "–" }), inH), save];
+    if (existing) kids.push(h("button", { class: "btn quiet", type: "button", text: "Cancel", onclick: () => { editing.delete(f.id); schedule(); } }));
+    return kids;
+  }
+
+  function fixtureRow(f, out, probs) {
+    const r = results[f.id];
+    const isUSF = f.home === "USF" || f.away === "USF";
+    const done = M.valid(r);
+    const teams = h("div", { class: "teams" },
+      h("span", { text: SHORT[f.away] }), h("span", { class: "at", text: " at " }), h("span", { text: SHORT[f.home] }));
+    const left = h("div", {}, teams);
+    if (!done && probs) {
+      left.append(h("div", { class: "odds tab", text: SHORT[f.away] + " " + pct(probs.A) + " · Draw " + pct(probs.D) + " · " + SHORT[f.home] + " " + pct(probs.H) }));
+    }
+    const controls = h("div", { class: "controls" });
+    if (done && !editing.has(f.id)) {
+      controls.append(h("span", { class: "final-score", text: SHORT[f.away] + " " + r.ag + "–" + r.hg + " " + SHORT[f.home] }), h("span", { class: "pill final", text: "Final" }));
+      if (canWrite !== false && db) {
+        controls.append(h("button", { class: "btn quiet", type: "button", text: "Edit", onclick: () => { editing.add(f.id); schedule(); } }));
+        controls.append(h("button", { class: "btn quiet", type: "button", text: "Remove", onclick: () => clearScore(f) }));
+      }
+    } else {
+      if (!done) {
+        const seg = h("div", { class: "seg", role: "group", "aria-label": "What-if result" });
+        [["A", SHORT[f.away]], ["D", "Draw"], ["H", SHORT[f.home]]].forEach(([o, lab]) => {
+          seg.append(h("button", { type: "button", "aria-pressed": whatIf[f.id] === o ? "true" : "false", title: "What if: " + outcomeTeam(f, o), text: lab,
+            onclick: () => { if (whatIf[f.id] === o) delete whatIf[f.id]; else whatIf[f.id] = o; saveLocal(); schedule(); } }));
+        });
+        controls.append(seg);
+      }
+      if (db && canWrite !== false) controls.append(...scoreEntry(f, done ? r : null));
+    }
+    return h("div", { class: "fx" + (isUSF ? " usf" : "") },
+      h("div", { class: "time", text: f.time || "" }), left, controls);
+  }
+
+  function render() {
+    const app = document.getElementById("app");
+    const status = document.getElementById("status");
+    // keep focus/values of inputs being typed into
+    const active = document.activeElement && document.activeElement.id;
+    const typed = {};
+    app.querySelectorAll("input[type=number]").forEach((i) => { if (i.value !== "") typed[i.id] = i.value; });
+
+    if (!loaded) return;
+    // drop what-ifs for games that now have scores
+    let changed = false;
+    for (const id of Object.keys(whatIf)) if (M.valid(results[id]) || !FX[id]) { delete whatIf[id]; changed = true; }
+    if (changed) saveLocal();
+
+    const out = M.run(results, whatIf, { credit, nonconf, stats });
+    const nLocks = Object.keys(whatIf).length;
+
+    let saved = "";
+    if (lastUpdated) { const t = new Date(lastUpdated); if (!isNaN(t)) saved = " · last score saved " + MONTHS[t.getMonth()] + " " + t.getDate(); }
+    status.textContent = out.played + " of 36 conference games played" + (staticLabel ? " · " + staticLabel : saved + (canWrite === false ? " · view only" : ""));
+    const sc = document.getElementById("scenario");
+    sc.hidden = nLocks === 0;
+    document.getElementById("scenarioText").textContent = "What-if: " + nLocks + (nLocks === 1 ? " result locked" : " results locked");
+
+    const frag = document.createDocumentFragment();
+    if (writeError) frag.append(h("p", { class: "err", role: "alert", text: writeError }));
+
+    // ---- summary tiles ----
+    const nextGame = out.usfGames.filter((g) => !g.lock)[0] || out.usfGames[0];
+    const usfRow = out.standings.find((s) => s.code === "USF");
+    const lineRow = out.line !== null ? out.finals.find((x) => x.pts === out.line) : null;
+    const tiles = h("div", { class: "tiles" },
+      h("div", { class: "tile lead" },
+        h("span", { class: "label", text: "USF top-4 chance" }),
+        h("span", { class: "num", text: out.remaining === 0 && out.top4.USF === 1 ? "In" : out.remaining === 0 && out.top4.USF === 0 ? "Out" : pct(out.top4.USF) }),
+        h("span", { class: "sub", text: out.remaining === 0 ? "Final table" : "Across " + out.sims.toLocaleString() + " simulated seasons" })),
+      h("div", { class: "tile" },
+        h("span", { class: "label", text: "Points" }),
+        h("span", { class: "num", text: String(usfRow.pts) }),
+        h("span", { class: "sub", text: usfRow.left + (usfRow.left === 1 ? " game" : " games") + " left · max " + usfRow.max })),
+      h("div", { class: "tile" },
+        h("span", { class: "label", text: "The line" }),
+        h("span", { class: "num", text: out.remaining === 0 ? "—" : out.line === null ? "None" : out.line + " pts" }),
+        h("span", { class: "sub", text: out.remaining === 0 ? "Season complete" : out.line === null ? "No reachable total gets USF in more often than not" : pct(lineRow.top4) + " at " + out.line + " · needs " + Math.max(0, out.line - usfRow.pts) + " more" })),
+      h("div", { class: "tile" },
+        h("span", { class: "label", text: "Next USF match" }),
+        nextGame
+          ? [h("span", { class: "num text", text: (nextGame.home === "USF" ? "vs " : "at ") + SHORT[nextGame.home === "USF" ? nextGame.away : nextGame.home] }),
+             h("span", { class: "sub tab", text: fmtDate(nextGame.date, true) + " · " + (nextGame.home === "USF" ? "W " + pct(nextGame.probs.H) + " D " + pct(nextGame.probs.D) + " L " + pct(nextGame.probs.A) : "W " + pct(nextGame.probs.A) + " D " + pct(nextGame.probs.D) + " L " + pct(nextGame.probs.H)) })]
+          : [h("span", { class: "num text", text: "Done" }), h("span", { class: "sub", text: "Regular season complete" })]));
+    frag.append(tiles);
+
+    // ---- what USF needs ----
+    if (out.remaining > 0 && out.usfGames.length) {
+      const sec = h("section", { id: "needs" }, h("div", { class: "sechead" }, h("h2", { text: "What USF needs" }),
+        h("span", { class: "small muted", text: "Top-4 chance after each result" })));
+      const gt = h("table", {}, h("thead", {}, h("tr", {},
+        h("th", { text: "Date" }), h("th", { text: "Match" }), h("th", { class: "r", text: "Win" }), h("th", { class: "r", text: "Draw" }), h("th", { class: "r", text: "Loss" }),
+        h("th", { class: "r", text: "Top 4 if W" }), h("th", { class: "r", text: "If D" }), h("th", { class: "r", text: "If L" }))));
+      const tb = h("tbody");
+      out.usfGames.forEach((g) => {
+        const home = g.home === "USF";
+        const W = home ? "H" : "A", L = home ? "A" : "H";
+        const opp = (home ? "vs " : "at ") + SHORT[home ? g.away : g.home];
+        const lock = g.lock ? (g.lock === W ? "W" : g.lock === L ? "L" : "D") : null;
+        tb.append(h("tr", {},
+          h("td", { text: fmtDate(g.date, true) }),
+          h("td", {}, opp, lock ? [" ", h("span", { class: "pill lock", text: "what-if " + lock })] : null),
+          h("td", { class: "r", text: pct(g.probs[W]) }), h("td", { class: "r", text: pct(g.probs.D) }), h("td", { class: "r", text: pct(g.probs[L]) }),
+          h("td", { class: "r pct", text: pct(g.top4If[W]) }), h("td", { class: "r pct", text: pct(g.top4If.D) }), h("td", { class: "r pct", text: pct(g.top4If[L]) })));
+      });
+      gt.append(tb);
+
+      const fin = out.finals.filter((x) => x.share >= 0.005);
+      const ft = h("table", {}, h("thead", {}, h("tr", {}, h("th", { text: "USF final pts" }), h("th", { class: "r", text: "Chance" }), h("th", { text: "Top 4 if so" }))));
+      const ftb = h("tbody");
+      const nameCodes = (s) => s.replace(/\b(POR|DEN|PAC|SEA|USD|SCU|USF|SMC|LMU)\b/g, (c) => SHORT[c]);
+      fin.forEach((x) => {
+        const range = x.best && x.worst && x.best.top4 - x.worst.top4 >= 0.04
+          ? h("div", { class: "route small muted tab" },
+              h("div", { text: pct(x.worst.top4) + " if USF " + nameCodes(x.worst.label) }),
+              h("div", { text: pct(x.best.top4) + " if USF " + nameCodes(x.best.label) }))
+          : null;
+        ftb.append(h("tr", out.line === x.pts ? { class: "cut" } : {},
+          h("td", {}, h("span", { class: "final-score", text: String(x.pts) }), out.line === x.pts ? [" ", h("span", { class: "cutlabel", text: "the line" })] : null),
+          h("td", { class: "r", text: pct(x.share) }),
+          h("td", {}, meter(x.top4), range)));
+      });
+      ft.append(ftb);
+
+      // Win-out path: cumulative odds as USF stacks wins in date order
+      const pathCard = h("div", { class: "card" }, h("h3", { text: "If USF wins out" }));
+      const steps = h("div", { class: "path" },
+        h("div", { class: "step now" }, h("span", { class: "steplab", text: "Today" }), h("span", { class: "stepnum tab", text: pct(out.top4.USF) }), h("span", { class: "stepsub tab", text: out.usf.pts + " pts" })));
+      out.winPath.forEach((p) => {
+        const home = p.home === "USF";
+        steps.append(h("div", { class: "step" },
+          h("span", { class: "steplab", text: (home ? "Beat " : "Win at ") + SHORT[home ? p.away : p.home] }),
+          h("span", { class: "stepnum tab", text: pct(p.top4) }),
+          h("span", { class: "stepsub tab", text: fmtDate(p.date) + " · " + p.ptsAfter + " pts" })));
+      });
+      pathCard.append(steps, h("p", { class: "small muted", text: "Each step assumes USF also won every game before it, with the games after it still to play." }));
+      sec.append(pathCard);
+
+      sec.append(h("div", { class: "grid2" },
+        h("div", { class: "card" }, h("h3", { text: "One game at a time" }), h("div", { class: "scroll" }, gt),
+          h("p", { class: "small muted", text: "Win, draw and loss are USF's chances in that game. The last three columns change only that one game and leave USF's other games undecided. A win over Portland scores higher than a win at LMU because it leaves the easier games still to play." })),
+        h("div", { class: "card" }, h("h3", { text: "Where USF could finish" }), h("div", { class: "scroll" }, ft),
+          h("p", { class: "small muted", text: "The bar averages every way of reaching that total. The lines under it show the worst and best routes, since dropping points to Pacific or Seattle U hurts more than dropping them to Portland or LMU." }))));
+      frag.append(sec);
+    }
+
+    // ---- root for ----
+    if (out.remaining > 0) {
+      const sec = h("section", { id: "rootfor" }, h("div", { class: "sechead" }, h("h2", { text: "Root for" }),
+        h("span", { class: "small muted", text: "Other games that move USF's odds most" })));
+      const list = h("div", { class: "card roots" });
+      const top = out.swings.filter((s) => s.swing >= 0.01).slice(0, 6);
+      if (!top.length) list.append(h("p", { class: "muted", text: "No other game moves USF's odds by more than a point right now." }));
+      top.forEach((s) => {
+        const parts = ["A", "D", "H"].filter((o) => s.top4If["n" + o] >= 150).map((o) => outcomeTeam(s, o) + " " + pct(s.top4If[o]));
+        list.append(h("div", { class: "root" },
+          h("div", {}, h("div", { class: "who", text: s.best === "D" ? "A draw" : (s.best === "H" ? SHORT[s.home] : SHORT[s.away]) + " to win" }),
+            h("div", { class: "small muted", text: fmtDate(s.date, true) + " · " + SHORT[s.away] + " at " + SHORT[s.home] })),
+          h("div", { class: "swing tab", text: Math.round(s.swing * 100) + "-pt swing" }),
+          h("div", { class: "detail tab", text: "USF top 4: " + parts.join(" · ") })));
+      });
+      sec.append(list);
+      frag.append(sec);
+    }
+
+    // ---- table ----
+    {
+      const sec = h("section", { id: "table" }, h("div", { class: "sechead" }, h("h2", { text: "Conference table" }),
+        h("span", { class: "small muted", text: "Top four make the tournament" })));
+      const t = h("table", {}, h("thead", {}, h("tr", {},
+        h("th", { class: "r", text: "#" }), h("th", { text: "Team" }), h("th", { class: "r", text: "W-L-T" }), h("th", { class: "r", text: "Pts" }),
+        h("th", { class: "r", text: "GD" }), h("th", { class: "r", text: "Left" }), h("th", { class: "r", text: "Max" }), h("th", { text: "Top 4" }))));
+      const tb = h("tbody");
+      out.standings.forEach((s) => {
+        const cls = [s.code === "USF" ? "usf" : "", s.pos === 4 ? "cut" : ""].join(" ").trim();
+        tb.append(h("tr", cls ? { class: cls } : {},
+          h("td", { class: "r", text: String(s.pos) }),
+          h("td", {}, s.name, s.pos === 4 ? [" ", h("span", { class: "cutlabel", text: "tournament line" })] : null),
+          h("td", { class: "r", text: s.w + "-" + s.l + "-" + s.t }),
+          h("td", { class: "r", text: String(s.pts) }),
+          h("td", { class: "r", text: (s.gd > 0 ? "+" : "") + s.gd }),
+          h("td", { class: "r", text: String(s.left) }),
+          h("td", { class: "r", text: String(s.max) }),
+          h("td", {}, meter(out.top4[s.code]))));
+      });
+      t.append(tb);
+      sec.append(h("div", { class: "card" }, h("div", { class: "scroll" }, t)));
+      frag.append(sec);
+    }
+
+    // ---- comparables ----
+    {
+      const others = M.TEAMS.map((t) => t.code).filter((c) => c !== "USF");
+      if (!compTeam || !others.includes(compTeam)) {
+        const ng = out.usfGames[0];
+        compTeam = ng ? (ng.home === "USF" ? ng.away : ng.home) : "PAC";
+      }
+      const them = SHORT[compTeam];
+      const sec = h("section", { id: "comparables" }, h("div", { class: "sechead" }, h("h2", { text: "Comparables" }),
+        h("span", { class: "small muted", text: "USF and another WCC team against the same opponents" })));
+      const pick = h("div", { class: "chips", role: "group", "aria-label": "Compare USF with" });
+      others.forEach((c) => pick.append(h("button", { type: "button", "aria-pressed": c === compTeam ? "true" : "false", text: SHORT[c],
+        onclick: () => { compTeam = c; schedule(); } })));
+
+      const A = teamGames("USF"), B = teamGames(compTeam);
+      const byKey = (list) => { const m = {}; list.forEach((x) => (m[x.key] = m[x.key] || []).push(x)); return m; };
+      const mA = byKey(A), mB = byKey(B);
+      const shared = Object.keys(mA).filter((k) => mB[k] && k !== compTeam && k !== "USF")
+        .sort((x, y) => (x.startsWith("nc:") - y.startsWith("nc:")) || mA[x][0].opp.localeCompare(mA[y][0].opp));
+      const rec = (list) => {
+        let w = 0, l = 0, t = 0, d = 0;
+        list.forEach((x) => { d += x.gf - x.ga; if (x.gf > x.ga) w++; else if (x.gf < x.ga) l++; else t++; });
+        return { w, l, t, d };
+      };
+      const fmtRes = (list) => list.map((x) => (x.gf > x.ga ? "W" : x.gf < x.ga ? "L" : "T") + " " + x.gf + "-" + x.ga + " " + SITE[x.site]).join(" · ");
+      const sgn = (d) => (d > 0 ? "+" : "") + d;
+
+      const t = h("table", {}, h("thead", {}, h("tr", {},
+        h("th", { text: "Opponent" }), h("th", { text: "USF" }), h("th", { text: them }), h("th", { class: "r", text: "Edge" }))));
+      const tb = h("tbody");
+      let allA = [], allB = [];
+      shared.forEach((k) => {
+        const ra = rec(mA[k]), rb = rec(mB[k]);
+        allA = allA.concat(mA[k]); allB = allB.concat(mB[k]);
+        const diff = ra.d - rb.d;
+        tb.append(h("tr", {},
+          h("td", {}, mA[k][0].opp, k.startsWith("nc:") ? null : [" ", h("span", { class: "pill final", text: "WCC" })]),
+          h("td", { class: "tab", text: fmtRes(mA[k]) }),
+          h("td", { class: "tab", text: fmtRes(mB[k]) }),
+          h("td", { class: "r tab " + (diff > 0 ? "edge-usf" : diff < 0 ? "edge-them" : "muted"), text: diff === 0 ? "Even" : (diff > 0 ? "USF " : them + " ") + "+" + Math.abs(diff) })));
+      });
+      t.append(tb);
+
+      const ta = rec(allA), tbm = rec(allB);
+      const hh = mA[compTeam] || [];
+      const fx = M.FIXTURES.find((f) => (f.home === "USF" && f.away === compTeam) || (f.away === "USF" && f.home === compTeam));
+      const rA = out.ratings.find((r) => r.code === "USF"), rB = out.ratings.find((r) => r.code === compTeam);
+      const gap = rA.net - rB.net;
+      const card = h("div", { class: "card" }, pick,
+        h("p", { class: "tab" }, h("strong", { text: shared.length + " shared opponents. " }),
+          "USF went " + ta.w + "-" + ta.l + "-" + ta.t + " (" + sgn(ta.d) + "), " + them + " went " + tbm.w + "-" + tbm.l + "-" + tbm.t + " (" + sgn(tbm.d) + ")."),
+        h("p", { class: "small muted tab", text: (hh.length
+            ? "Head to head: " + hh.map((x) => "USF " + (x.gf > x.ga ? "won " : x.gf < x.ga ? "lost " : "drew ") + x.gf + "-" + x.ga + " " + SITE[x.site]).join(", ") + "."
+            : fx ? "Head to head: " + fmtDate(fx.date, true) + (fx.home === "USF" ? " at USF." : " at " + them + ".") : "") +
+          " The model rates USF " + Math.abs(gap).toFixed(2) + " goals per game " + (gap >= 0 ? "better" : "worse") + " than " + them + " on a neutral field." }),
+        shared.length ? h("div", { class: "scroll" }, t) : h("p", { class: "muted", text: "No shared opponents yet." }));
+      sec.append(card);
+      frag.append(sec);
+    }
+
+    // ---- team stats ----
+    {
+      const sec = h("section", { id: "stats" }, h("div", { class: "sechead" }, h("h2", { text: "Team stats" }),
+        h("span", { class: "small muted", text: "All games. Records and goals are current; shots are through " + (statsAsOf ? fmtDate(statsAsOf) : "the last update") + "." })));
+      const t = h("table", {}, h("thead", {}, h("tr", {},
+        h("th", { text: "Team" }), h("th", { class: "r", text: "Overall" }), h("th", { class: "r", text: "WCC" }),
+        h("th", { class: "r", text: "GF/g" }), h("th", { class: "r", text: "GA/g" }),
+        h("th", { class: "r", title: "Shots on goal per game", text: "SOG/g" }), h("th", { class: "r", title: "Shots on goal allowed per game", text: "SOG agst" }),
+        h("th", { class: "r", title: "Goals per shot on goal", text: "Finishing" }), h("th", { class: "r", title: "Shots on goal stopped", text: "Save %" }),
+        h("th", { class: "r", title: "Model goal difference per game against an average opponent, neutral field", text: "Strength" }))));
+      const tb = h("tbody");
+      const order = out.ratings.slice().sort((x, y) => y.net - x.net);
+      order.forEach((rt) => {
+        const c = rt.code, g = teamGames(c), r = rec2(g), st = stats && stats[c];
+        const sr = out.standings.find((s) => s.code === c);
+        const per = (x) => (g.length ? (x / g.length).toFixed(2) : "—");
+        const ok = st && st.gp && st.sog != null && st.opp_sog != null;
+        tb.append(h("tr", c === "USF" ? { class: "usf" } : {},
+          h("td", { text: SHORT[c] === "USF" ? "San Francisco" : SHORT[c] }),
+          h("td", { class: "r", text: r.w + "-" + r.l + "-" + r.t }),
+          h("td", { class: "r", text: sr.w + "-" + sr.l + "-" + sr.t }),
+          h("td", { class: "r", text: per(r.gf) }), h("td", { class: "r", text: per(r.ga) }),
+          h("td", { class: "r", text: ok ? (st.sog / st.gp).toFixed(1) : "—" }),
+          h("td", { class: "r", text: ok ? (st.opp_sog / st.gp).toFixed(1) : "—" }),
+          h("td", { class: "r", text: ok && st.sog ? Math.round((st.goals / st.sog) * 100) + "%" : "—" }),
+          h("td", { class: "r", text: ok && st.opp_sog && st.goals_against != null ? Math.round(((st.opp_sog - st.goals_against) / st.opp_sog) * 100) + "%" : "—" }),
+          h("td", { class: "r pct", text: (rt.net >= 0 ? "+" : "") + rt.net.toFixed(2) })));
+      });
+      t.append(tb);
+      const missing = M.TEAMS.filter((tm) => !(stats && stats[tm.code] && stats[tm.code].sog != null)).map((tm) => SHORT[tm.code]);
+      sec.append(h("div", { class: "card" }, h("div", { class: "scroll" }, t),
+        h("p", { class: "small muted", text: "Strength is the model's goal difference per game against an average opponent on a neutral field." +
+          (missing.length ? " Shot numbers for " + missing.join(", ") + " weren't available from the team's stats page." : "") })));
+      frag.append(sec);
+    }
+
+    // ---- schedule ----
+    {
+      const sec = h("section", { id: "schedule" }, h("div", { class: "sechead" }, h("h2", { text: "Schedule" }),
+        h("span", { class: "small muted", text: (db && canWrite !== false ? "Enter final scores as they come in. " : "") + "Tap a result to try a what-if." })));
+      const rem = M.FIXTURES.filter((f) => !M.valid(results[f.id]) || editing.has(f.id));
+      const byDate = {};
+      rem.forEach((f) => (byDate[f.date] = byDate[f.date] || []).push(f));
+      const allProbs = MODEL_probs(out);
+      Object.keys(byDate).sort().forEach((d) => {
+        const day = h("div", { class: "day" }, h("div", { class: "dayhead", text: fmtDate(d, true) }));
+        byDate[d].forEach((f) => day.append(fixtureRow(f, out, allProbs[f.id])));
+        sec.append(day);
+      });
+      if (!rem.length) sec.append(h("p", { class: "muted", text: "Every conference game has a final score." }));
+
+      const played = M.FIXTURES.filter((f) => M.valid(results[f.id]) && !editing.has(f.id));
+      const det = h("details", {}, h("summary", { text: "Results so far (" + played.length + ")" }));
+      const pd = {};
+      played.forEach((f) => (pd[f.date] = pd[f.date] || []).push(f));
+      Object.keys(pd).sort().reverse().forEach((d) => {
+        const day = h("div", { class: "day" }, h("div", { class: "dayhead", text: fmtDate(d, true) }));
+        pd[d].forEach((f) => day.append(fixtureRow(f, out, null)));
+        det.append(day);
+      });
+      sec.append(det);
+      frag.append(sec);
+    }
+
+    app.replaceChildren(frag);
+    for (const [id, v] of Object.entries(typed)) { const el = document.getElementById(id); if (el && el.value === "") { el.value = v; el.dispatchEvent(new Event("input")); } }
+    if (active) { const el = document.getElementById(active); if (el) el.focus(); }
+  }
+
+  const SITE = { H: "home", A: "away", N: "neutral" };
+
+  // Every game a WCC team has played: conference results plus nonconference games.
+  function teamGames(code) {
+    const out = [];
+    M.FIXTURES.forEach((f) => {
+      const r = results[f.id];
+      if (!M.valid(r)) return;
+      if (f.home === code) out.push({ key: f.away, opp: SHORT[f.away], date: f.date, site: "H", gf: r.hg, ga: r.ag });
+      else if (f.away === code) out.push({ key: f.home, opp: SHORT[f.home], date: f.date, site: "A", gf: r.ag, ga: r.hg });
+    });
+    M.cleanNonconf(nonconf).forEach((x) => {
+      if (x.team === code) out.push({ key: "nc:" + x.opp, opp: x.opp, date: x.date, site: x.site, gf: x.gf, ga: x.ga });
+    });
+    return out.sort((a, b) => a.date.localeCompare(b.date));
+  }
+  function rec2(list) {
+    let w = 0, l = 0, t = 0, gf = 0, ga = 0;
+    list.forEach((x) => { gf += x.gf; ga += x.ga; if (x.gf > x.ga) w++; else if (x.gf < x.ga) l++; else t++; });
+    return { w, l, t, gf, ga };
+  }
+
+  // Match probabilities for every remaining game (USF games and others).
+  function MODEL_probs(out) {
+    const map = {};
+    (out.allGames || []).forEach((g) => (map[g.id] = g.probs));
+    return map;
+  }
+
+  document.getElementById("credit").addEventListener("change", (e) => { credit = e.target.checked; saveLocal(); schedule(); });
+  document.getElementById("clearWhatIf").addEventListener("click", () => { whatIf = {}; saveLocal(); schedule(); });
+
+  // ---- connect to the shared score store ----
+  // Show the scores saved into the page right away, then switch to live scores if this view can reach the store.
+  const snap0 = typeof SNAPSHOT !== "undefined" ? SNAPSHOT : null;
+  if (snap0 && snap0.results) {
+    results = {};
+    for (const [id, r] of Object.entries(snap0.results)) {
+      if (FX[id] && r && Number.isInteger(r.hg) && Number.isInteger(r.ag)) results[id] = { hg: r.hg, ag: r.ag };
+    }
+    staticLabel = snap0.label || "";
+    if (Array.isArray(snap0.nonconf)) nonconf = snap0.nonconf;
+    if (snap0.stats && snap0.stats.teams) { stats = snap0.stats.teams; statsAsOf = snap0.stats.asOf || ""; }
+    loaded = true;
+    schedule();
+  }
+
+  (async () => {
+    try {
+      db = window.claude && window.claude.use ? await window.claude.use("db") : null;
+    } catch (e) { db = null; }
+    if (!db) {
+      if (!loaded) {
+        document.getElementById("status").textContent = "Scores unavailable";
+        document.getElementById("emptyState").textContent = "This view can't reach the tracker's saved scores.";
+      }
+      return;
+    }
+    try {
+      const user = await window.claude.use("user");
+      if (user) canWrite = await user.can("data.write");
+    } catch (e) {}
+    db.collection("results").onSnapshot((snap) => {
+      const next = {};
+      let latest = null;
+      snap.docs.forEach((d) => {
+        const x = d.data() || {};
+        const hg = Number(x.hg), ag = Number(x.ag);
+        if (FX[d.id] && Number.isInteger(hg) && Number.isInteger(ag)) {
+          next[d.id] = { hg, ag };
+          if (typeof x.updatedAt === "string" && (!latest || x.updatedAt > latest)) latest = x.updatedAt;
+        }
+      });
+      results = next;
+      lastUpdated = latest;
+      staticLabel = "";
+      if (!snap.size) {
+        document.getElementById("status").textContent = "No scores saved yet";
+      }
+      loaded = true;
+      schedule();
+    }, (e) => {
+      document.getElementById("status").textContent = "Live updates stopped. Reload the page to reconnect.";
+    });
+    db.collection("nonconf").onSnapshot((snap) => {
+      if (!snap.size) return; // keep the copy built into the page
+      nonconf = snap.docs.map((d) => {
+        const x = d.data() || {};
+        return { team: x.team, opp: x.opp, date: x.date, site: x.site, gf: Number(x.gf), ga: Number(x.ga) };
+      });
+      schedule();
+    }, () => {});
+    db.doc("stats/teams").onSnapshot((snap) => {
+      const x = snap.exists ? snap.data() : null;
+      if (!x || !x.teams) return;
+      stats = x.teams;
+      statsAsOf = typeof x.asOf === "string" ? x.asOf : "";
+      schedule();
+    }, () => {});
+  })();
+})();
+</script>
+
+</body>
+</html>
