@@ -172,7 +172,6 @@ summary { cursor: pointer; padding: 10px 0; font-weight: 600; }
     <p class="lede">The top four in the conference table after Nov 6 make the WCC Tournament. Semifinals are Nov 11 and the final is Nov 14, with the higher seed hosting each round.</p>
     <div class="statusrow">
       <span id="status">Loading scores…</span>
-      <label class="toggle" for="credit"><input type="checkbox" id="credit" checked> Rate USF as if it beat Saint Mary's and Santa Clara</label>
     </div>
   </header>
 
@@ -246,7 +245,6 @@ const MODEL = (() => {
     ncWeight: 0.75,     // nonconference games count a bit less than conference games
     shotK: 0.75,        // how much shots on goal shape the starting point
     sims: 20000,
-    creditIds: ["0926-USF-SMC", "0930-USF-SCU"], // draws counted as USF 1-0 wins when rating teams
   };
   // Opponents outside Division I start below average.
   const NON_D1 = { "Southern Oregon": -0.8 };
@@ -377,7 +375,6 @@ const MODEL = (() => {
   }
 
   function run(results, whatIf, opts = {}) {
-    const credit = opts.credit !== false;
     const nS = opts.sims || CFG.sims;
     const nonconf = cleanNonconf(opts.nonconf);
     const played = [], remaining = [];
@@ -414,10 +411,7 @@ const MODEL = (() => {
     const pAtt = new Array(nT).fill(0), pDef = new Array(nT).fill(0);
     for (let i = 0; i < N; i++) { pAtt[i] = sp.att[i]; pDef[i] = sp.def[i]; }
     oppNames.forEach((nm, k) => { const v = NON_D1[nm]; if (v) { pAtt[N + k] = v / 2; pDef[N + k] = v / 2; } });
-    const fitGames = played.map((g) => {
-      const c = credit && CFG.creditIds.includes(g.id);
-      return { h: g.h, a: g.a, hg: c ? (g.h === USF ? 1 : 0) : g.hg, ag: c ? (g.a === USF ? 1 : 0) : g.ag, w: 1, ha: CFG.home };
-    });
+    const fitGames = played.map((g) => ({ h: g.h, a: g.a, hg: g.hg, ag: g.ag, w: 1, ha: CFG.home }));
     nonconf.forEach((x) => {
       const ti = IDX[x.team], oi = oppIdx[x.opp];
       if (x.site === "A") fitGames.push({ h: oi, a: ti, hg: x.ga, ag: x.gf, w: CFG.ncWeight, ha: CFG.home });
@@ -584,7 +578,6 @@ if (typeof module !== "undefined") module.exports = MODEL;
   let canWrite = null;
   let editing = new Set();
   let whatIf = {};
-  let credit = true;
   let lastUpdated = null;
   let writeError = "";
   let staticLabel = "";
@@ -594,11 +587,9 @@ if (typeof module !== "undefined") module.exports = MODEL;
   let compTeam = null;
 
   try { const w = JSON.parse(localStorage.getItem("usfwatch.whatif") || "{}"); if (w && typeof w === "object") whatIf = w; } catch (e) {}
-  try { const c = localStorage.getItem("usfwatch.credit"); if (c !== null) credit = c === "1"; } catch (e) {}
-  document.getElementById("credit").checked = credit;
 
   const saveLocal = () => {
-    try { localStorage.setItem("usfwatch.whatif", JSON.stringify(whatIf)); localStorage.setItem("usfwatch.credit", credit ? "1" : "0"); } catch (e) {}
+    try { localStorage.setItem("usfwatch.whatif", JSON.stringify(whatIf)); } catch (e) {}
   };
 
   // ---- tiny DOM helper ----
@@ -724,7 +715,7 @@ if (typeof module !== "undefined") module.exports = MODEL;
     for (const id of Object.keys(whatIf)) if (M.valid(results[id]) || !FX[id]) { delete whatIf[id]; changed = true; }
     if (changed) saveLocal();
 
-    const out = M.run(results, whatIf, { credit, nonconf, stats });
+    const out = M.run(results, whatIf, { nonconf, stats });
     const nLocks = Object.keys(whatIf).length;
 
     let saved = "";
@@ -1024,7 +1015,6 @@ if (typeof module !== "undefined") module.exports = MODEL;
     return map;
   }
 
-  document.getElementById("credit").addEventListener("change", (e) => { credit = e.target.checked; saveLocal(); schedule(); });
   document.getElementById("clearWhatIf").addEventListener("click", () => { whatIf = {}; saveLocal(); schedule(); });
 
   // ---- connect to the shared score store ----
