@@ -189,52 +189,305 @@ summary { cursor: pointer; padding: 10px 0; font-weight: 600; }
 </div>
 
 <script id="snapshot">
-var SNAPSHOT = {"label":"scores as of Oct 14","results":{"0926-USF-SMC":{"ag":1,"hg":1},"0926-DEN-USD":{"ag":0,"hg":0},"0926-LMU-POR":{"ag":0,"hg":4},"0926-SCU-SEA":{"ag":0,"hg":0},"0930-USD-LMU":{"ag":2,"hg":1},"0930-SMC-POR":{"ag":0,"hg":5},"0930-SEA-PAC":{"ag":3,"hg":3},"0930-USF-SCU":{"ag":1,"hg":1},"1003-LMU-DEN":{"ag":1,"hg":2},"1003-SMC-SEA":{"ag":2,"hg":4},"1003-USD-USF":{"ag":2,"hg":2},"1003-SCU-PAC":{"ag":1,"hg":2},"1010-PAC-SMC":{"ag":2,"hg":1},"1010-USF-DEN":{"ag":1,"hg":2},"1010-POR-USD":{"ag":5,"hg":4},"1010-LMU-SCU":{"ag":0,"hg":2}},"nonconf":[{"team":"DEN","opp":"Cal Poly","date":"2026-08-20","site":"H","gf":2,"ga":2},{"team":"DEN","opp":"Stanford","date":"2026-08-23","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"UCLA","date":"2026-08-28","site":"A","gf":0,"ga":3},{"team":"DEN","opp":"California Baptist","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"DEN","opp":"Tulsa","date":"2026-09-04","site":"H","gf":3,"ga":0},{"team":"DEN","opp":"Indiana","date":"2026-09-07","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"West Virginia","date":"2026-09-11","site":"A","gf":0,"ga":5},{"team":"DEN","opp":"Creighton","date":"2026-09-22","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Michigan","date":"2026-08-20","site":"A","gf":0,"ga":0},{"team":"LMU","opp":"UC Irvine","date":"2026-08-24","site":"A","gf":1,"ga":3},{"team":"LMU","opp":"SMU","date":"2026-08-28","site":"A","gf":0,"ga":2},{"team":"LMU","opp":"UNLV","date":"2026-09-02","site":"H","gf":1,"ga":0},{"team":"LMU","opp":"Cal Poly","date":"2026-09-07","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"California Baptist","date":"2026-09-11","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Cal State Fullerton","date":"2026-09-16","site":"A","gf":0,"ga":0},{"team":"PAC","opp":"Utah Valley","date":"2026-08-20","site":"A","gf":1,"ga":2},{"team":"PAC","opp":"Utah Tech","date":"2026-08-23","site":"A","gf":3,"ga":2},{"team":"PAC","opp":"UC Davis","date":"2026-08-27","site":"H","gf":3,"ga":3},{"team":"PAC","opp":"UC Irvine","date":"2026-08-30","site":"H","gf":0,"ga":3},{"team":"PAC","opp":"UC San Diego","date":"2026-09-05","site":"A","gf":0,"ga":1},{"team":"PAC","opp":"San Jose State","date":"2026-09-10","site":"A","gf":2,"ga":2},{"team":"PAC","opp":"Cal State Northridge","date":"2026-09-13","site":"H","gf":1,"ga":3},{"team":"PAC","opp":"Sacramento State","date":"2026-09-17","site":"A","gf":2,"ga":4},{"team":"PAC","opp":"California Baptist","date":"2026-09-20","site":"A","gf":0,"ga":2},{"team":"PAC","opp":"California","date":"2026-09-25","site":"H","gf":0,"ga":3},{"team":"POR","opp":"California","date":"2026-08-21","site":"H","gf":0,"ga":0},{"team":"POR","opp":"Washington","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"POR","opp":"Princeton","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"POR","opp":"Wisconsin","date":"2026-09-05","site":"H","gf":1,"ga":2},{"team":"POR","opp":"Southern Oregon","date":"2026-09-08","site":"H","gf":4,"ga":1},{"team":"POR","opp":"Oregon State","date":"2026-09-13","site":"H","gf":0,"ga":0},{"team":"POR","opp":"New Hampshire","date":"2026-09-19","site":"H","gf":2,"ga":0},{"team":"POR","opp":"Michigan","date":"2026-10-04","site":"A","gf":2,"ga":1},{"team":"SCU","opp":"Cleveland State","date":"2026-08-20","site":"H","gf":2,"ga":1},{"team":"SCU","opp":"Fordham","date":"2026-08-23","site":"H","gf":2,"ga":0},{"team":"SCU","opp":"California","date":"2026-08-27","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Utah Valley","date":"2026-08-30","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Loyola Chicago","date":"2026-09-04","site":"N","gf":2,"ga":3},{"team":"SCU","opp":"Creighton","date":"2026-09-07","site":"A","gf":1,"ga":4},{"team":"SCU","opp":"Stanford","date":"2026-09-15","site":"A","gf":0,"ga":1},{"team":"SCU","opp":"San Diego State","date":"2026-09-20","site":"H","gf":2,"ga":1},{"team":"SEA","opp":"Saint Louis","date":"2026-08-20","site":"A","gf":0,"ga":4},{"team":"SEA","opp":"Michigan State","date":"2026-08-23","site":"A","gf":1,"ga":2},{"team":"SEA","opp":"Cal State Fullerton","date":"2026-08-31","site":"H","gf":7,"ga":1},{"team":"SEA","opp":"UC Davis","date":"2026-09-03","site":"H","gf":6,"ga":1},{"team":"SEA","opp":"Western Michigan","date":"2026-09-13","site":"A","gf":3,"ga":0},{"team":"SEA","opp":"Lindenwood","date":"2026-09-20","site":"H","gf":1,"ga":1},{"team":"SEA","opp":"Oregon State","date":"2026-09-23","site":"A","gf":1,"ga":3},{"team":"SMC","opp":"Wisconsin","date":"2026-08-20","site":"A","gf":0,"ga":5},{"team":"SMC","opp":"Marquette","date":"2026-08-23","site":"A","gf":0,"ga":2},{"team":"SMC","opp":"Sacramento State","date":"2026-08-27","site":"H","gf":2,"ga":1},{"team":"SMC","opp":"San Jose State","date":"2026-08-30","site":"A","gf":2,"ga":4},{"team":"SMC","opp":"Marist","date":"2026-09-04","site":"H","gf":1,"ga":4},{"team":"SMC","opp":"Air Force","date":"2026-09-07","site":"H","gf":2,"ga":2},{"team":"SMC","opp":"Creighton","date":"2026-09-10","site":"A","gf":3,"ga":3},{"team":"SMC","opp":"Omaha","date":"2026-09-13","site":"A","gf":2,"ga":1},{"team":"SMC","opp":"UC Davis","date":"2026-09-19","site":"H","gf":2,"ga":2},{"team":"USD","opp":"Washington","date":"2026-08-20","site":"A","gf":2,"ga":1},{"team":"USD","opp":"Liberty","date":"2026-08-23","site":"H","gf":3,"ga":1},{"team":"USD","opp":"Stanford","date":"2026-08-27","site":"A","gf":0,"ga":1},{"team":"USD","opp":"UC Santa Barbara","date":"2026-08-31","site":"A","gf":1,"ga":1},{"team":"USD","opp":"California Baptist","date":"2026-09-05","site":"A","gf":2,"ga":1},{"team":"USD","opp":"UC Irvine","date":"2026-09-08","site":"A","gf":2,"ga":1},{"team":"USD","opp":"San Diego State","date":"2026-09-13","site":"H","gf":2,"ga":1},{"team":"USD","opp":"Kansas City","date":"2026-09-20","site":"A","gf":0,"ga":1},{"team":"USF","opp":"Wake Forest","date":"2026-08-20","site":"A","gf":2,"ga":4},{"team":"USF","opp":"UNC Greensboro","date":"2026-08-23","site":"A","gf":0,"ga":0},{"team":"USF","opp":"Creighton","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"USF","opp":"Kansas City","date":"2026-08-30","site":"A","gf":3,"ga":2},{"team":"USF","opp":"Air Force","date":"2026-09-04","site":"H","gf":2,"ga":0},{"team":"USF","opp":"Marist","date":"2026-09-07","site":"H","gf":1,"ga":4},{"team":"USF","opp":"UC Davis","date":"2026-09-12","site":"A","gf":6,"ga":0},{"team":"USF","opp":"California","date":"2026-09-16","site":"H","gf":3,"ga":2},{"team":"USF","opp":"Cal State Bakersfield","date":"2026-09-20","site":"A","gf":1,"ga":2}],"stats":{"asOf":"2026-10-13","teams":{"DEN":{"gp":11,"goals":11,"goals_against":21,"shots":100,"sog":44,"opp_shots":190,"opp_sog":75,"corners":35,"opp_corners":64,"saves":54,"opp_saves":33},"LMU":{"gp":11,"goals":4,"goals_against":17,"shots":100,"sog":37,"opp_shots":139,"opp_sog":52,"corners":37,"opp_corners":49,"saves":35,"opp_saves":32},"PAC":{"gp":13,"goals":19,"goals_against":30,"shots":102,"sog":52,"opp_shots":207,"opp_sog":98,"corners":48,"opp_corners":81,"saves":68,"opp_saves":33},"POR":{"gp":11,"goals":25,"goals_against":14,"shots":172,"sog":80,"opp_shots":100,"opp_sog":47,"corners":66,"opp_corners":37,"saves":33,"opp_saves":56},"SCU":{"gp":12,"goals":13,"goals_against":15,"shots":156,"sog":50,"opp_shots":156,"opp_sog":67,"corners":54,"opp_corners":61,"saves":52,"opp_saves":37},"SMC":{"gp":13,"goals":18,"goals_against":36,"shots":157,"sog":52,"opp_shots":181,"opp_sog":79,"corners":65,"opp_corners":59,"saves":43,"opp_saves":34},"USD":{"gp":12,"goals":20,"goals_against":16,"shots":166,"sog":57,"opp_shots":139,"opp_sog":40,"corners":69,"opp_corners":60,"saves":24,"opp_saves":37},"USF":{"gp":13,"goals":25,"goals_against":24,"shots":200,"sog":90,"opp_shots":154,"opp_sog":66,"corners":79,"opp_corners":63,"saves":42,"opp_saves":65}}}};
+var SNAPSHOT = {"label":"scores as of Oct 15","results":{"0926-USF-SMC":{"ag":1,"hg":1},"0926-DEN-USD":{"ag":0,"hg":0},"0926-LMU-POR":{"ag":0,"hg":4},"0926-SCU-SEA":{"ag":0,"hg":0},"0930-USD-LMU":{"ag":2,"hg":1},"0930-SMC-POR":{"ag":0,"hg":5},"0930-SEA-PAC":{"ag":3,"hg":3},"0930-USF-SCU":{"ag":1,"hg":1},"1003-LMU-DEN":{"ag":1,"hg":2},"1003-SMC-SEA":{"ag":2,"hg":4},"1003-USD-USF":{"ag":2,"hg":2},"1003-SCU-PAC":{"ag":1,"hg":2},"1010-PAC-SMC":{"ag":2,"hg":1},"1010-USF-DEN":{"ag":1,"hg":2},"1010-POR-USD":{"ag":5,"hg":4},"1010-LMU-SCU":{"ag":0,"hg":2}},"nonconf":[{"team":"DEN","opp":"Cal Poly","date":"2026-08-20","site":"H","gf":2,"ga":2},{"team":"DEN","opp":"Stanford","date":"2026-08-23","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"UCLA","date":"2026-08-28","site":"A","gf":0,"ga":3},{"team":"DEN","opp":"California Baptist","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"DEN","opp":"Tulsa","date":"2026-09-04","site":"H","gf":3,"ga":0},{"team":"DEN","opp":"Indiana","date":"2026-09-07","site":"A","gf":1,"ga":3},{"team":"DEN","opp":"West Virginia","date":"2026-09-11","site":"A","gf":0,"ga":5},{"team":"DEN","opp":"Creighton","date":"2026-09-22","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Michigan","date":"2026-08-20","site":"A","gf":0,"ga":0},{"team":"LMU","opp":"UC Irvine","date":"2026-08-24","site":"A","gf":1,"ga":3},{"team":"LMU","opp":"SMU","date":"2026-08-28","site":"A","gf":0,"ga":2},{"team":"LMU","opp":"UNLV","date":"2026-09-02","site":"H","gf":1,"ga":0},{"team":"LMU","opp":"Cal Poly","date":"2026-09-07","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"California Baptist","date":"2026-09-11","site":"H","gf":0,"ga":1},{"team":"LMU","opp":"Cal State Fullerton","date":"2026-09-16","site":"A","gf":0,"ga":0},{"team":"PAC","opp":"Utah Valley","date":"2026-08-20","site":"A","gf":1,"ga":2},{"team":"PAC","opp":"Utah Tech","date":"2026-08-23","site":"A","gf":3,"ga":2},{"team":"PAC","opp":"UC Davis","date":"2026-08-27","site":"H","gf":3,"ga":3},{"team":"PAC","opp":"UC Irvine","date":"2026-08-30","site":"H","gf":0,"ga":3},{"team":"PAC","opp":"UC San Diego","date":"2026-09-05","site":"A","gf":0,"ga":1},{"team":"PAC","opp":"San Jose State","date":"2026-09-10","site":"A","gf":2,"ga":2},{"team":"PAC","opp":"Cal State Northridge","date":"2026-09-13","site":"H","gf":1,"ga":3},{"team":"PAC","opp":"Sacramento State","date":"2026-09-17","site":"A","gf":2,"ga":4},{"team":"PAC","opp":"California Baptist","date":"2026-09-20","site":"A","gf":0,"ga":2},{"team":"PAC","opp":"California","date":"2026-09-25","site":"H","gf":0,"ga":3},{"team":"POR","opp":"California","date":"2026-08-21","site":"H","gf":0,"ga":0},{"team":"POR","opp":"Washington","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"POR","opp":"Princeton","date":"2026-08-31","site":"A","gf":0,"ga":2},{"team":"POR","opp":"Wisconsin","date":"2026-09-05","site":"H","gf":1,"ga":2},{"team":"POR","opp":"Southern Oregon","date":"2026-09-08","site":"H","gf":4,"ga":1},{"team":"POR","opp":"Oregon State","date":"2026-09-13","site":"H","gf":0,"ga":0},{"team":"POR","opp":"New Hampshire","date":"2026-09-19","site":"H","gf":2,"ga":0},{"team":"POR","opp":"Michigan","date":"2026-10-04","site":"A","gf":2,"ga":1},{"team":"SCU","opp":"Cleveland State","date":"2026-08-20","site":"H","gf":2,"ga":1},{"team":"SCU","opp":"Fordham","date":"2026-08-23","site":"H","gf":2,"ga":0},{"team":"SCU","opp":"California","date":"2026-08-27","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Utah Valley","date":"2026-08-30","site":"H","gf":0,"ga":1},{"team":"SCU","opp":"Loyola Chicago","date":"2026-09-04","site":"N","gf":2,"ga":3},{"team":"SCU","opp":"Creighton","date":"2026-09-07","site":"A","gf":1,"ga":4},{"team":"SCU","opp":"Stanford","date":"2026-09-15","site":"A","gf":0,"ga":1},{"team":"SCU","opp":"San Diego State","date":"2026-09-20","site":"H","gf":2,"ga":1},{"team":"SEA","opp":"Saint Louis","date":"2026-08-20","site":"A","gf":0,"ga":4},{"team":"SEA","opp":"Michigan State","date":"2026-08-23","site":"A","gf":1,"ga":2},{"team":"SEA","opp":"Cal State Fullerton","date":"2026-08-31","site":"H","gf":7,"ga":1},{"team":"SEA","opp":"UC Davis","date":"2026-09-03","site":"H","gf":6,"ga":1},{"team":"SEA","opp":"Western Michigan","date":"2026-09-13","site":"A","gf":3,"ga":0},{"team":"SEA","opp":"Lindenwood","date":"2026-09-20","site":"H","gf":1,"ga":1},{"team":"SEA","opp":"Oregon State","date":"2026-09-23","site":"A","gf":1,"ga":3},{"team":"SMC","opp":"Wisconsin","date":"2026-08-20","site":"A","gf":0,"ga":5},{"team":"SMC","opp":"Marquette","date":"2026-08-23","site":"A","gf":0,"ga":2},{"team":"SMC","opp":"Sacramento State","date":"2026-08-27","site":"H","gf":2,"ga":1},{"team":"SMC","opp":"San Jose State","date":"2026-08-30","site":"A","gf":2,"ga":4},{"team":"SMC","opp":"Marist","date":"2026-09-04","site":"H","gf":1,"ga":4},{"team":"SMC","opp":"Air Force","date":"2026-09-07","site":"H","gf":2,"ga":2},{"team":"SMC","opp":"Creighton","date":"2026-09-10","site":"A","gf":3,"ga":3},{"team":"SMC","opp":"Omaha","date":"2026-09-13","site":"A","gf":2,"ga":1},{"team":"SMC","opp":"UC Davis","date":"2026-09-19","site":"H","gf":2,"ga":2},{"team":"USD","opp":"Washington","date":"2026-08-20","site":"A","gf":2,"ga":1},{"team":"USD","opp":"Liberty","date":"2026-08-23","site":"H","gf":3,"ga":1},{"team":"USD","opp":"Stanford","date":"2026-08-27","site":"A","gf":0,"ga":1},{"team":"USD","opp":"UC Santa Barbara","date":"2026-08-31","site":"A","gf":1,"ga":1},{"team":"USD","opp":"California Baptist","date":"2026-09-05","site":"A","gf":2,"ga":1},{"team":"USD","opp":"UC Irvine","date":"2026-09-08","site":"A","gf":2,"ga":1},{"team":"USD","opp":"San Diego State","date":"2026-09-13","site":"H","gf":2,"ga":1},{"team":"USD","opp":"Kansas City","date":"2026-09-20","site":"A","gf":0,"ga":1},{"team":"USF","opp":"Wake Forest","date":"2026-08-20","site":"A","gf":2,"ga":4},{"team":"USF","opp":"UNC Greensboro","date":"2026-08-23","site":"A","gf":0,"ga":0},{"team":"USF","opp":"Creighton","date":"2026-08-27","site":"A","gf":2,"ga":4},{"team":"USF","opp":"Kansas City","date":"2026-08-30","site":"A","gf":3,"ga":2},{"team":"USF","opp":"Air Force","date":"2026-09-04","site":"H","gf":2,"ga":0},{"team":"USF","opp":"Marist","date":"2026-09-07","site":"H","gf":1,"ga":4},{"team":"USF","opp":"UC Davis","date":"2026-09-12","site":"A","gf":6,"ga":0},{"team":"USF","opp":"California","date":"2026-09-16","site":"H","gf":3,"ga":2},{"team":"USF","opp":"Cal State Bakersfield","date":"2026-09-20","site":"A","gf":1,"ga":2},{"team":"SEA","opp":"Washington","date":"2026-10-14","site":"A","gf":1,"ga":3}],"stats":{"asOf":"2026-10-13","teams":{"DEN":{"gp":11,"goals":11,"goals_against":21,"shots":100,"sog":44,"opp_shots":190,"opp_sog":75,"corners":35,"opp_corners":64,"saves":54,"opp_saves":33},"LMU":{"gp":11,"goals":4,"goals_against":17,"shots":100,"sog":37,"opp_shots":139,"opp_sog":52,"corners":37,"opp_corners":49,"saves":35,"opp_saves":32},"PAC":{"gp":13,"goals":19,"goals_against":30,"shots":102,"sog":52,"opp_shots":207,"opp_sog":98,"corners":48,"opp_corners":81,"saves":68,"opp_saves":33},"POR":{"gp":11,"goals":25,"goals_against":14,"shots":172,"sog":80,"opp_shots":100,"opp_sog":47,"corners":66,"opp_corners":37,"saves":33,"opp_saves":56},"SCU":{"gp":12,"goals":13,"goals_against":15,"shots":156,"sog":50,"opp_shots":156,"opp_sog":67,"corners":54,"opp_corners":61,"saves":52,"opp_saves":37},"SMC":{"gp":13,"goals":18,"goals_against":36,"shots":157,"sog":52,"opp_shots":181,"opp_sog":79,"corners":65,"opp_corners":59,"saves":43,"opp_saves":34},"USD":{"gp":12,"goals":20,"goals_against":16,"shots":166,"sog":57,"opp_shots":139,"opp_sog":40,"corners":69,"opp_corners":60,"saves":24,"opp_saves":37},"USF":{"gp":13,"goals":25,"goals_against":24,"shots":200,"sog":90,"opp_shots":154,"opp_sog":66,"corners":79,"opp_corners":63,"saves":42,"opp_saves":65},"SEA":{"gp":11,"goals":27,"goals_against":20,"shots":118,"sog":50,"opp_shots":152,"opp_sog":72,"corners":49,"opp_corners":55,"saves":52,"opp_saves":24}}}};
+</script>
+<script>
+var LEAGUE = {
+ "key": "men",
+ "focus": "USF",
+ "eyebrow": "WCC Men's Soccer \u00b7 2026",
+ "title": "USF Playoff Watch",
+ "lede": "The top four in the conference table after Nov 6 make the WCC Tournament. Semifinals are Nov 11 and the final is Nov 14, with the higher seed hosting each round.",
+ "backtest": "Tested on the 90 games already played, teams this model made roughly 64% favorites won about 64% of the time.",
+ "teams": [
+  {
+   "code": "POR",
+   "name": "Portland",
+   "short": "Portland"
+  },
+  {
+   "code": "DEN",
+   "name": "Denver",
+   "short": "Denver"
+  },
+  {
+   "code": "PAC",
+   "name": "Pacific",
+   "short": "Pacific"
+  },
+  {
+   "code": "SEA",
+   "name": "Seattle U",
+   "short": "Seattle U"
+  },
+  {
+   "code": "USD",
+   "name": "San Diego",
+   "short": "San Diego"
+  },
+  {
+   "code": "SCU",
+   "name": "Santa Clara",
+   "short": "Santa Clara"
+  },
+  {
+   "code": "USF",
+   "name": "San Francisco",
+   "short": "USF"
+  },
+  {
+   "code": "SMC",
+   "name": "Saint Mary's",
+   "short": "Saint Mary's"
+  },
+  {
+   "code": "LMU",
+   "name": "LMU",
+   "short": "LMU"
+  }
+ ],
+ "fixtures": [
+  {
+   "date": "2026-09-26",
+   "time": "",
+   "away": "USF",
+   "home": "SMC"
+  },
+  {
+   "date": "2026-09-26",
+   "time": "",
+   "away": "DEN",
+   "home": "USD"
+  },
+  {
+   "date": "2026-09-26",
+   "time": "",
+   "away": "LMU",
+   "home": "POR"
+  },
+  {
+   "date": "2026-09-26",
+   "time": "",
+   "away": "SCU",
+   "home": "SEA"
+  },
+  {
+   "date": "2026-09-30",
+   "time": "",
+   "away": "USD",
+   "home": "LMU"
+  },
+  {
+   "date": "2026-09-30",
+   "time": "",
+   "away": "SMC",
+   "home": "POR"
+  },
+  {
+   "date": "2026-09-30",
+   "time": "",
+   "away": "SEA",
+   "home": "PAC"
+  },
+  {
+   "date": "2026-09-30",
+   "time": "",
+   "away": "USF",
+   "home": "SCU"
+  },
+  {
+   "date": "2026-10-03",
+   "time": "",
+   "away": "LMU",
+   "home": "DEN"
+  },
+  {
+   "date": "2026-10-03",
+   "time": "",
+   "away": "SMC",
+   "home": "SEA"
+  },
+  {
+   "date": "2026-10-03",
+   "time": "",
+   "away": "USD",
+   "home": "USF"
+  },
+  {
+   "date": "2026-10-03",
+   "time": "",
+   "away": "SCU",
+   "home": "PAC"
+  },
+  {
+   "date": "2026-10-10",
+   "time": "",
+   "away": "PAC",
+   "home": "SMC"
+  },
+  {
+   "date": "2026-10-10",
+   "time": "",
+   "away": "USF",
+   "home": "DEN"
+  },
+  {
+   "date": "2026-10-10",
+   "time": "",
+   "away": "POR",
+   "home": "USD"
+  },
+  {
+   "date": "2026-10-10",
+   "time": "",
+   "away": "LMU",
+   "home": "SCU"
+  },
+  {
+   "date": "2026-10-17",
+   "time": "6:00 PM",
+   "away": "SEA",
+   "home": "LMU"
+  },
+  {
+   "date": "2026-10-17",
+   "time": "7:00 PM",
+   "away": "USD",
+   "home": "PAC"
+  },
+  {
+   "date": "2026-10-17",
+   "time": "7:00 PM",
+   "away": "SMC",
+   "home": "SCU"
+  },
+  {
+   "date": "2026-10-17",
+   "time": "7:00 PM",
+   "away": "DEN",
+   "home": "POR"
+  },
+  {
+   "date": "2026-10-21",
+   "time": "3:00 PM",
+   "away": "DEN",
+   "home": "SMC"
+  },
+  {
+   "date": "2026-10-21",
+   "time": "7:00 PM",
+   "away": "SCU",
+   "home": "USD"
+  },
+  {
+   "date": "2026-10-21",
+   "time": "7:00 PM",
+   "away": "POR",
+   "home": "SEA"
+  },
+  {
+   "date": "2026-10-21",
+   "time": "7:00 PM",
+   "away": "PAC",
+   "home": "USF"
+  },
+  {
+   "date": "2026-10-24",
+   "time": "2:00 PM",
+   "away": "PAC",
+   "home": "DEN"
+  },
+  {
+   "date": "2026-10-24",
+   "time": "7:00 PM",
+   "away": "SCU",
+   "home": "POR"
+  },
+  {
+   "date": "2026-10-24",
+   "time": "7:00 PM",
+   "away": "SEA",
+   "home": "USF"
+  },
+  {
+   "date": "2026-10-25",
+   "time": "1:00 PM",
+   "away": "LMU",
+   "home": "SMC"
+  },
+  {
+   "date": "2026-10-31",
+   "time": "6:00 PM",
+   "away": "USF",
+   "home": "LMU"
+  },
+  {
+   "date": "2026-10-31",
+   "time": "7:00 PM",
+   "away": "USD",
+   "home": "SEA"
+  },
+  {
+   "date": "2026-10-31",
+   "time": "7:00 PM",
+   "away": "POR",
+   "home": "PAC"
+  },
+  {
+   "date": "2026-10-31",
+   "time": "7:00 PM",
+   "away": "DEN",
+   "home": "SCU"
+  },
+  {
+   "date": "2026-11-06",
+   "time": "5:00 PM",
+   "away": "SEA",
+   "home": "DEN"
+  },
+  {
+   "date": "2026-11-06",
+   "time": "6:00 PM",
+   "away": "PAC",
+   "home": "LMU"
+  },
+  {
+   "date": "2026-11-06",
+   "time": "7:00 PM",
+   "away": "POR",
+   "home": "USF"
+  },
+  {
+   "date": "2026-11-06",
+   "time": "7:00 PM",
+   "away": "SMC",
+   "home": "USD"
+  }
+ ],
+ "nonD1": {
+  "Southern Oregon": -0.8
+ },
+ "alias": {
+  "Cal Baptist": "California Baptist"
+ },
+ "cfg": {}
+};
+if (typeof module !== 'undefined') module.exports = LEAGUE;
+
 </script>
 <script>
 // ---- Model: ratings from every D1 game + Monte Carlo of the WCC regular season ----
-const MODEL = (() => {
-  const TEAMS = [
-    { code: "POR", name: "Portland" },
-    { code: "DEN", name: "Denver" },
-    { code: "PAC", name: "Pacific" },
-    { code: "SEA", name: "Seattle U" },
-    { code: "USD", name: "San Diego" },
-    { code: "SCU", name: "Santa Clara" },
-    { code: "USF", name: "San Francisco" },
-    { code: "SMC", name: "Saint Mary's" },
-    { code: "LMU", name: "LMU" },
-  ];
+function makeModel(LEAGUE) {
+  const TEAMS = LEAGUE.teams.map((t) => ({ code: t.code, name: t.name }));
   const N = TEAMS.length;
   const IDX = {};
   TEAMS.forEach((t, i) => (IDX[t.code] = i));
-  const USF = IDX.USF;
+  const USF = IDX[LEAGUE.focus];  // the team the page follows
 
   // Full conference schedule. Times are Pacific.
-  const F = (date, time, away, home) => ({
-    id: date.slice(5).replace("-", "") + "-" + away + "-" + home, date, time, away, home,
-  });
-  const FIXTURES = [
-    F("2026-09-26", "", "USF", "SMC"), F("2026-09-26", "", "DEN", "USD"),
-    F("2026-09-26", "", "LMU", "POR"), F("2026-09-26", "", "SCU", "SEA"),
-    F("2026-09-30", "", "USD", "LMU"), F("2026-09-30", "", "SMC", "POR"),
-    F("2026-09-30", "", "SEA", "PAC"), F("2026-09-30", "", "USF", "SCU"),
-    F("2026-10-03", "", "LMU", "DEN"), F("2026-10-03", "", "SMC", "SEA"),
-    F("2026-10-03", "", "USD", "USF"), F("2026-10-03", "", "SCU", "PAC"),
-    F("2026-10-10", "", "PAC", "SMC"), F("2026-10-10", "", "USF", "DEN"),
-    F("2026-10-10", "", "POR", "USD"), F("2026-10-10", "", "LMU", "SCU"),
-    F("2026-10-17", "6:00 PM", "SEA", "LMU"), F("2026-10-17", "7:00 PM", "USD", "PAC"),
-    F("2026-10-17", "7:00 PM", "SMC", "SCU"), F("2026-10-17", "7:00 PM", "DEN", "POR"),
-    F("2026-10-21", "3:00 PM", "DEN", "SMC"), F("2026-10-21", "7:00 PM", "SCU", "USD"),
-    F("2026-10-21", "7:00 PM", "POR", "SEA"), F("2026-10-21", "7:00 PM", "PAC", "USF"),
-    F("2026-10-24", "2:00 PM", "PAC", "DEN"), F("2026-10-24", "7:00 PM", "SCU", "POR"),
-    F("2026-10-24", "7:00 PM", "SEA", "USF"),
-    F("2026-10-25", "1:00 PM", "LMU", "SMC"),
-    F("2026-10-31", "6:00 PM", "USF", "LMU"), F("2026-10-31", "7:00 PM", "USD", "SEA"),
-    F("2026-10-31", "7:00 PM", "POR", "PAC"), F("2026-10-31", "7:00 PM", "DEN", "SCU"),
-    F("2026-11-06", "5:00 PM", "SEA", "DEN"), F("2026-11-06", "6:00 PM", "PAC", "LMU"),
-    F("2026-11-06", "7:00 PM", "POR", "USF"), F("2026-11-06", "7:00 PM", "SMC", "USD"),
-  ];
+  const FIXTURES = LEAGUE.fixtures.map((f) => ({
+    id: f.date.slice(5).replace("-", "") + "-" + f.away + "-" + f.home, date: f.date, time: f.time || "", away: f.away, home: f.home,
+  }));
 
   // Settings chosen by back-testing on the 90 games already played (leave-one-out):
   // shots on goal predict better than goals in this sample, and home field is worth more than first assumed.
@@ -245,10 +498,11 @@ const MODEL = (() => {
     ncWeight: 0.75,     // nonconference games count a bit less than conference games
     shotK: 0.75,        // how much shots on goal shape the starting point
     sims: 20000,
+    ...(LEAGUE.cfg || {}),
   };
   // Opponents outside Division I start below average.
-  const NON_D1 = { "Southern Oregon": -0.8 };
-  const ALIAS = { "Cal Baptist": "California Baptist" };
+  const NON_D1 = LEAGUE.nonD1 || {};
+  const ALIAS = LEAGUE.alias || {};
 
   function rng(seed) {
     let a = seed >>> 0;
@@ -543,7 +797,32 @@ const MODEL = (() => {
       return { pts: f, share: fin[f][0] / nS, top4: fin[f][1] / fin[f][0], n: fin[f][0],
                best: rs.length > 1 ? rs[0] : null, worst: rs.length > 1 ? rs[rs.length - 1] : null };
     });
-    const line = finals.filter((x) => x.n >= 100 && x.top4 >= 0.5).map((x) => x.pts).sort((a, b) => a - b)[0];
+    // Rare win-out steps: simulate them directly with those wins locked in, instead of
+    // relying on the handful of random seasons that happened to produce them.
+    let winOutSwings = null;
+    if (opts.exactPath !== false) {
+      const locks = { ...whatIf };
+      usfK.forEach((k, j) => {
+        const g = remaining[k];
+        locks[g.id] = g.h === USF ? "H" : "A";
+        if (winPath[j].n < 150) {
+          const last = j === usfK.length - 1;
+          const sub = run(results, { ...locks }, { ...opts, sims: last ? 10000 : 6000, exactPath: false });
+          winPath[j].top4 = sub.top4[TEAMS[USF].code];
+          winPath[j].exact = true;
+          if (last) winOutSwings = sub.swings;
+        }
+      });
+    }
+    // Winning out is the one route to the maximum total, so its exact figure stands in for a thin sample.
+    const lastStep = winPath[winPath.length - 1];
+    if (lastStep && lastStep.top4 != null) {
+      const maxPts = pts[USF] + 3 * left[USF];
+      const row = finals.find((x) => x.pts === maxPts);
+      if (!row) finals.unshift({ pts: maxPts, share: lastStep.n / nS, top4: lastStep.top4, n: lastStep.n, best: null, worst: null, exact: true });
+      else if (row.n < 150) { row.top4 = lastStep.top4; row.exact = true; }
+    }
+    const line = finals.filter((x) => (x.n >= 100 || x.exact) && x.top4 >= 0.5).map((x) => x.pts).sort((a, b) => a - b)[0];
 
     // Strength vs an average opponent at a neutral site, in goals per game
     const ratings = TEAMS.map((tm, i) => {
@@ -552,7 +831,7 @@ const MODEL = (() => {
     });
 
     return {
-      standings, top4, seeds, usfGames, swings, finals, winPath, ratings,
+      standings, top4, seeds, usfGames, swings, finals, winPath, ratings, winOutSwings,
       line: line === undefined ? null : line,
       usf: { pts: pts[USF], left: left[USF], max: pts[USF] + 3 * left[USF] },
       played: played.length, remaining: R, sims: nS, nonconfCount: nonconf.length,
@@ -561,15 +840,16 @@ const MODEL = (() => {
   }
 
   return { TEAMS, IDX, FIXTURES, CFG, ALIAS, run, valid, cleanNonconf };
-})();
-if (typeof module !== "undefined") module.exports = MODEL;
+}
+if (typeof module !== "undefined") module.exports = makeModel;
 
 </script>
 <script>
 (() => {
-  const M = MODEL;
+  const M = makeModel(LEAGUE);
   const NAME = Object.fromEntries(M.TEAMS.map((t) => [t.code, t.name]));
-  const SHORT = { POR: "Portland", DEN: "Denver", PAC: "Pacific", SEA: "Seattle U", USD: "San Diego", SCU: "Santa Clara", USF: "USF", SMC: "Saint Mary's", LMU: "LMU" };
+  const SHORT = Object.fromEntries(LEAGUE.teams.map((t) => [t.code, t.short || t.name]));
+  const STORE_KEY = LEAGUE.key === "men" ? "usfwatch.whatif" : "usfwatch." + LEAGUE.key + ".whatif";
   const FX = Object.fromEntries(M.FIXTURES.map((f) => [f.id, f]));
 
   let results = {};
@@ -586,10 +866,10 @@ if (typeof module !== "undefined") module.exports = MODEL;
   let statsAsOf = "";
   let compTeam = null;
 
-  try { const w = JSON.parse(localStorage.getItem("usfwatch.whatif") || "{}"); if (w && typeof w === "object") whatIf = w; } catch (e) {}
+  try { const w = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); if (w && typeof w === "object") whatIf = w; } catch (e) {}
 
   const saveLocal = () => {
-    try { localStorage.setItem("usfwatch.whatif", JSON.stringify(whatIf)); } catch (e) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(whatIf)); } catch (e) {}
   };
 
   // ---- tiny DOM helper ----
@@ -720,7 +1000,7 @@ if (typeof module !== "undefined") module.exports = MODEL;
 
     let saved = "";
     if (lastUpdated) { const t = new Date(lastUpdated); if (!isNaN(t)) saved = " · last score saved " + MONTHS[t.getMonth()] + " " + t.getDate(); }
-    status.textContent = out.played + " of 36 conference games played" + (staticLabel ? " · " + staticLabel : saved + (canWrite === false ? " · view only" : ""));
+    status.textContent = out.played + " of " + M.FIXTURES.length + " conference games played" + (staticLabel ? " · " + staticLabel : saved + (canWrite === false ? " · view only" : ""));
     const sc = document.getElementById("scenario");
     sc.hidden = nLocks === 0;
     document.getElementById("scenarioText").textContent = "What-if: " + nLocks + (nLocks === 1 ? " result locked" : " results locked");
@@ -774,10 +1054,11 @@ if (typeof module !== "undefined") module.exports = MODEL;
       });
       gt.append(tb);
 
-      const fin = out.finals.filter((x) => x.share >= 0.005);
+      const fin = out.finals.filter((x) => x.share >= 0.005 || x.exact);
       const ft = h("table", {}, h("thead", {}, h("tr", {}, h("th", { text: "USF final pts" }), h("th", { class: "r", text: "Chance" }), h("th", { text: "Top 4 if so" }))));
       const ftb = h("tbody");
-      const nameCodes = (s) => s.replace(/\b(POR|DEN|PAC|SEA|USD|SCU|USF|SMC|LMU)\b/g, (c) => SHORT[c]);
+      const codeRe = new RegExp("\\b(" + M.TEAMS.map((t) => t.code).join("|") + ")\\b", "g");
+      const nameCodes = (s) => s.replace(codeRe, (c) => SHORT[c]);
       const verb = (s) => s.replace(/\bloses\b/g, "lose").replace(/\bdraws\b/g, "draw").replace(/\bwins out\b/g, "win out");
       fin.forEach((x) => {
         const range = x.best && x.worst && x.best.top4 - x.worst.top4 >= 0.04
@@ -787,7 +1068,7 @@ if (typeof module !== "undefined") module.exports = MODEL;
           : null;
         ftb.append(h("tr", out.line === x.pts ? { class: "cut" } : {},
           h("td", {}, h("span", { class: "final-score", text: String(x.pts) }), out.line === x.pts ? [" ", h("span", { class: "cutlabel", text: "the line" })] : null),
-          h("td", { class: "r", text: pct(x.share) }),
+          h("td", { class: "r", text: x.share < 0.005 ? "<1%" : pct(x.share) }),
           h("td", {}, meter(x.top4), range)));
       });
       ft.append(ftb);
@@ -803,23 +1084,26 @@ if (typeof module !== "undefined") module.exports = MODEL;
           h("span", { class: "stepnum tab", text: pct(p.top4) }),
           h("span", { class: "stepsub tab", text: fmtDate(p.date) + " · " + p.ptsAfter + " pts" })));
       });
-      pathCard.append(steps, h("p", { class: "small muted", text: "Each step assumes USF also won every game before it, with the games after it still to play." }));
+      pathCard.append(steps, h("p", { class: "small muted", text: "Each step assumes USF also won every game before it, with the games after it still to play." + (out.winPath.some((q) => q.exact) ? " The later steps happen too rarely to count in the random seasons, so they are worked out with those wins locked in." : "") }));
       sec.append(pathCard);
 
       sec.append(h("div", { class: "grid2" },
         h("div", { class: "card" }, h("h3", { text: "One game at a time" }), h("div", { class: "scroll" }, gt),
-          h("p", { class: "small muted", text: "Win, draw and loss are USF's chances in that game. The last three columns change only that one game and leave USF's other games undecided. A win over Portland scores higher than a win at LMU because it leaves the easier games still to play." })),
+          h("p", { class: "small muted", text: "Win, draw and loss are USF's chances in that game. The last three columns change only that one game and leave USF's other games undecided, so a win in a hard game can score higher than a win in an easy one: it leaves the easier games still to play." })),
         h("div", { class: "card" }, h("h3", { text: "Where USF could finish" }), h("div", { class: "scroll" }, ft),
-          h("p", { class: "small muted", text: "Each total can be reached more than one way. Twelve points means three wins and one loss, but the loss could come in any of the four games. The bar averages all of them. Worst and best show which dropped game hurts most and least: giving points to a rival for fourth, like Pacific or Seattle U, hurts more than giving them to Portland or LMU." }))));
+          h("p", { class: "small muted", text: "Each total can be reached more than one way, depending on which games USF drops. The bar averages all of them. Worst and best show the routes that help least and most: points handed to a rival for fourth hurt more than points handed to a team that finishes above or below USF either way." }))));
       frag.append(sec);
     }
 
     // ---- root for ----
     if (out.remaining > 0) {
+      // When USF only gets in by winning out, the useful question is who to root for in that case.
+      const winOutMode = out.top4.USF < 0.05 && out.winOutSwings && out.winOutSwings.length > 0;
+      const swingList = winOutMode ? out.winOutSwings : out.swings;
       const sec = h("section", { id: "rootfor" }, h("div", { class: "sechead" }, h("h2", { text: "Root for" }),
-        h("span", { class: "small muted", text: "Other games that move USF's odds most" })));
+        h("span", { class: "small muted", text: winOutMode ? "If USF wins all its remaining games, these results matter most" : "Other games that move USF's odds most" })));
       const list = h("div", { class: "card roots" });
-      const top = out.swings.filter((s) => s.swing >= 0.01).slice(0, 6);
+      const top = swingList.filter((s) => s.swing >= 0.01).slice(0, 6);
       if (!top.length) list.append(h("p", { class: "muted", text: "No other game moves USF's odds by more than a point right now." }));
       top.forEach((s) => {
         const parts = ["A", "D", "H"].filter((o) => s.top4If["n" + o] >= 150).map((o) => outcomeTeam(s, o) + " " + pct(s.top4If[o]));
@@ -936,7 +1220,7 @@ if (typeof module !== "undefined") module.exports = MODEL;
         const per = (x) => (g.length ? (x / g.length).toFixed(2) : "—");
         const ok = st && st.gp && st.sog != null && st.opp_sog != null;
         tb.append(h("tr", c === "USF" ? { class: "usf" } : {},
-          h("td", { text: SHORT[c] === "USF" ? "San Francisco" : SHORT[c] }),
+          h("td", { text: NAME[c] }),
           h("td", { class: "r", text: r.w + "-" + r.l + "-" + r.t }),
           h("td", { class: "r", text: sr.w + "-" + sr.l + "-" + sr.t }),
           h("td", { class: "r", text: per(r.gf) }), h("td", { class: "r", text: per(r.ga) }),
