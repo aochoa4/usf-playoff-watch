@@ -1,0 +1,65 @@
+{
+ "league": "mens",
+ "season": 2027,
+ "team_id": "2539",
+ "fetched": "2026-11-06 00:29",
+ "games": [
+  {
+   "event_id": "401921060",
+   "date": "2026-11-02",
+   "opponent": "Radford Highlanders",
+   "opponent_short": "Radford",
+   "site": "H",
+   "conference_game": false,
+   "season_type": 2,
+   "usf_score": 76,
+   "opp_score": 62,
+   "result": "W",
+   "check": {
+    "box_assists": 14,
+    "pbp_assists": 13,
+    "matches_box": false,
+    "box_fgm": 24,
+    "pbp_made_fg": 24,
+    "assist_text_without_ids": 0,
+    "name_checks": 13,
+    "name_mismatches": []
+   }
+  }
+ ],
+ "upcoming": [
+  {
+   "event_id": "401921061",
+   "date": "2026-11-06",
+   "tip_utc": "2026-11-07T03:00Z",
+   "opponent": "North Dakota State Bison",
+   "opponent_short": "N Dakota St",
+   "opponent_id": "2449",
+   "site": "H",
+   "conference_game": false,
+   "season_type": 2
+  },
+  {
+   "event_id": "401921062",
+   "date": "2026-11-10",
+   "tip_utc": "2026-11-11T03:00Z",
+   "opponent": "Montana Grizzlies",
+   "opponent_short": "Montana",
+   "opponent_id": "149",
+   "site": "H",
+   "conference_game": false,
+   "season_type": 2
+  },
+  {
+   "event_id": "401921063",
+   "date": "2026-11-13",
+   "tip_utc": "2026-11-14T05:00Z",
+   "opponent": "Portland State Vikings",
+   "opponent_short": "Portland St",
+   "opponent_id": "2502",
+   "site": "H",
+   "conference_game": false,
+   "season_type": 2
+  }
+ ]
+}

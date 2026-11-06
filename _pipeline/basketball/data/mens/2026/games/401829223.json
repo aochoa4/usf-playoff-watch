@@ -1,0 +1,343 @@
+{
+ "event_id": "401829223",
+ "date": "2026-01-31",
+ "tip_utc": "2026-02-01T03:00Z",
+ "opponent": "Pacific Tigers",
+ "opponent_short": "Pacific",
+ "opponent_id": "279",
+ "site": "H",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 87,
+ "opp_score": 82,
+ "result": "W",
+ "check": {
+  "box_assists": 15,
+  "pbp_assists": 15,
+  "matches_box": true,
+  "box_fgm": 30,
+  "pbp_made_fg": 30,
+  "assist_text_without_ids": 0,
+  "name_checks": 15,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5176426": {
+   "name": "Junjie Wang",
+   "short": "J. Wang",
+   "jersey": "35",
+   "position": "F",
+   "starter": true,
+   "minutes": "28",
+   "points": "11",
+   "assists": "1",
+   "dnp": false
+  },
+  "5174624": {
+   "name": "David Fuchs",
+   "short": "D. Fuchs",
+   "jersey": "8",
+   "position": "F",
+   "starter": true,
+   "minutes": "28",
+   "points": "30",
+   "assists": "1",
+   "dnp": false
+  },
+  "5176425": {
+   "name": "Ryan Beasley",
+   "short": "R. Beasley",
+   "jersey": "0",
+   "position": "G",
+   "starter": true,
+   "minutes": "36",
+   "points": "8",
+   "assists": "11",
+   "dnp": false
+  },
+  "5101799": {
+   "name": "Legend Smiley",
+   "short": "L. Smiley",
+   "jersey": "13",
+   "position": "G",
+   "starter": true,
+   "minutes": "28",
+   "points": "11",
+   "assists": "0",
+   "dnp": false
+  },
+  "5037875": {
+   "name": "Tyrone Riley IV",
+   "short": "T. Riley IV",
+   "jersey": "5",
+   "position": "G",
+   "starter": true,
+   "minutes": "34",
+   "points": "16",
+   "assists": "0",
+   "dnp": false
+  },
+  "5105410": {
+   "name": "Guillermo Diaz-Graham",
+   "short": "G. Diaz Graham",
+   "jersey": "25",
+   "position": "F",
+   "starter": false,
+   "minutes": "16",
+   "points": "8",
+   "assists": "1",
+   "dnp": false
+  },
+  "5241062": {
+   "name": "Veniamin Abosi",
+   "short": "V. Abosi",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "8",
+   "points": "3",
+   "assists": "0",
+   "dnp": false
+  },
+  "4433208": {
+   "name": "Saba Gigiberia",
+   "short": "S. Gigiberia",
+   "jersey": "10",
+   "position": "C",
+   "starter": false,
+   "minutes": "7",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "4702764": {
+   "name": "Vukasin Masic",
+   "short": "V. Masic",
+   "jersey": "7",
+   "position": "G",
+   "starter": false,
+   "minutes": "15",
+   "points": "0",
+   "assists": "1",
+   "dnp": false
+  },
+  "4875213": {
+   "name": "Ndewedo Newbury",
+   "short": "N. Newbury",
+   "jersey": "3",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4683767": {
+   "name": "Mookie Cook",
+   "short": "M. Cook",
+   "jersey": "1",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5313125": {
+   "name": "Weilun Zhao",
+   "short": "W. Zhao",
+   "jersey": "23",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5313124": {
+   "name": "Sean Blakely Drummond",
+   "short": "S. Blakely Drummond",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5107971": {
+   "name": "Aidan Braccia",
+   "short": "A. Braccia",
+   "jersey": "2",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4433614": {
+   "name": "Isa Silva",
+   "short": "I. Silva",
+   "jersey": "12",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 118286659,
+   "period": 1,
+   "clock": "16:14",
+   "passer": "5176425",
+   "scorer": "5176426",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Junjie Wang makes 24-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118287547,
+   "period": 1,
+   "clock": "9:35",
+   "passer": "5176425",
+   "scorer": "5037875",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Tyrone Riley IV makes 19-foot jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118287607,
+   "period": 1,
+   "clock": "8:10",
+   "passer": "5176425",
+   "scorer": "5174624",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "David Fuchs makes 24-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118288527,
+   "period": 1,
+   "clock": "0:41",
+   "passer": "5176425",
+   "scorer": "5105410",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Guillermo Diaz Graham makes 24-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118289310,
+   "period": 2,
+   "clock": "19:45",
+   "passer": "5176425",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 22-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118289476,
+   "period": 2,
+   "clock": "16:27",
+   "passer": "5176425",
+   "scorer": "5176426",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Junjie Wang makes 23-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118289713,
+   "period": 2,
+   "clock": "14:21",
+   "passer": "4702764",
+   "scorer": "5037875",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Tyrone Riley IV makes layup (Vukasin Masic assists)"
+  },
+  {
+   "seq": 118289887,
+   "period": 2,
+   "clock": "13:07",
+   "passer": "5105410",
+   "scorer": "5176425",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Ryan Beasley makes layup (Guillermo Diaz Graham assists)"
+  },
+  {
+   "seq": 118289974,
+   "period": 2,
+   "clock": "12:07",
+   "passer": "5174624",
+   "scorer": "5105410",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Guillermo Diaz Graham makes 25-foot three point jumper (David Fuchs assists)"
+  },
+  {
+   "seq": 118290205,
+   "period": 2,
+   "clock": "11:13",
+   "passer": "5176425",
+   "scorer": "5241062",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Veniamin Abosi makes 23-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118290617,
+   "period": 2,
+   "clock": "8:52",
+   "passer": "5176426",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 24-foot three point jumper (Junjie Wang assists)"
+  },
+  {
+   "seq": 118290954,
+   "period": 2,
+   "clock": "3:26",
+   "passer": "5176425",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "David Fuchs makes layup (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118291162,
+   "period": 2,
+   "clock": "1:20",
+   "passer": "5176425",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs makes 2-foot dunk (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118291168,
+   "period": 2,
+   "clock": "1:06",
+   "passer": "5176425",
+   "scorer": "5101799",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Legend Smiley makes layup (Ryan Beasley assists)"
+  },
+  {
+   "seq": 118291372,
+   "period": 2,
+   "clock": "0:15",
+   "passer": "5176425",
+   "scorer": "5105410",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "Guillermo Diaz Graham makes 1-foot dunk (Ryan Beasley assists)"
+  }
+ ]
+}

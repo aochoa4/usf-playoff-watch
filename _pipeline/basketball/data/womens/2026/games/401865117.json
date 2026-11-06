@@ -1,0 +1,291 @@
+{
+ "event_id": "401865117",
+ "date": "2026-03-22",
+ "tip_utc": "2026-03-22T20:00Z",
+ "opponent": "Montana State Bobcats",
+ "opponent_short": "Montana St",
+ "opponent_id": "147",
+ "site": "A",
+ "conference_game": false,
+ "season_type": 3,
+ "usf_score": 53,
+ "opp_score": 69,
+ "result": "L",
+ "check": {
+  "box_assists": 12,
+  "pbp_assists": 12,
+  "matches_box": true,
+  "box_fgm": 21,
+  "pbp_made_fg": 21,
+  "assist_text_without_ids": 0,
+  "name_checks": 12,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5314917": {
+   "name": "Natasa Tausova",
+   "short": "N. Tausova",
+   "jersey": "12",
+   "position": "F",
+   "starter": true,
+   "minutes": "24",
+   "points": "8",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314913": {
+   "name": "Noelia Mourino",
+   "short": "N. Mourio",
+   "jersey": "3",
+   "position": "F",
+   "starter": true,
+   "minutes": "25",
+   "points": "4",
+   "assists": "3",
+   "dnp": false
+  },
+  "5314915": {
+   "name": "Aina Cargol",
+   "short": "A. Cargol",
+   "jersey": "9",
+   "position": "G",
+   "starter": true,
+   "minutes": "27",
+   "points": "3",
+   "assists": "3",
+   "dnp": false
+  },
+  "5241784": {
+   "name": "Candy Edokpaigbe",
+   "short": "C. Edokpaigbe",
+   "jersey": "23",
+   "position": "G",
+   "starter": true,
+   "minutes": "30",
+   "points": "20",
+   "assists": "0",
+   "dnp": false
+  },
+  "5107763": {
+   "name": "Mara Neira",
+   "short": "M. Neira",
+   "jersey": "2",
+   "position": "G",
+   "starter": true,
+   "minutes": "17",
+   "points": "6",
+   "assists": "3",
+   "dnp": false
+  },
+  "5314918": {
+   "name": "Sophia Priestley",
+   "short": "S. Priestley",
+   "jersey": "32",
+   "position": "F",
+   "starter": false,
+   "minutes": "6",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5178456": {
+   "name": "Nevaeh Ferrara Horne",
+   "short": "N. Ferrara Horne",
+   "jersey": "7",
+   "position": "F",
+   "starter": false,
+   "minutes": "21",
+   "points": "2",
+   "assists": "1",
+   "dnp": false
+  },
+  "5178411": {
+   "name": "Michelle Ugwah",
+   "short": "M. Ugwah",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "6",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "4705117": {
+   "name": "Sol Castro",
+   "short": "S. Castro",
+   "jersey": "24",
+   "position": "F",
+   "starter": false,
+   "minutes": "10",
+   "points": "0",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314916": {
+   "name": "Amy Pateman",
+   "short": "A. Pateman",
+   "jersey": "10",
+   "position": "G",
+   "starter": false,
+   "minutes": "13",
+   "points": "4",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314914": {
+   "name": "Meghan McIntyre",
+   "short": "M. McIntyre",
+   "jersey": "4",
+   "position": "G",
+   "starter": false,
+   "minutes": "19",
+   "points": "4",
+   "assists": "1",
+   "dnp": false
+  },
+  "4899726": {
+   "name": "Olivia Williams",
+   "short": "O. Williams",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": "2",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5174314": {
+   "name": "Paula Tirado",
+   "short": "P. Tirado",
+   "jersey": "22",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 120359316,
+   "period": 1,
+   "clock": "9:27",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 26-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 120359351,
+   "period": 1,
+   "clock": "7:52",
+   "passer": "5107763",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourino makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 120359676,
+   "period": 1,
+   "clock": "1:52",
+   "passer": "5107763",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 120359841,
+   "period": 2,
+   "clock": "9:37",
+   "passer": "5314915",
+   "scorer": "5314917",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Natasa Tausova makes 25-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 120360146,
+   "period": 2,
+   "clock": "5:07",
+   "passer": "5107763",
+   "scorer": "5314917",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Natasa Tausova makes 22-foot three point jumper (Mara Neira assists)"
+  },
+  {
+   "seq": 120360207,
+   "period": 2,
+   "clock": "4:05",
+   "passer": "5314913",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120360401,
+   "period": 2,
+   "clock": "1:07",
+   "passer": "5314914",
+   "scorer": "5178411",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Michelle Ugwah makes layup (Meghan McIntyre assists)"
+  },
+  {
+   "seq": 120361247,
+   "period": 3,
+   "clock": "5:03",
+   "passer": "4705117",
+   "scorer": "5314914",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Meghan McIntyre makes layup (Sol Castro assists)"
+  },
+  {
+   "seq": 120361389,
+   "period": 3,
+   "clock": "2:24",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 26-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 120361582,
+   "period": 3,
+   "clock": "0:49",
+   "passer": "5178456",
+   "scorer": "5314916",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Amy Pateman makes 27-foot three point jumper (Nevaeh Ferrara Horne assists)"
+  },
+  {
+   "seq": 120361918,
+   "period": 4,
+   "clock": "6:52",
+   "passer": "5314913",
+   "scorer": "5314914",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Meghan McIntyre makes layup (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120362214,
+   "period": 4,
+   "clock": "4:38",
+   "passer": "5314913",
+   "scorer": "5241784",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Candy Edokpaigbe makes 26-foot three point jumper (Noelia Mourino assists)"
+  }
+ ]
+}

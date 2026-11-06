@@ -1,0 +1,291 @@
+{
+ "event_id": "401851823",
+ "date": "2026-03-06",
+ "tip_utc": "2026-03-06T22:45Z",
+ "opponent": "San Diego Toreros",
+ "opponent_short": "San Diego",
+ "opponent_id": "301",
+ "site": "N",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 61,
+ "opp_score": 52,
+ "result": "W",
+ "check": {
+  "box_assists": 12,
+  "pbp_assists": 12,
+  "matches_box": true,
+  "box_fgm": 22,
+  "pbp_made_fg": 22,
+  "assist_text_without_ids": 0,
+  "name_checks": 12,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5314917": {
+   "name": "Natasa Tausova",
+   "short": "N. Tausova",
+   "jersey": "12",
+   "position": "F",
+   "starter": true,
+   "minutes": "20",
+   "points": "6",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314913": {
+   "name": "Noelia Mourino",
+   "short": "N. Mourio",
+   "jersey": "3",
+   "position": "F",
+   "starter": true,
+   "minutes": "15",
+   "points": "5",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314915": {
+   "name": "Aina Cargol",
+   "short": "A. Cargol",
+   "jersey": "9",
+   "position": "G",
+   "starter": true,
+   "minutes": "37",
+   "points": "6",
+   "assists": "4",
+   "dnp": false
+  },
+  "5241784": {
+   "name": "Candy Edokpaigbe",
+   "short": "C. Edokpaigbe",
+   "jersey": "23",
+   "position": "G",
+   "starter": true,
+   "minutes": "36",
+   "points": "25",
+   "assists": "1",
+   "dnp": false
+  },
+  "5107763": {
+   "name": "Mara Neira",
+   "short": "M. Neira",
+   "jersey": "2",
+   "position": "G",
+   "starter": true,
+   "minutes": "36",
+   "points": "9",
+   "assists": "4",
+   "dnp": false
+  },
+  "5178456": {
+   "name": "Nevaeh Ferrara Horne",
+   "short": "N. Ferrara Horne",
+   "jersey": "7",
+   "position": "F",
+   "starter": false,
+   "minutes": "8",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5178411": {
+   "name": "Michelle Ugwah",
+   "short": "M. Ugwah",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "19",
+   "points": "6",
+   "assists": "1",
+   "dnp": false
+  },
+  "4705117": {
+   "name": "Sol Castro",
+   "short": "S. Castro",
+   "jersey": "24",
+   "position": "F",
+   "starter": false,
+   "minutes": "6",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314914": {
+   "name": "Meghan McIntyre",
+   "short": "M. McIntyre",
+   "jersey": "4",
+   "position": "G",
+   "starter": false,
+   "minutes": "11",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "4899726": {
+   "name": "Olivia Williams",
+   "short": "O. Williams",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": "12",
+   "points": "0",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314918": {
+   "name": "Sophia Priestley",
+   "short": "S. Priestley",
+   "jersey": "32",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5314916": {
+   "name": "Amy Pateman",
+   "short": "A. Pateman",
+   "jersey": "10",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5174314": {
+   "name": "Paula Tirado",
+   "short": "P. Tirado",
+   "jersey": "22",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 119977949,
+   "period": 1,
+   "clock": "6:24",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 24-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 119979284,
+   "period": 2,
+   "clock": "3:04",
+   "passer": "4899726",
+   "scorer": "5107763",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Mara Neira makes layup (Olivia Williams assists)"
+  },
+  {
+   "seq": 119979396,
+   "period": 2,
+   "clock": "2:18",
+   "passer": "5178411",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Michelle Ugwah assists)"
+  },
+  {
+   "seq": 119979511,
+   "period": 2,
+   "clock": "0:39",
+   "passer": "5107763",
+   "scorer": "5314915",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Aina Cargol makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 119980569,
+   "period": 3,
+   "clock": "8:50",
+   "passer": "5241784",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Noelia Mourino makes 18-foot jumper (Candy Edokpaigbe assists)"
+  },
+  {
+   "seq": 119980810,
+   "period": 3,
+   "clock": "7:13",
+   "passer": "5314913",
+   "scorer": "5241784",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Candy Edokpaigbe makes 23-foot three point jumper (Noelia Mourino assists)"
+  },
+  {
+   "seq": 119980924,
+   "period": 3,
+   "clock": "5:31",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 26-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 119980959,
+   "period": 3,
+   "clock": "4:49",
+   "passer": "5107763",
+   "scorer": "5314917",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Natasa Tausova makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 119982849,
+   "period": 4,
+   "clock": "5:09",
+   "passer": "5107763",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 119983278,
+   "period": 4,
+   "clock": "4:25",
+   "passer": "5314915",
+   "scorer": "5178411",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Michelle Ugwah makes 7-foot turnaround jump shot (Aina Cargol assists)"
+  },
+  {
+   "seq": 119983295,
+   "period": 4,
+   "clock": "4:01",
+   "passer": "5107763",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Mara Neira assists)"
+  },
+  {
+   "seq": 119983776,
+   "period": 4,
+   "clock": "0:50",
+   "passer": "5314915",
+   "scorer": "5178411",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Michelle Ugwah makes layup (Aina Cargol assists)"
+  }
+ ]
+}

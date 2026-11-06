@@ -1,0 +1,333 @@
+{
+ "event_id": "401830748",
+ "date": "2025-11-28",
+ "tip_utc": "2025-11-28T19:00Z",
+ "opponent": "Nevada Wolf Pack",
+ "opponent_short": "Nevada",
+ "opponent_id": "2440",
+ "site": "N",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 65,
+ "opp_score": 81,
+ "result": "L",
+ "check": {
+  "box_assists": 14,
+  "pbp_assists": 14,
+  "matches_box": true,
+  "box_fgm": 19,
+  "pbp_made_fg": 19,
+  "assist_text_without_ids": 0,
+  "name_checks": 14,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5176426": {
+   "name": "Junjie Wang",
+   "short": "J. Wang",
+   "jersey": "35",
+   "position": "F",
+   "starter": true,
+   "minutes": "20",
+   "points": "10",
+   "assists": "1",
+   "dnp": false
+  },
+  "5105410": {
+   "name": "Guillermo Diaz-Graham",
+   "short": "G. Diaz Graham",
+   "jersey": "25",
+   "position": "F",
+   "starter": true,
+   "minutes": "14",
+   "points": "5",
+   "assists": "1",
+   "dnp": false
+  },
+  "5176425": {
+   "name": "Ryan Beasley",
+   "short": "R. Beasley",
+   "jersey": "0",
+   "position": "G",
+   "starter": true,
+   "minutes": "31",
+   "points": "3",
+   "assists": "4",
+   "dnp": false
+  },
+  "5037875": {
+   "name": "Tyrone Riley IV",
+   "short": "T. Riley IV",
+   "jersey": "5",
+   "position": "G",
+   "starter": true,
+   "minutes": "24",
+   "points": "9",
+   "assists": "0",
+   "dnp": false
+  },
+  "4702764": {
+   "name": "Vukasin Masic",
+   "short": "V. Masic",
+   "jersey": "7",
+   "position": "G",
+   "starter": true,
+   "minutes": "24",
+   "points": "8",
+   "assists": "1",
+   "dnp": false
+  },
+  "5174624": {
+   "name": "David Fuchs",
+   "short": "D. Fuchs",
+   "jersey": "8",
+   "position": "F",
+   "starter": false,
+   "minutes": "24",
+   "points": "16",
+   "assists": "0",
+   "dnp": false
+  },
+  "4683767": {
+   "name": "Mookie Cook",
+   "short": "M. Cook",
+   "jersey": "1",
+   "position": "F",
+   "starter": false,
+   "minutes": "27",
+   "points": "12",
+   "assists": "3",
+   "dnp": false
+  },
+  "5241062": {
+   "name": "Veniamin Abosi",
+   "short": "V. Abosi",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "10",
+   "points": "0",
+   "assists": "1",
+   "dnp": false
+  },
+  "4433208": {
+   "name": "Saba Gigiberia",
+   "short": "S. Gigiberia",
+   "jersey": "10",
+   "position": "C",
+   "starter": false,
+   "minutes": "3",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5313125": {
+   "name": "Weilun Zhao",
+   "short": "W. Zhao",
+   "jersey": "23",
+   "position": "G",
+   "starter": false,
+   "minutes": "6",
+   "points": "0",
+   "assists": "3",
+   "dnp": false
+  },
+  "5107971": {
+   "name": "Aidan Braccia",
+   "short": "A. Braccia",
+   "jersey": "2",
+   "position": "G",
+   "starter": false,
+   "minutes": "3",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5101799": {
+   "name": "Legend Smiley",
+   "short": "L. Smiley",
+   "jersey": "13",
+   "position": "G",
+   "starter": false,
+   "minutes": "14",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "4875213": {
+   "name": "Ndewedo Newbury",
+   "short": "N. Newbury",
+   "jersey": "3",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5313124": {
+   "name": "Sean Blakely Drummond",
+   "short": "S. Blakely Drummond",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4433614": {
+   "name": "Isa Silva",
+   "short": "I. Silva",
+   "jersey": "12",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 115119546,
+   "period": 1,
+   "clock": "15:09",
+   "passer": "5176425",
+   "scorer": "5037875",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Tyrone Riley IV made Three Point Jumper. Assisted by Ryan Beasley."
+  },
+  {
+   "seq": 115120046,
+   "period": 1,
+   "clock": "13:58",
+   "passer": "5176425",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs made Dunk. Assisted by Ryan Beasley."
+  },
+  {
+   "seq": 115121910,
+   "period": 1,
+   "clock": "8:31",
+   "passer": "5105410",
+   "scorer": "4683767",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mookie Cook made Three Point Jumper. Assisted by Guillermo Diaz Graham."
+  },
+  {
+   "seq": 115123004,
+   "period": 1,
+   "clock": "7:52",
+   "passer": "5176426",
+   "scorer": "5037875",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Tyrone Riley IV made Jumper. Assisted by Junjie Wang."
+  },
+  {
+   "seq": 115123270,
+   "period": 1,
+   "clock": "7:07",
+   "passer": "4683767",
+   "scorer": "4702764",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Vukasin Masic made Three Point Jumper. Assisted by Mookie Cook."
+  },
+  {
+   "seq": 115123448,
+   "period": 1,
+   "clock": "6:29",
+   "passer": "4683767",
+   "scorer": "4702764",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Vukasin Masic made Layup. Assisted by Mookie Cook."
+  },
+  {
+   "seq": 115124496,
+   "period": 1,
+   "clock": "3:24",
+   "passer": "5176425",
+   "scorer": "5176426",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Junjie Wang made Three Point Jumper. Assisted by Ryan Beasley."
+  },
+  {
+   "seq": 115124983,
+   "period": 1,
+   "clock": "0:34",
+   "passer": "4702764",
+   "scorer": "5105410",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Guillermo Diaz Graham made Three Point Jumper. Assisted by Vukasin Masic."
+  },
+  {
+   "seq": 115131459,
+   "period": 2,
+   "clock": "11:12",
+   "passer": "4683767",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "David Fuchs made Layup. Assisted by Mookie Cook."
+  },
+  {
+   "seq": 115132570,
+   "period": 2,
+   "clock": "7:50",
+   "passer": "5241062",
+   "scorer": "4702764",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Vukasin Masic made Three Point Jumper. Assisted by Veniamin Abosi."
+  },
+  {
+   "seq": 115134437,
+   "period": 2,
+   "clock": "3:06",
+   "passer": "5176425",
+   "scorer": "4683767",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "Mookie Cook made Dunk. Assisted by Ryan Beasley."
+  },
+  {
+   "seq": 115134547,
+   "period": 2,
+   "clock": "2:14",
+   "passer": "5313125",
+   "scorer": "4433208",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Saba Gigiberia made Layup. Assisted by Weilun Zhao."
+  },
+  {
+   "seq": 115134741,
+   "period": 2,
+   "clock": "1:20",
+   "passer": "5313125",
+   "scorer": "4683767",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Mookie Cook made Jumper. Assisted by Weilun Zhao."
+  },
+  {
+   "seq": 115134786,
+   "period": 2,
+   "clock": "0:32",
+   "passer": "5313125",
+   "scorer": "4683767",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mookie Cook made Three Point Jumper. Assisted by Weilun Zhao."
+  }
+ ]
+}

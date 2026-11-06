@@ -1,0 +1,391 @@
+{
+ "event_id": "401822816",
+ "date": "2025-11-16",
+ "tip_utc": "2025-11-16T22:00Z",
+ "opponent": "UC San Diego Tritons",
+ "opponent_short": "UC San Diego",
+ "opponent_id": "28",
+ "site": "H",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 80,
+ "opp_score": 69,
+ "result": "W",
+ "check": {
+  "box_assists": 22,
+  "pbp_assists": 22,
+  "matches_box": true,
+  "box_fgm": 33,
+  "pbp_made_fg": 33,
+  "assist_text_without_ids": 0,
+  "name_checks": 22,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5314917": {
+   "name": "Natasa Tausova",
+   "short": "N. Tausova",
+   "jersey": "12",
+   "position": "F",
+   "starter": true,
+   "minutes": "22",
+   "points": "4",
+   "assists": "3",
+   "dnp": false
+  },
+  "5314913": {
+   "name": "Noelia Mourino",
+   "short": "N. Mourio",
+   "jersey": "3",
+   "position": "F",
+   "starter": true,
+   "minutes": "28",
+   "points": "16",
+   "assists": "3",
+   "dnp": false
+  },
+  "5314915": {
+   "name": "Aina Cargol",
+   "short": "A. Cargol",
+   "jersey": "9",
+   "position": "G",
+   "starter": true,
+   "minutes": "35",
+   "points": "11",
+   "assists": "6",
+   "dnp": false
+  },
+  "5241784": {
+   "name": "Candy Edokpaigbe",
+   "short": "C. Edokpaigbe",
+   "jersey": "23",
+   "position": "G",
+   "starter": true,
+   "minutes": "38",
+   "points": "24",
+   "assists": "1",
+   "dnp": false
+  },
+  "5174314": {
+   "name": "Paula Tirado",
+   "short": "P. Tirado",
+   "jersey": "22",
+   "position": "G",
+   "starter": true,
+   "minutes": "17",
+   "points": "2",
+   "assists": "2",
+   "dnp": false
+  },
+  "5314918": {
+   "name": "Sophia Priestley",
+   "short": "S. Priestley",
+   "jersey": "32",
+   "position": "F",
+   "starter": false,
+   "minutes": "1",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5178456": {
+   "name": "Nevaeh Ferrara Horne",
+   "short": "N. Ferrara Horne",
+   "jersey": "7",
+   "position": "F",
+   "starter": false,
+   "minutes": "1",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5178411": {
+   "name": "Michelle Ugwah",
+   "short": "M. Ugwah",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "12",
+   "points": "4",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314914": {
+   "name": "Meghan McIntyre",
+   "short": "M. McIntyre",
+   "jersey": "4",
+   "position": "G",
+   "starter": false,
+   "minutes": "27",
+   "points": "9",
+   "assists": "4",
+   "dnp": false
+  },
+  "5107763": {
+   "name": "Mara Neira",
+   "short": "M. Neira",
+   "jersey": "2",
+   "position": "G",
+   "starter": false,
+   "minutes": "19",
+   "points": "10",
+   "assists": "3",
+   "dnp": false
+  },
+  "4705117": {
+   "name": "Sol Castro",
+   "short": "S. Castro",
+   "jersey": "24",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5314916": {
+   "name": "Amy Pateman",
+   "short": "A. Pateman",
+   "jersey": "10",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4899726": {
+   "name": "Olivia Williams",
+   "short": "O. Williams",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 114473844,
+   "period": 1,
+   "clock": "9:35",
+   "passer": "5174314",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourio made Layup. Assisted by Paula Tirado."
+  },
+  {
+   "seq": 114473892,
+   "period": 1,
+   "clock": "9:07",
+   "passer": "5314917",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe made Layup. Assisted by Natasa Tausova."
+  },
+  {
+   "seq": 114474083,
+   "period": 1,
+   "clock": "7:42",
+   "passer": "5314917",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourio made Layup. Assisted by Natasa Tausova."
+  },
+  {
+   "seq": 114474699,
+   "period": 1,
+   "clock": "6:23",
+   "passer": "5314913",
+   "scorer": "5314914",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Meghan McIntyre made Layup. Assisted by Noelia Mourio."
+  },
+  {
+   "seq": 114476062,
+   "period": 1,
+   "clock": "1:40",
+   "passer": "5314914",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe made Layup. Assisted by Meghan McIntyre."
+  },
+  {
+   "seq": 114476525,
+   "period": 1,
+   "clock": "0:20",
+   "passer": "5314917",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe made Layup. Assisted by Natasa Tausova."
+  },
+  {
+   "seq": 114477242,
+   "period": 2,
+   "clock": "9:20",
+   "passer": "5314913",
+   "scorer": "5314915",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Aina Cargol made Layup. Assisted by Noelia Mourio."
+  },
+  {
+   "seq": 114477377,
+   "period": 2,
+   "clock": "8:38",
+   "passer": "5107763",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourio made Layup. Assisted by Mara Neira."
+  },
+  {
+   "seq": 114477777,
+   "period": 2,
+   "clock": "6:14",
+   "passer": "5314915",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Candy Edokpaigbe made Jumper. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114477932,
+   "period": 2,
+   "clock": "5:25",
+   "passer": "5314914",
+   "scorer": "5178411",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Michelle Ugwah made Layup. Assisted by Meghan McIntyre."
+  },
+  {
+   "seq": 114477988,
+   "period": 2,
+   "clock": "5:03",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira made Three Point Jumper. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114478053,
+   "period": 2,
+   "clock": "4:13",
+   "passer": "5314915",
+   "scorer": "5178411",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Michelle Ugwah made Layup. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114478496,
+   "period": 2,
+   "clock": "3:31",
+   "passer": "5107763",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourio made Layup. Assisted by Mara Neira."
+  },
+  {
+   "seq": 114479336,
+   "period": 2,
+   "clock": "1:02",
+   "passer": "5314915",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Noelia Mourio made Jumper. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114480683,
+   "period": 3,
+   "clock": "8:04",
+   "passer": "5174314",
+   "scorer": "5314915",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Aina Cargol made Three Point Jumper. Assisted by Paula Tirado."
+  },
+  {
+   "seq": 114480721,
+   "period": 3,
+   "clock": "7:36",
+   "passer": "5314915",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Candy Edokpaigbe made Jumper. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114481095,
+   "period": 3,
+   "clock": "6:31",
+   "passer": "5314915",
+   "scorer": "5174314",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Paula Tirado made Layup. Assisted by Aina Cargol."
+  },
+  {
+   "seq": 114481251,
+   "period": 3,
+   "clock": "5:02",
+   "passer": "5107763",
+   "scorer": "5314914",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Meghan McIntyre made Three Point Jumper. Assisted by Mara Neira."
+  },
+  {
+   "seq": 114481568,
+   "period": 3,
+   "clock": "4:44",
+   "passer": "5314914",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe made Layup. Assisted by Meghan McIntyre."
+  },
+  {
+   "seq": 114482113,
+   "period": 3,
+   "clock": "1:19",
+   "passer": "5314914",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira made Three Point Jumper. Assisted by Meghan McIntyre."
+  },
+  {
+   "seq": 114483333,
+   "period": 4,
+   "clock": "4:59",
+   "passer": "5314913",
+   "scorer": "5314915",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Aina Cargol made Three Point Jumper. Assisted by Noelia Mourio."
+  },
+  {
+   "seq": 114483679,
+   "period": 4,
+   "clock": "3:09",
+   "passer": "5241784",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourio made Layup. Assisted by Candy Edokpaigbe."
+  }
+ ]
+}

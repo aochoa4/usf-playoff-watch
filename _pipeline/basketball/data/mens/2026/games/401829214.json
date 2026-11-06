@@ -1,0 +1,313 @@
+{
+ "event_id": "401829214",
+ "date": "2026-01-24",
+ "tip_utc": "2026-01-25T01:00Z",
+ "opponent": "Gonzaga Bulldogs",
+ "opponent_short": "Gonzaga",
+ "opponent_id": "2250",
+ "site": "A",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 66,
+ "opp_score": 68,
+ "result": "L",
+ "check": {
+  "box_assists": 12,
+  "pbp_assists": 12,
+  "matches_box": true,
+  "box_fgm": 22,
+  "pbp_made_fg": 22,
+  "assist_text_without_ids": 0,
+  "name_checks": 12,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5176426": {
+   "name": "Junjie Wang",
+   "short": "J. Wang",
+   "jersey": "35",
+   "position": "F",
+   "starter": true,
+   "minutes": "22",
+   "points": "7",
+   "assists": "0",
+   "dnp": false
+  },
+  "5174624": {
+   "name": "David Fuchs",
+   "short": "D. Fuchs",
+   "jersey": "8",
+   "position": "F",
+   "starter": true,
+   "minutes": "6",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5176425": {
+   "name": "Ryan Beasley",
+   "short": "R. Beasley",
+   "jersey": "0",
+   "position": "G",
+   "starter": true,
+   "minutes": "35",
+   "points": "14",
+   "assists": "6",
+   "dnp": false
+  },
+  "5101799": {
+   "name": "Legend Smiley",
+   "short": "L. Smiley",
+   "jersey": "13",
+   "position": "G",
+   "starter": true,
+   "minutes": "33",
+   "points": "18",
+   "assists": "0",
+   "dnp": false
+  },
+  "5037875": {
+   "name": "Tyrone Riley IV",
+   "short": "T. Riley IV",
+   "jersey": "5",
+   "position": "G",
+   "starter": true,
+   "minutes": "31",
+   "points": "7",
+   "assists": "1",
+   "dnp": false
+  },
+  "5105410": {
+   "name": "Guillermo Diaz-Graham",
+   "short": "G. Diaz Graham",
+   "jersey": "25",
+   "position": "F",
+   "starter": false,
+   "minutes": "15",
+   "points": "0",
+   "assists": "2",
+   "dnp": false
+  },
+  "4683767": {
+   "name": "Mookie Cook",
+   "short": "M. Cook",
+   "jersey": "1",
+   "position": "F",
+   "starter": false,
+   "minutes": "14",
+   "points": "3",
+   "assists": "0",
+   "dnp": false
+  },
+  "5241062": {
+   "name": "Veniamin Abosi",
+   "short": "V. Abosi",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "19",
+   "points": "6",
+   "assists": "1",
+   "dnp": false
+  },
+  "4702764": {
+   "name": "Vukasin Masic",
+   "short": "V. Masic",
+   "jersey": "7",
+   "position": "G",
+   "starter": false,
+   "minutes": "25",
+   "points": "11",
+   "assists": "2",
+   "dnp": false
+  },
+  "4875213": {
+   "name": "Ndewedo Newbury",
+   "short": "N. Newbury",
+   "jersey": "3",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4433208": {
+   "name": "Saba Gigiberia",
+   "short": "S. Gigiberia",
+   "jersey": "10",
+   "position": "C",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5313125": {
+   "name": "Weilun Zhao",
+   "short": "W. Zhao",
+   "jersey": "23",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5313124": {
+   "name": "Sean Blakely Drummond",
+   "short": "S. Blakely Drummond",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5107971": {
+   "name": "Aidan Braccia",
+   "short": "A. Braccia",
+   "jersey": "2",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4433614": {
+   "name": "Isa Silva",
+   "short": "I. Silva",
+   "jersey": "12",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 117944288,
+   "period": 1,
+   "clock": "12:40",
+   "passer": "5176425",
+   "scorer": "5037875",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Tyrone Riley IV makes 22-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 117945067,
+   "period": 1,
+   "clock": "10:10",
+   "passer": "5241062",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 23-foot three point jumper (Veniamin Abosi assists)"
+  },
+  {
+   "seq": 117945580,
+   "period": 1,
+   "clock": "7:29",
+   "passer": "5176425",
+   "scorer": "5176426",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Junjie Wang makes 26-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 117946339,
+   "period": 1,
+   "clock": "5:06",
+   "passer": "5105410",
+   "scorer": "5176425",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Ryan Beasley makes 25-foot three point jumper (Guillermo Diaz Graham assists)"
+  },
+  {
+   "seq": 117948632,
+   "period": 2,
+   "clock": "17:03",
+   "passer": "5176425",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 23-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 117948792,
+   "period": 2,
+   "clock": "15:29",
+   "passer": "5105410",
+   "scorer": "5176425",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Ryan Beasley makes 24-foot three pointer (Guillermo Diaz Graham assists)"
+  },
+  {
+   "seq": 117948835,
+   "period": 2,
+   "clock": "14:20",
+   "passer": "4702764",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 24-foot three point jumper (Vukasin Masic assists)"
+  },
+  {
+   "seq": 117949185,
+   "period": 2,
+   "clock": "12:53",
+   "passer": "5037875",
+   "scorer": "5241062",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Veniamin Abosi makes 26-foot three point jumper (Tyrone Riley IV assists)"
+  },
+  {
+   "seq": 117949221,
+   "period": 2,
+   "clock": "12:35",
+   "passer": "4702764",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 23-foot three point jumper (Vukasin Masic assists)"
+  },
+  {
+   "seq": 117951480,
+   "period": 2,
+   "clock": "1:42",
+   "passer": "5176425",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 27-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 117951563,
+   "period": 2,
+   "clock": "1:20",
+   "passer": "5176425",
+   "scorer": "4702764",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Vukasin Masic makes 24-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 117951611,
+   "period": 2,
+   "clock": "1:02",
+   "passer": "5176425",
+   "scorer": "4702764",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Vukasin Masic makes 24-foot three point jumper (Ryan Beasley assists)"
+  }
+ ]
+}

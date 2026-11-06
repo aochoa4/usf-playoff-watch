@@ -1,0 +1,370 @@
+{
+ "event_id": "401917685",
+ "date": "2026-11-05",
+ "tip_utc": "2026-11-05T20:00Z",
+ "opponent": "Hawai'i Rainbow Wahine",
+ "opponent_short": "Hawai'i",
+ "opponent_id": "62",
+ "site": "H",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 85,
+ "opp_score": 79,
+ "result": "W",
+ "check": {
+  "box_assists": 21,
+  "pbp_assists": 21,
+  "matches_box": true,
+  "box_fgm": 32,
+  "pbp_made_fg": 32,
+  "assist_text_without_ids": 0,
+  "name_checks": 21,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5107990": {
+   "name": "Lucia Yenes",
+   "short": "L. Yenes",
+   "jersey": "24",
+   "position": "F",
+   "starter": true,
+   "minutes": "14",
+   "points": "7",
+   "assists": "3",
+   "dnp": false
+  },
+  "5462165": {
+   "name": "Maria Burliga",
+   "short": "M. Burliga",
+   "jersey": "33",
+   "position": "G",
+   "starter": true,
+   "minutes": "32",
+   "points": "17",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314915": {
+   "name": "Aina Cargol",
+   "short": "A. Cargol",
+   "jersey": "9",
+   "position": "G",
+   "starter": true,
+   "minutes": "41",
+   "points": "17",
+   "assists": "6",
+   "dnp": false
+  },
+  "5241784": {
+   "name": "Candy Edokpaigbe",
+   "short": "C. Edokpaigbe",
+   "jersey": "23",
+   "position": "G",
+   "starter": true,
+   "minutes": "37",
+   "points": "15",
+   "assists": "1",
+   "dnp": false
+  },
+  "5178181": {
+   "name": "Keiryn McGuff",
+   "short": "K. McGuff",
+   "jersey": "14",
+   "position": "G",
+   "starter": true,
+   "minutes": "19",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314917": {
+   "name": "Natasa Tausova",
+   "short": "N. Taušova",
+   "jersey": "12",
+   "position": "F",
+   "starter": false,
+   "minutes": "7",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314913": {
+   "name": "Noelia Mourino",
+   "short": "N. Mouriño",
+   "jersey": "3",
+   "position": "F",
+   "starter": false,
+   "minutes": "24",
+   "points": "6",
+   "assists": "4",
+   "dnp": false
+  },
+  "5462163": {
+   "name": "Savi Mi",
+   "short": "S. Mi",
+   "jersey": "10",
+   "position": "G",
+   "starter": false,
+   "minutes": "25",
+   "points": "14",
+   "assists": "5",
+   "dnp": false
+  },
+  "5462162": {
+   "name": "Emilie Beggs",
+   "short": "E. Beggs",
+   "jersey": "8",
+   "position": "G",
+   "starter": false,
+   "minutes": "6",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5462159": {
+   "name": "Ines Babaya",
+   "short": "I. Babaya",
+   "jersey": "0",
+   "position": "G",
+   "starter": false,
+   "minutes": "3",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5312407": {
+   "name": "Jayda Queeley",
+   "short": "J. Queeley",
+   "jersey": "5",
+   "position": "G",
+   "starter": false,
+   "minutes": "17",
+   "points": "3",
+   "assists": "1",
+   "dnp": false
+  },
+  "5174314": {
+   "name": "Paula Tirado",
+   "short": "P. Tirado",
+   "jersey": "22",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 120712820,
+   "period": 1,
+   "clock": "8:01",
+   "passer": "5314915",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 120712889,
+   "period": 1,
+   "clock": "5:27",
+   "passer": "5314915",
+   "scorer": "5462163",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Savi Mi makes 24-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 120712893,
+   "period": 1,
+   "clock": "5:00",
+   "passer": "5314915",
+   "scorer": "5314913",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Noelia Mourino makes layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 120712900,
+   "period": 1,
+   "clock": "4:27",
+   "passer": "5314913",
+   "scorer": "5312407",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Jayda Queeley makes 24-foot three point jumper (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120712910,
+   "period": 1,
+   "clock": "3:47",
+   "passer": "5314915",
+   "scorer": "5107990",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Lucia Yenes makes 25-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 120712913,
+   "period": 1,
+   "clock": "3:23",
+   "passer": "5314915",
+   "scorer": "5314917",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Natasa Tausova makes driving layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 120713025,
+   "period": 1,
+   "clock": "0:28",
+   "passer": "5107990",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Lucia Yenes assists)"
+  },
+  {
+   "seq": 120713060,
+   "period": 2,
+   "clock": "9:04",
+   "passer": "5107990",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Candy Edokpaigbe makes 18-foot jumper (Lucia Yenes assists)"
+  },
+  {
+   "seq": 120713297,
+   "period": 2,
+   "clock": "0:05",
+   "passer": "5462163",
+   "scorer": "5462165",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Maria Burliga makes layup (Savi Mi assists)"
+  },
+  {
+   "seq": 120713223,
+   "period": 3,
+   "clock": "9:35",
+   "passer": "5107990",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Lucia Yenes assists)"
+  },
+  {
+   "seq": 120713434,
+   "period": 3,
+   "clock": "6:09",
+   "passer": "5314915",
+   "scorer": "5462165",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Maria Burliga makes driving layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 120713533,
+   "period": 3,
+   "clock": "5:02",
+   "passer": "5314913",
+   "scorer": "5462163",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Savi Mi makes layup (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120713651,
+   "period": 3,
+   "clock": "2:20",
+   "passer": "5241784",
+   "scorer": "5462165",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Maria Burliga makes 7-foot jumper (Candy Edokpaigbe assists)"
+  },
+  {
+   "seq": 120714046,
+   "period": 4,
+   "clock": "4:15",
+   "passer": "5462163",
+   "scorer": "5314915",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Aina Cargol makes layup (Savi Mi assists)"
+  },
+  {
+   "seq": 120714050,
+   "period": 4,
+   "clock": "3:59",
+   "passer": "5312407",
+   "scorer": "5314915",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Aina Cargol makes 26-foot three point jumper (Jayda Queeley assists)"
+  },
+  {
+   "seq": 120714075,
+   "period": 4,
+   "clock": "2:21",
+   "passer": "5462163",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Savi Mi assists)"
+  },
+  {
+   "seq": 120714104,
+   "period": 4,
+   "clock": "1:25",
+   "passer": "5462165",
+   "scorer": "5462163",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Savi Mi makes 23-foot three point jumper (Maria Burliga assists)"
+  },
+  {
+   "seq": 120714127,
+   "period": 4,
+   "clock": "0:50",
+   "passer": "5314913",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120714276,
+   "period": 5,
+   "clock": "3:12",
+   "passer": "5314913",
+   "scorer": "5314915",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Aina Cargol makes driving layup (Noelia Mourino assists)"
+  },
+  {
+   "seq": 120714280,
+   "period": 5,
+   "clock": "2:49",
+   "passer": "5462163",
+   "scorer": "5462165",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Maria Burliga makes layup (Savi Mi assists)"
+  },
+  {
+   "seq": 120714466,
+   "period": 5,
+   "clock": "1:24",
+   "passer": "5462163",
+   "scorer": "5462165",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Maria Burliga makes layup (Savi Mi assists)"
+  }
+ ]
+}

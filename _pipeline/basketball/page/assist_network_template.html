@@ -1,0 +1,849 @@
+<title>USF Assist Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: the Playoff Watch column. Team and season switches, the game stepper, summary tiles,
+   the map with the selected game beside it, hub and authority rankings, then players and the game log. */
+:root {
+  --bg: #f4f6f2;
+  --panel: #ffffff;
+  --ink: #15211b;
+  --muted: #5d6a62;
+  --line: #d7ded8;
+  --green: #0b5d41;
+  --green-soft: #e3efe8;
+  --gold: #94690a;
+  --gold-soft: #fbf1d6;
+  --edge: #7d978a;
+  --good: #1f7a4d;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1613; --panel: #16201b; --ink: #e5ece7; --muted: #9aa89f; --line: #2a3832;
+    --green: #5cc896; --green-soft: #1b3127; --gold: #e8b84a; --gold-soft: #33290f;
+    --edge: #6d8a7c; --good: #5cc896; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1613; --panel: #16201b; --ink: #e5ece7; --muted: #9aa89f; --line: #2a3832;
+  --green: #5cc896; --green-soft: #1b3127; --gold: #e8b84a; --gold-soft: #33290f;
+  --edge: #6d8a7c; --good: #5cc896; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 48px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+/* flex children may shrink below their content, so wide tables scroll inside .scroll, not the page */
+.wrap > *, section > *, .card > *, header > * { min-width: 0; }
+h1, h2, .num, .display { font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1; margin: 0; font-weight: 700; letter-spacing: 0.01em; text-wrap: balance; }
+h2 { font-size: 1.55rem; margin: 0; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+p { margin: 0; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); font-weight: 600; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+header { display: flex; flex-direction: column; gap: 8px; }
+.lede { max-width: 62ch; color: var(--muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 6px; }
+.status { font-size: 0.85rem; color: var(--muted); }
+.teamlink { font-size: 0.85rem; font-weight: 600; color: var(--green); text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 14px; background: var(--panel); }
+.teamlink:hover { background: var(--green-soft); }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--panel); }
+.seg button { font: inherit; font-size: 0.85rem; padding: 6px 14px; background: transparent; color: var(--ink); border: 0; border-right: 1px solid var(--line); cursor: pointer; }
+.seg.small button { font-size: 0.78rem; padding: 4px 10px; }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--green); color: var(--bg); font-weight: 600; }
+.seg button:not([aria-pressed="true"]):hover { background: var(--green-soft); }
+
+section { display: flex; flex-direction: column; gap: 14px; }
+.sechead { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+
+.stepper { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+.steprow { display: flex; gap: 10px; align-items: center; }
+.steprow input[type="range"] { flex: 1; min-width: 0; accent-color: var(--green); height: 28px; }
+.steplabel { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.1; }
+.btn { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--green); background: var(--green); color: var(--bg); cursor: pointer; min-width: 4.6rem; }
+.btn.ghost { background: transparent; color: var(--green); min-width: 2.4rem; padding: 6px 10px; }
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tile .label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.tile .num { font-size: 2.6rem; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tile .num.text { font-size: 1.55rem; line-height: 1.1; overflow-wrap: anywhere; }
+.tile .sub { font-size: 0.85rem; color: var(--muted); }
+.tile.lead { background: var(--green); border-color: var(--green); color: var(--bg); }
+.tile.lead .label, .tile.lead .sub { color: var(--bg); opacity: 0.85; }
+
+.mapgrid { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .mapgrid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mapbar { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.mapbox { position: relative; width: 100%; }
+#map { display: block; width: 100%; touch-action: manipulation; }
+.empty { padding: 40px 16px; text-align: center; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.8rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend svg { flex: none; }
+.focusinfo { font-size: 0.88rem; min-height: 2.6em; border-top: 1px solid var(--line); padding-top: 8px; }
+.focusinfo strong { font-weight: 600; }
+
+.matchup { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; line-height: 1.1; }
+.result { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.result.W { color: var(--good); }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+.pill.ok { background: var(--green-soft); color: var(--green); }
+.pill.gap { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold); }
+.pill.new { background: var(--gold-soft); color: var(--gold); }
+.pairs { display: flex; flex-direction: column; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+.pair:last-child { border-bottom: 0; }
+.pair .n { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+
+.ranks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .ranks { grid-template-columns: minmax(0, 1fr); } }
+.rankdef { font-size: 0.85rem; color: var(--muted); }
+.ranklist { display: flex; flex-direction: column; }
+.rankrow { display: grid; grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) 3.4rem; gap: 10px; align-items: center; width: 100%; font: inherit; font-size: 0.9rem; text-align: left; background: transparent; color: var(--ink); border: 0; border-bottom: 1px solid var(--line); padding: 8px 4px; cursor: pointer; }
+.rankrow:last-child { border-bottom: 0; }
+.rankrow:hover, .rankrow[aria-pressed="true"] { background: var(--green-soft); }
+.rankrow .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rankrow .val { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; text-align: right; font-variant-numeric: tabular-nums; }
+.bar { position: relative; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.bar > span { position: absolute; inset: 0 auto 0 0; background: var(--green); border-radius: 4px; }
+
+.spark { display: block; overflow: visible; }
+.spark-all { fill: none; stroke: var(--line); stroke-width: 1.5; }
+.spark-now { fill: none; stroke: var(--green); stroke-width: 1.5; }
+.spark-dot { fill: var(--green); }
+.cellm { display: inline-flex; gap: 8px; align-items: center; justify-content: flex-end; }
+
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.r, td.r { text-align: right; }
+th button.sort { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+th[aria-sort="descending"] button.sort { color: var(--ink); }
+th[aria-sort="descending"] button.sort::after { content: " \2193"; }
+#log tbody tr { cursor: pointer; }
+#log tbody tr:hover td { background: var(--green-soft); }
+#log tr.cur td { background: var(--green-soft); font-weight: 600; }
+#log tr.future td { color: var(--muted); }
+.note { font-size: 0.85rem; color: var(--muted); max-width: 72ch; }
+button:focus-visible, input:focus-visible, tr:focus-visible, .node:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* map marks */
+.edge { fill: none; stroke: var(--edge); stroke-linecap: round; opacity: 0.45; transition: opacity 0.3s; }
+.edge.new { stroke: var(--gold); opacity: 0.95; }
+.edge.entering { opacity: 0; }
+.arrowhead { fill: var(--edge); }
+.arrowhead.new { fill: var(--gold); }
+.node { cursor: pointer; transition: opacity 0.2s; }
+.node circle { fill: var(--green); stroke: var(--panel); stroke-width: 1.5; }
+.node.new circle { stroke: var(--gold); stroke-width: 3; }
+.node text { font: 500 12px var(--font-body); fill: var(--ink); paint-order: stroke; stroke: var(--panel); stroke-width: 3.5px; stroke-linejoin: round; pointer-events: none; }
+.node:focus { outline: none; }
+.node:focus-visible circle { stroke: var(--gold); stroke-width: 3; }
+svg.focusing .edge { opacity: 0.06; }
+svg.focusing .edge.inc { opacity: 0.9; }
+svg.focusing .node { opacity: 0.3; }
+svg.focusing .node.me, svg.focusing .node.nbr { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .edge, .node { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow" id="eyebrow">USF Basketball</span>
+    <h1>USF Assist Network</h1>
+    <p class="lede">Assisted baskets from ESPN's play-by-play, passer to scorer, added one game at a time.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Team" id="teamSeg"></div>
+      <a class="teamlink" id="otherTeam" hidden></a>
+      <div class="seg" role="group" aria-label="Season" id="seasonSeg"></div>
+      <span class="status" id="status"></span>
+    </div>
+  </header>
+
+  <div class="stepper">
+    <div class="steprow">
+      <button class="btn" id="play" type="button">Play</button>
+      <button class="btn ghost" id="prev" type="button" aria-label="Previous game">&#8249;</button>
+      <input type="range" id="game" min="1" max="1" step="1" value="1" aria-label="Show the map through this game">
+      <button class="btn ghost" id="next" type="button" aria-label="Next game">&#8250;</button>
+    </div>
+    <p class="steplabel" id="steplabel" aria-live="polite"></p>
+  </div>
+
+  <div class="tiles" id="tiles">
+    <div class="tile lead"><span class="label">Assists mapped</span><span class="num" id="tAst">0</span><span class="sub" id="tAstSub"></span></div>
+    <div class="tile"><span class="label">Connections</span><span class="num" id="tCon">0</span><span class="sub" id="tConSub"></span></div>
+    <div class="tile"><span class="label">Team entropy</span><span class="num" id="tEnt"></span><span class="sub" id="tEntSub"></span><span id="tEntSpark"></span></div>
+    <div class="tile"><span class="label">Top hub</span><span class="num text" id="tHub"></span><span class="sub" id="tHubSub"></span></div>
+    <div class="tile"><span class="label">Top authority</span><span class="num text" id="tAuth"></span><span class="sub" id="tAuthSub"></span></div>
+    <div class="tile"><span class="label">Top connection</span><span class="num text" id="tPair"></span><span class="sub" id="tPairSub"></span></div>
+  </div>
+
+  <div class="mapgrid">
+    <div class="card">
+      <div class="mapbar">
+        <span class="small muted">Circle size</span>
+        <div class="seg small" role="group" aria-label="Circle size" id="sizeSeg"></div>
+      </div>
+      <div class="mapbox" id="mapbox">
+        <svg id="map" role="img" aria-label="Assist network map"></svg>
+        <div class="empty" id="mapEmpty" hidden></div>
+      </div>
+      <div class="legend">
+        <span><svg width="34" height="10" aria-hidden="true"><line x1="2" y1="5" x2="25" y2="5" stroke="var(--edge)" stroke-width="3" stroke-linecap="round"/><path d="M24,1 L32,5 L24,9 z" fill="var(--edge)"/></svg>Passer to scorer, thicker is more assists</span>
+        <span><svg width="34" height="10" aria-hidden="true"><line x1="2" y1="5" x2="25" y2="5" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/><path d="M24,1 L32,5 L24,9 z" fill="var(--gold)"/></svg>This game</span>
+        <span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="var(--green)"/></svg><span id="legendSize">Bigger circle, more assists made and received</span></span>
+      </div>
+      <p class="focusinfo" id="focusinfo"></p>
+    </div>
+
+    <div class="card" id="gamecard">
+      <h3 id="gEyebrow">Game</h3>
+      <p class="matchup" id="gMatch"></p>
+      <p class="result" id="gResult"></p>
+      <p class="small" id="gCheck"></p>
+      <p class="small muted" id="gNew"></p>
+      <div class="pairs" id="gPairs"></div>
+    </div>
+  </div>
+
+  <section id="rankSection">
+    <div class="sechead"><h2>Hub and authority</h2><span class="small muted" id="ranksNote"></span></div>
+    <div class="ranks">
+      <div class="card">
+        <h3>Hub score</h3>
+        <p class="rankdef">Assists made, each weighted by the receiver's authority score.</p>
+        <div class="ranklist" id="hubList"></div>
+      </div>
+      <div class="card">
+        <h3>Authority score</h3>
+        <p class="rankdef">Baskets scored off assists, each weighted by the passer's hub score.</p>
+        <div class="ranklist" id="authList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>Players</h2><span class="small muted" id="playersNote"></span></div>
+    <div class="scroll">
+      <table id="players">
+        <thead><tr>
+          <th>Player</th>
+          <th class="r" data-key="out"><button class="sort" type="button">Assists</button></th>
+          <th class="r" data-key="in"><button class="sort" type="button">Scored off assists</button></th>
+          <th class="r" data-key="hub"><button class="sort" type="button">Hub</button></th>
+          <th class="r" data-key="auth"><button class="sort" type="button">Authority</button></th>
+          <th class="r" data-key="box"><button class="sort" type="button">Box score assists</button></th>
+          <th>Most to</th><th>Most from</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>Game log</h2><span class="small muted">Tap a game to show the map through it</span></div>
+    <div class="scroll">
+      <table id="log">
+        <thead><tr><th class="r">#</th><th>Date</th><th>Opponent</th><th>Result</th><th class="r">Mapped / box score</th><th class="r">New connections</th><th class="r">Team entropy</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="note">Each line is one player's mapped assists to one teammate, from ESPN's play-by-play, where an assisted basket names the passer and the scorer. In some games the play-by-play has fewer assists than the box score, so every game shows both counts. Hub and authority are HITS scores on the network through the selected game: a player's hub score weights each mapped assist by the receiver's authority score, and authority weights each mapped assisted basket by the passer's hub score. Each team's scores are scaled to unit length within that network. Team entropy is the Shannon entropy of each player's share of the assists made, divided by log2 of the number of players on the map, so 1 means every player makes the same number of assists. The trend lines run 0 to 1. Dates are Pacific time.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>var DATA = /*__DATA__*/null;</script>
+<script>
+(function () {
+  "use strict";
+  var D = window.DATA;
+  var $ = function (id) { return document.getElementById(id); };
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var fmtDate = function (iso) { var p = iso.split("-"); return MONTHS[+p[1] - 1] + " " + (+p[2]); };
+  // scores bounded by 1 print without the leading zero
+  var fmtScore = function (x, dp) { if (x == null) return "-"; var s = x.toFixed(dp); return s.charAt(0) === "0" ? s.slice(1) : s; };
+  var reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var STORE = "usfassist.view";
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  if (typeof d3 === "undefined" || !D) {
+    $("mapEmpty").hidden = false;
+    $("mapEmpty").textContent = "The map didn't load. Reload the page to try again.";
+    return;
+  }
+
+  // ---- view state ----
+  var teams = Object.keys(D.teams);
+  STORE += "." + teams.join("-");   // the men's and women's pages share a site, so each keeps its own view
+  var view = { team: teams[0], season: null, step: 0, size: "inv", sort: "out" };
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE) || "null");
+    if (saved && D.teams[saved.team]) { view.team = saved.team; view.season = saved.season; }
+    if (saved && ["inv", "hub", "auth"].indexOf(saved.size) >= 0) view.size = saved.size;
+    if (saved && ["out", "in", "hub", "auth", "box"].indexOf(saved.sort) >= 0) view.sort = saved.sort;
+  } catch (e) {}
+  var seasonsOf = function (t) { return Object.keys(D.teams[t].seasons).sort().reverse(); };
+  if (!view.season || !D.teams[view.team].seasons[view.season]) view.season = seasonsOf(view.team)[0];
+  var remember = function () { try { localStorage.setItem(STORE, JSON.stringify({ team: view.team, season: view.season, size: view.size, sort: view.sort })); } catch (e) {} };
+
+  // ---- per team-season: cumulative steps and a layout that carries over game to game ----
+  var cache = {};
+  function hash(s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
+
+  function prepare(team, season) {
+    var key = team + ":" + season;
+    if (cache[key]) return cache[key];
+    var S = D.teams[team].seasons[season];
+    var steps = [], edges = new Map(), nodes = new Map(), boxP = new Map(), boxTotal = 0;
+    S.games.forEach(function (g, i) {
+      var gameEdges = new Map(), newPairs = [];
+      g.a.forEach(function (a) { var k = a[0] + ">" + a[1]; gameEdges.set(k, (gameEdges.get(k) || 0) + 1); });
+      gameEdges.forEach(function (n, k) {
+        var ps = k.split(">");
+        var e = edges.get(k);
+        if (e) e.w += n; else { edges.set(k, { k: k, p: ps[0], s: ps[1], w: n }); newPairs.push(k); }
+        [[ps[0], "out"], [ps[1], "in"]].forEach(function (r) {
+          var nd = nodes.get(r[0]);
+          if (!nd) { nd = { id: r[0], out: 0, in: 0 }; nodes.set(r[0], nd); }
+          nd[r[1]] += n;
+        });
+      });
+      Object.keys(g.pa || {}).forEach(function (id) { boxP.set(id, (boxP.get(id) || 0) + g.pa[id]); });
+      boxTotal += g.box || 0;
+      var ec = new Map(), nc = new Map();
+      edges.forEach(function (e, k) { ec.set(k, { k: e.k, p: e.p, s: e.s, w: e.w }); });
+      nodes.forEach(function (n, k) { nc.set(k, { id: n.id, out: n.out, in: n.in }); });
+      var m = g.m || { h: {}, au: {}, te: null };
+      steps.push({ idx: i + 1, game: g, edges: ec, nodes: nc, boxP: new Map(boxP), boxTotal: boxTotal, gameEdges: gameEdges, newPairs: newPairs,
+                   hub: m.h || {}, auth: m.au || {}, te: m.te });
+    });
+    var pos = layoutAll(steps);
+    // each game gets its own frame; the move between frames animates, so the map zooms out as it grows
+    var boxes = pos.map(function (mp) {
+      var bb = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity };
+      mp.forEach(function (p) { bb.x0 = Math.min(bb.x0, p.x); bb.x1 = Math.max(bb.x1, p.x); bb.y0 = Math.min(bb.y0, p.y); bb.y1 = Math.max(bb.y1, p.y); });
+      return bb;
+    });
+    return (cache[key] = { S: S, steps: steps, pos: pos, boxes: boxes });
+  }
+
+  function layoutAll(steps) {
+    var out = [], prev = new Map();
+    steps.forEach(function (st, i) {
+      var ids = Array.from(st.nodes.keys());
+      var und = new Map();
+      st.edges.forEach(function (e) { var k = e.p < e.s ? e.p + "|" + e.s : e.s + "|" + e.p; und.set(k, (und.get(k) || 0) + e.w); });
+      var nbrs = new Map(ids.map(function (id) { return [id, []]; }));
+      und.forEach(function (w, k) { var ab = k.split("|"); nbrs.get(ab[0]).push(ab[1]); nbrs.get(ab[1]).push(ab[0]); });
+      var maxR = 0;
+      prev.forEach(function (p) { maxR = Math.max(maxR, Math.hypot(p.x, p.y)); });
+      var nodes = ids.map(function (id) {
+        var p = prev.get(id);
+        if (p) return { id: id, x: p.x, y: p.y };
+        var ang = (hash(id) % 360) * Math.PI / 180;
+        var placed = nbrs.get(id).map(function (n) { return prev.get(n); }).filter(Boolean);
+        if (placed.length) {
+          var mx = 0, my = 0;
+          placed.forEach(function (q) { mx += q.x; my += q.y; });
+          return { id: id, x: mx / placed.length + Math.cos(ang) * 60, y: my / placed.length + Math.sin(ang) * 60 };
+        }
+        var r = prev.size ? maxR + 70 : 60;
+        return { id: id, x: Math.cos(ang) * r, y: Math.sin(ang) * r };
+      });
+      var links = Array.from(und).map(function (kw) { var ab = kw[0].split("|"); return { source: ab[0], target: ab[1], w: kw[1] }; });
+      var sim = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(function (d) { return d.id; })
+          .distance(function (l) { return 210 / (1 + 0.3 * Math.log1p(l.w)); })
+          .strength(function (l) { return Math.min(0.7, 0.12 + 0.08 * Math.log1p(l.w)); }))
+        .force("charge", d3.forceManyBody().strength(-1100).distanceMax(900))
+        .force("collide", d3.forceCollide(58))
+        .force("x", d3.forceX(0).strength(0.06))
+        .force("y", d3.forceY(0).strength(0.09))
+        .stop();
+      if (i > 0) sim.alpha(0.3);
+      var n = i === 0 ? 300 : 120;
+      for (var t = 0; t < n; t++) sim.tick();
+      var pos = new Map(nodes.map(function (d) { return [d.id, { x: d.x, y: d.y }]; }));
+      out.push(pos);
+      prev = pos;
+    });
+    return out;
+  }
+
+  // ---- helpers ----
+  function cur() { return prepare(view.team, view.season); }
+  function curStep() { var c = cur(); return c.steps.length ? c.steps[view.step - 1] : null; }
+  function player(id) { return cur().S.players[id] || { n: "Player " + id, s: "Player " + id }; }
+  function shortName(id) { var p = player(id); return p.s || p.n; }
+  function where(g) { return (g.site === "A" ? "at " : "vs ") + g.opp; }
+  function tags(g) { return (g.site === "N" ? " · neutral" : "") + (g.conf ? " · WCC" : "") + (g.post ? " · postseason" : ""); }
+  function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+  function maxBy(arr, f) { var best = null, bv = -Infinity; arr.forEach(function (x) { var v = f(x); if (v > bv) { bv = v; best = x; } }); return best; }
+  function hubOf(st, id) { return st.hub[id] || 0; }
+  function authOf(st, id) { return st.auth[id] || 0; }
+
+  // a 0-1 trend line: the whole season faint, the season so far solid, a dot on the selected game
+  function spark(values, at, w, h) {
+    var s = document.createElementNS(SVGNS, "svg");
+    s.setAttribute("width", w); s.setAttribute("height", h); s.setAttribute("viewBox", "0 0 " + w + " " + h);
+    s.setAttribute("class", "spark"); s.setAttribute("aria-hidden", "true");
+    var n = values.length;
+    if (n < 2) return s;
+    var X = function (i) { return 1.5 + (w - 3) * i / (n - 1); }, Y = function (v) { return h - 1.5 - (h - 3) * Math.max(0, Math.min(1, v)); };
+    var line = function (upto) {
+      var d = "", pen = false;
+      for (var i = 0; i <= upto; i++) {
+        if (values[i] == null) { pen = false; continue; }
+        d += (pen ? "L" : "M") + X(i).toFixed(1) + "," + Y(values[i]).toFixed(1); pen = true;
+      }
+      return d;
+    };
+    [["spark-all", n - 1], ["spark-now", at]].forEach(function (p) {
+      var path = document.createElementNS(SVGNS, "path"); path.setAttribute("d", line(p[1])); path.setAttribute("class", p[0]); s.appendChild(path);
+    });
+    if (values[at] != null) {
+      var dot = document.createElementNS(SVGNS, "circle");
+      dot.setAttribute("cx", X(at)); dot.setAttribute("cy", Y(values[at])); dot.setAttribute("r", 2.4); dot.setAttribute("class", "spark-dot");
+      s.appendChild(dot);
+    }
+    return s;
+  }
+  function series(c, id, key) { return c.steps.map(function (st) { return id in st[key] ? st[key][id] : null; }); }
+
+  // ---- map ----
+  var svg = d3.select("#map");
+  var defs = svg.append("defs");
+  [["arrow", "arrowhead"], ["arrow-new", "arrowhead new"]].forEach(function (m) {
+    defs.append("marker").attr("id", m[0]).attr("viewBox", "0 0 10 10").attr("refX", 9).attr("refY", 5)
+      .attr("markerWidth", 9).attr("markerHeight", 9).attr("markerUnits", "userSpaceOnUse").attr("orient", "auto")
+      .append("path").attr("d", "M0,0 L10,5 L0,10 z").attr("class", m[1]);
+  });
+  var gEdges = svg.append("g"), gNodes = svg.append("g");
+  var shown = new Map();   // id -> drawn {x, y, r}, so the next draw starts where this one is
+  var anim = null, hoverId = null, pinId = null;
+
+  function geometry(c) {
+    var w = Math.max(280, $("mapbox").clientWidth);
+    var h = Math.round(Math.max(340, Math.min(620, w * (w < 560 ? 1.05 : 0.68))));
+    var pad = 44, bb = c.boxes[view.step - 1];
+    var bw = Math.max(1, bb.x1 - bb.x0), bh = Math.max(1, bb.y1 - bb.y0);
+    var k = Math.min((w - 2 * pad) / bw, (h - 2 * pad - 16) / bh, 1.5);
+    var cx = (bb.x0 + bb.x1) / 2, cy = (bb.y0 + bb.y1) / 2;
+    return { w: w, h: h, X: function (x) { return w / 2 + (x - cx) * k; }, Y: function (y) { return h / 2 - 6 + (y - cy) * k; } };
+  }
+
+  function edgePath(a, b) {
+    var dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+    var bend = Math.min(60, len * 0.18);
+    // bend to one side of the direction of travel, so A to B and B to A split apart
+    var cx = (a.x + b.x) / 2 - dy / len * bend, cy = (a.y + b.y) / 2 + dx / len * bend;
+    var sx = cx - a.x, sy = cy - a.y, sl = Math.hypot(sx, sy) || 1;
+    var ex = b.x - cx, ey = b.y - cy, elen = Math.hypot(ex, ey) || 1;
+    var ra = Math.max(0, a.r) + 1.5, rb = Math.max(0, b.r) + 4;
+    return "M" + (a.x + sx / sl * ra) + "," + (a.y + sy / sl * ra) + " Q" + cx + "," + cy + " " + (b.x - ex / elen * rb) + "," + (b.y - ey / elen * rb);
+  }
+
+  function sizeValue(st, n) {
+    return view.size === "hub" ? hubOf(st, n.id) : view.size === "auth" ? authOf(st, n.id) : n.out + n.in;
+  }
+
+  function drawMap(animate) {
+    var c = cur(), st = curStep();
+    if (!st || !st.nodes.size) {
+      svg.attr("height", 0);
+      $("mapEmpty").hidden = false;
+      var up = (c.S.upcoming || [])[0];
+      $("mapEmpty").textContent = st ? "No assisted baskets mapped yet."
+        : "No games yet." + (up ? " First up: " + fmtDate(up.date) + " " + where(up) + "." : "");
+      gNodes.selectAll("*").remove(); gEdges.selectAll("*").remove(); shown = new Map();
+      return;
+    }
+    $("mapEmpty").hidden = true;
+    var G = geometry(c), pos = c.pos[view.step - 1];
+    svg.attr("viewBox", "0 0 " + G.w + " " + G.h).attr("height", G.h);
+
+    var vmax = 0, wmax = 1;
+    st.nodes.forEach(function (n) { vmax = Math.max(vmax, sizeValue(st, n)); });
+    st.edges.forEach(function (e) { wmax = Math.max(wmax, e.w); });
+    vmax = vmax || 1;
+    var inGame = new Set();
+    st.gameEdges.forEach(function (n, k) { var ps = k.split(">"); inGame.add(ps[0]); inGame.add(ps[1]); });
+
+    var ndata = Array.from(st.nodes.values()).map(function (n) {
+      var p = pos.get(n.id);
+      return { id: n.id, out: n.out, in: n.in, isNew: inGame.has(n.id),
+               t: { x: G.X(p.x), y: G.Y(p.y), r: 5 + 12 * Math.sqrt(sizeValue(st, n) / vmax) }, f: shown.get(n.id) || null };
+    });
+    var byId = new Map(ndata.map(function (d) { return [d.id, d]; }));
+    var edata = Array.from(st.edges.values()).map(function (e) {
+      return { k: e.k, p: e.p, s: e.s, w: e.w, isNew: st.gameEdges.has(e.k), sw: 1 + 5.5 * Math.sqrt(e.w / wmax) };
+    }).sort(function (a, b) { return (a.isNew - b.isNew) || (a.w - b.w); });
+
+    var nodeSel = gNodes.selectAll("g.node").data(ndata, function (d) { return d.id; }).join(function (enter) {
+      var g = enter.append("g").attr("class", "node").attr("tabindex", 0).attr("role", "button");
+      g.append("circle");
+      g.append("text").attr("text-anchor", "middle");
+      return g;
+    });
+    nodeSel.classed("new", function (d) { return d.isNew; })
+      .attr("aria-label", function (d) {
+        return player(d.id).n + ": " + plural(d.out, "assist", "assists") + ", " + d.in + " scored off assists, hub " +
+          fmtScore(hubOf(st, d.id), 3) + ", authority " + fmtScore(authOf(st, d.id), 3);
+      });
+    nodeSel.select("text").text(function (d) { return shortName(d.id); }).attr("dy", function (d) { return d.t.r + 13; });
+    nodeSel.on("pointerenter", function (ev, d) { hoverId = d.id; applyFocus(); })
+      .on("pointerleave", function () { hoverId = null; applyFocus(); })
+      .on("click", function (ev, d) { ev.stopPropagation(); pinId = pinId === d.id ? null : d.id; applyFocus(); })
+      .on("keydown", function (ev, d) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); pinId = pinId === d.id ? null : d.id; applyFocus(); } });
+
+    var edgeSel = gEdges.selectAll("path.edge").data(edata, function (d) { return d.k; }).join(function (enter) {
+      return enter.append("path").attr("class", "edge entering");
+    });
+    edgeSel.classed("new", function (d) { return d.isNew; })
+      .attr("stroke-width", function (d) { return d.sw; })
+      .attr("marker-end", function (d) { return d.isNew ? "url(#arrow-new)" : "url(#arrow)"; })
+      .order();
+
+    if (anim) cancelAnimationFrame(anim);
+    var dur = animate && !reduceMotion ? 650 : 0, t0 = performance.now();
+    function frame(now) {
+      var t = dur ? Math.min(1, (now - t0) / dur) : 1, e = d3.easeCubicInOut(t);
+      ndata.forEach(function (d) {
+        var f = d.f || { x: d.t.x, y: d.t.y, r: 0 };
+        d.x = f.x + (d.t.x - f.x) * e; d.y = f.y + (d.t.y - f.y) * e; d.r = f.r + (d.t.r - f.r) * e;
+        shown.set(d.id, { x: d.x, y: d.y, r: d.r });
+      });
+      nodeSel.attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+      nodeSel.select("circle").attr("r", function (d) { return Math.max(0, d.r); });
+      edgeSel.attr("d", function (d) { return edgePath(byId.get(d.p), byId.get(d.s)); });
+      if (t < 1) { anim = requestAnimationFrame(frame); return; }
+      anim = null;
+      edgeSel.classed("entering", false);
+      shown = new Map(ndata.map(function (d) { return [d.id, { x: d.t.x, y: d.t.y, r: d.t.r }]; }));
+    }
+    // A still draw lands at once, so the map is complete before any animation frame runs.
+    if (dur) anim = requestAnimationFrame(frame); else frame(t0);
+    if (pinId && !st.nodes.has(pinId)) pinId = null;
+    applyFocus();
+  }
+
+  svg.on("click", function () { pinId = null; applyFocus(); });
+
+  function applyFocus() {
+    var st = curStep(), id = hoverId || pinId;
+    document.querySelectorAll(".rankrow").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.id === pinId)); });
+    if (!st || !id || !st.nodes.has(id)) {
+      svg.classed("focusing", false);
+      gNodes.selectAll("g.node").classed("me", false).classed("nbr", false);
+      gEdges.selectAll("path.edge").classed("inc", false);
+      focusInfo(null);
+      return;
+    }
+    var nb = new Set();
+    st.edges.forEach(function (e) { if (e.p === id) nb.add(e.s); if (e.s === id) nb.add(e.p); });
+    svg.classed("focusing", true);
+    gNodes.selectAll("g.node").classed("me", function (d) { return d.id === id; }).classed("nbr", function (d) { return nb.has(d.id); });
+    gEdges.selectAll("path.edge").classed("inc", function (d) { return d.p === id || d.s === id; });
+    focusInfo(id);
+  }
+
+  // a change too small to show at this precision says so; it is never reported as zero
+  function change(now, before, dp) {
+    if (before == null) return "";
+    var d = now - before, step = Math.pow(10, -dp);
+    if (Math.abs(d) < step / 2) return ", change under " + fmtScore(step, dp);
+    return (d > 0 ? ", up " : ", down ") + fmtScore(Math.abs(d), dp);
+  }
+
+  // the most-to or most-from teammate, naming ties instead of hiding them
+  function topLabel(list, name) {
+    if (!list.length) return "-";
+    var w = Math.max.apply(null, list.map(function (e) { return e.w; }));
+    var top = list.filter(function (e) { return e.w === w; }).map(name).sort();
+    if (top.length === 1) return top[0] + " (" + w + ")";
+    if (top.length === 2) return top[0] + ", " + top[1] + " (" + w + " each)";
+    return top.length + " teammates tied (" + w + " each)";
+  }
+
+  function focusInfo(id) {
+    var box = $("focusinfo"), st = curStep(), c = cur();
+    box.textContent = "";
+    if (!st) return;
+    if (!id) { box.appendChild(el("span", "muted", "Tap or hover a player to see who they pass to and who feeds them.")); return; }
+    var n = st.nodes.get(id), p = player(id), prev = view.step > 1 ? c.steps[view.step - 2] : null;
+    var outs = [], ins = [];
+    st.edges.forEach(function (e) { if (e.p === id) outs.push(e); if (e.s === id) ins.push(e); });
+    box.appendChild(el("strong", null, p.n + (p.j ? " #" + p.j : "")));
+    var bits = [
+      plural(n.out, "assist", "assists") + " to " + plural(outs.length, "teammate", "teammates"),
+      n.in + " scored off assists from " + plural(ins.length, "teammate", "teammates"),
+      "hub " + fmtScore(hubOf(st, id), 3) + (prev ? change(hubOf(st, id), id in prev.hub ? prev.hub[id] : null, 3) : ""),
+      "authority " + fmtScore(authOf(st, id), 3) + (prev ? change(authOf(st, id), id in prev.auth ? prev.auth[id] : null, 3) : "")
+    ];
+    if (outs.length) bits.push("most to " + topLabel(outs, function (e) { return shortName(e.s); }));
+    if (ins.length) bits.push("most from " + topLabel(ins, function (e) { return shortName(e.p); }));
+    box.appendChild(document.createTextNode(" · " + bits.join(" · ") + (prev ? " (changes since game " + prev.idx + ")" : "")));
+  }
+
+  // ---- panels ----
+  function renderTiles(st, c) {
+    var ast = 0; st.edges.forEach(function (e) { ast += e.w; });
+    $("tAst").textContent = ast;
+    $("tAstSub").textContent = "box score has " + st.boxTotal;
+    $("tCon").textContent = st.edges.size;
+    $("tConSub").textContent = "passer-to-scorer pairs among " + st.nodes.size + " players";
+    var prev = view.step > 1 ? c.steps[view.step - 2] : null;
+    $("tEnt").textContent = fmtScore(st.te, 2);
+    $("tEntSub").textContent = "how evenly " + st.nodes.size + " players share the assists made; 1 is even" +
+      (prev && prev.te != null && st.te != null ? " · " + change(st.te, prev.te, 3).slice(2) + " since game " + prev.idx : "");
+    var es = $("tEntSpark"); es.textContent = "";
+    es.appendChild(spark(c.steps.map(function (s) { return s.te; }), view.step - 1, 160, 26));
+    var nodes = Array.from(st.nodes.values());
+    if (!nodes.length) { ["tHub", "tHubSub", "tAuth", "tAuthSub", "tPair", "tPairSub"].forEach(function (id) { $(id).textContent = "-"; }); return; }
+    var th = maxBy(nodes, function (n) { return hubOf(st, n.id); }), ta = maxBy(nodes, function (n) { return authOf(st, n.id); });
+    $("tHub").textContent = shortName(th.id);
+    $("tHubSub").textContent = "hub " + fmtScore(hubOf(st, th.id), 3) + " · " + plural(th.out, "assist", "assists") +
+      tied(nodes, th, function (n) { return hubOf(st, n.id); }, function (n) { return shortName(n.id); });
+    $("tAuth").textContent = shortName(ta.id);
+    $("tAuthSub").textContent = "authority " + fmtScore(authOf(st, ta.id), 3) + " · " + ta.in + " scored off assists" +
+      tied(nodes, ta, function (n) { return authOf(st, n.id); }, function (n) { return shortName(n.id); });
+    var edges = Array.from(st.edges.values()), pair = maxBy(edges, function (e) { return e.w; });
+    $("tPair").textContent = shortName(pair.p) + " → " + shortName(pair.s);
+    $("tPairSub").textContent = plural(pair.w, "assist", "assists") +
+      tied(edges, pair, function (e) { return e.w; }, function (e) { return shortName(e.p) + " → " + shortName(e.s); });
+  }
+
+  // name a tie for first instead of hiding it
+  function tied(items, top, val, label) {
+    var others = items.filter(function (x) { return x !== top && Math.abs(val(x) - val(top)) < 1e-9; });
+    if (!others.length) return "";
+    return others.length === 1 ? " · tied with " + label(others[0]) : " · tied with " + others.length + " others";
+  }
+
+  function renderGame(st, total) {
+    var g = st.game;
+    $("gEyebrow").textContent = "Game " + st.idx + " of " + total + " · " + fmtDate(g.date) + tags(g);
+    $("gMatch").textContent = where(g);
+    var r = $("gResult");
+    r.className = "result " + (g.res || "");
+    r.textContent = (g.res || "") + " " + g.us + "-" + g.them;
+    var check = $("gCheck"); check.textContent = "";
+    var mapped = g.a.length, box = g.box == null ? null : g.box;
+    check.appendChild(document.createTextNode(plural(mapped, "assist", "assists") + " mapped" + (box == null ? "" : " · box score " + box) + " "));
+    if (box != null) check.appendChild(el("span", box === mapped ? "pill ok" : "pill gap", box === mapped ? "counts match"
+      : Math.abs(box - mapped) + (box > mapped ? " fewer" : " more") + " than box score"));
+    $("gNew").textContent = plural(st.newPairs.length, "new connection", "new connections") + " this game";
+    var list = $("gPairs"); list.textContent = "";
+    var newSet = new Set(st.newPairs);
+    Array.from(st.gameEdges).sort(function (a, b) { return (b[1] - a[1]) || shortName(a[0].split(">")[0]).localeCompare(shortName(b[0].split(">")[0])); })
+      .forEach(function (kv) {
+        var ps = kv[0].split(">"), row = el("div", "pair"), who = el("span", null, shortName(ps[0]) + " → " + shortName(ps[1]) + " ");
+        if (newSet.has(kv[0])) who.appendChild(el("span", "pill new", "new"));
+        row.appendChild(who); row.appendChild(el("span", "n", String(kv[1])));
+        list.appendChild(row);
+      });
+  }
+
+  function renderRanks(st) {
+    [["hubList", st.hub], ["authList", st.auth]].forEach(function (pair) {
+      var list = $(pair[0]), scores = pair[1]; list.textContent = "";
+      var ranked = Object.keys(scores).filter(function (id) { return scores[id] > 0; })
+        .sort(function (a, b) { return (scores[b] - scores[a]) || shortName(a).localeCompare(shortName(b)); });
+      // top six, plus anyone tied with the sixth
+      var cut = ranked.length > 6 ? scores[ranked[5]] : -1;
+      ranked.filter(function (id, i) { return i < 6 || Math.abs(scores[id] - cut) < 1e-9; }).forEach(function (id) {
+          var b = el("button", "rankrow"); b.type = "button"; b.dataset.id = id;
+          b.setAttribute("aria-pressed", String(id === pinId));
+          b.appendChild(el("span", "nm", shortName(id)));
+          var bar = el("span", "bar"), fill = el("span"); fill.style.width = (100 * Math.min(1, scores[id])).toFixed(1) + "%"; bar.appendChild(fill);
+          b.appendChild(bar);
+          b.appendChild(el("span", "val", fmtScore(scores[id], 3)));
+          b.addEventListener("click", function () {
+            pinId = pinId === id ? null : id; applyFocus();
+            var r = $("mapbox").getBoundingClientRect();
+            if (pinId && (r.bottom < 0 || r.top > window.innerHeight)) $("mapbox").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+          });
+          list.appendChild(b);
+        });
+    });
+    $("ranksNote").textContent = "Through game " + st.idx + " · top six, with ties at sixth · tap a player to show them on the map";
+  }
+
+  function renderPlayers(st, c) {
+    var ids = new Set(Array.from(st.nodes.keys()));
+    st.boxP.forEach(function (n, id) { ids.add(id); });
+    var rows = Array.from(ids).map(function (id) {
+      var n = st.nodes.get(id) || { out: 0, in: 0 }, outs = [], ins = [];
+      st.edges.forEach(function (e) { if (e.p === id) outs.push(e); if (e.s === id) ins.push(e); });
+      return { id: id, out: n.out, in: n.in, box: st.boxP.get(id) || 0, hub: hubOf(st, id), auth: authOf(st, id),
+               to: topLabel(outs, function (e) { return shortName(e.s); }), from: topLabel(ins, function (e) { return shortName(e.p); }) };
+    }).sort(function (a, b) { return (b[view.sort] - a[view.sort]) || (b.out - a.out) || shortName(a.id).localeCompare(shortName(b.id)); });
+    var tb = document.querySelector("#players tbody"); tb.textContent = "";
+    rows.forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.appendChild(el("td", null, player(r.id).n));
+      tr.appendChild(el("td", "r", String(r.out)));
+      tr.appendChild(el("td", "r", String(r.in)));
+      [["hub", r.hub], ["auth", r.auth]].forEach(function (m) {
+        var td = el("td", "r"), wrap = el("span", "cellm");
+        wrap.appendChild(spark(series(c, r.id, m[0]), view.step - 1, 56, 16));
+        wrap.appendChild(el("span", null, st.nodes.has(r.id) ? fmtScore(m[1], 3) : "-"));
+        td.appendChild(wrap); tr.appendChild(td);
+      });
+      tr.appendChild(el("td", "r", String(r.box)));
+      tr.appendChild(el("td", null, r.to));
+      tr.appendChild(el("td", null, r.from));
+      tb.appendChild(tr);
+    });
+    document.querySelectorAll("#players th[data-key]").forEach(function (th) {
+      if (th.dataset.key === view.sort) th.setAttribute("aria-sort", "descending"); else th.removeAttribute("aria-sort");
+    });
+    $("playersNote").textContent = "Players with a mapped assist made or received, or a box-score assist · through game " + st.idx;
+  }
+
+  function renderLog(c) {
+    var tb = document.querySelector("#log tbody"); tb.textContent = "";
+    c.steps.forEach(function (st) {
+      var g = st.game, tr = document.createElement("tr");
+      tr.className = st.idx === view.step ? "cur" : (st.idx > view.step ? "future" : "");
+      tr.tabIndex = 0;
+      tr.appendChild(el("td", "r", String(st.idx)));
+      tr.appendChild(el("td", null, fmtDate(g.date)));
+      tr.appendChild(el("td", null, where(g) + tags(g)));
+      tr.appendChild(el("td", null, (g.res || "") + " " + g.us + "-" + g.them));
+      tr.appendChild(el("td", "r", g.a.length + (g.box == null ? "" : " / " + g.box)));
+      tr.appendChild(el("td", "r", String(st.newPairs.length)));
+      tr.appendChild(el("td", "r", fmtScore(st.te, 2)));
+      var go = function () { stopPlay(); setStep(st.idx, true); };
+      tr.addEventListener("click", go);
+      tr.addEventListener("keydown", function (ev) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+      tb.appendChild(tr);
+    });
+  }
+
+  var SIZES = [["inv", "Assists", "Bigger circle, more assists made and received"], ["hub", "Hub", "Bigger circle, higher hub score"], ["auth", "Authority", "Bigger circle, higher authority score"]];
+  function renderControls() {
+    var tseg = $("teamSeg"); tseg.textContent = "";
+    // a one-team page swaps the team switch for a link to the other team's page
+    tseg.hidden = teams.length < 2;
+    if (teams.length < 2 && D.other) { var a = $("otherTeam"); a.href = D.other.href; a.textContent = D.other.label; a.hidden = false; }
+    if (teams.length > 1) teams.forEach(function (t) {
+      var b = el("button", null, t === "mens" ? "Men" : "Women");
+      b.type = "button"; b.id = "team-" + t; b.setAttribute("aria-pressed", String(t === view.team));
+      b.addEventListener("click", function () { if (view.team === t) return; view.team = t; if (!D.teams[t].seasons[view.season]) view.season = seasonsOf(t)[0]; switchView(); });
+      tseg.appendChild(b);
+    });
+    var sseg = $("seasonSeg"); sseg.textContent = "";
+    seasonsOf(view.team).forEach(function (s) {
+      var b = el("button", null, D.teams[view.team].seasons[s].label);
+      b.type = "button"; b.id = "season-" + s; b.setAttribute("aria-pressed", String(s === view.season));
+      b.addEventListener("click", function () { if (view.season === s) return; view.season = s; switchView(); });
+      sseg.appendChild(b);
+    });
+    var zseg = $("sizeSeg"); zseg.textContent = "";
+    SIZES.forEach(function (z) {
+      var b = el("button", null, z[1]);
+      b.type = "button"; b.id = "size-" + z[0]; b.setAttribute("aria-pressed", String(z[0] === view.size));
+      b.addEventListener("click", function () { if (view.size === z[0]) return; view.size = z[0]; remember(); renderControls(); drawMap(true); });
+      zseg.appendChild(b);
+      if (z[0] === view.size) $("legendSize").textContent = z[2];
+    });
+    var c = cur(), S = c.S, n = c.steps.length;
+    $("eyebrow").textContent = "USF " + D.teams[view.team].label + " · " + S.label;
+    $("status").textContent = n ? plural(n, "game", "games") + " through " + fmtDate(S.games[n - 1].date) + " · built " + fmtDate(D.built) : "No games yet · built " + fmtDate(D.built);
+    var range = $("game");
+    range.max = String(Math.max(1, n)); range.value = String(Math.max(1, view.step)); range.disabled = n <= 1;
+    $("prev").disabled = view.step <= 1; $("next").disabled = view.step >= n; $("play").disabled = n <= 1;
+  }
+
+  function render(animate) {
+    var c = cur(), st = curStep(), n = c.steps.length;
+    renderControls();
+    $("tiles").hidden = !st; $("gamecard").hidden = !st; $("rankSection").hidden = !st;
+    if (st) {
+      $("steplabel").textContent = "Through game " + st.idx + " of " + n + " · " + fmtDate(st.game.date) + " " + where(st.game);
+      renderTiles(st, c); renderGame(st, n); renderRanks(st); renderPlayers(st, c);
+    } else {
+      $("steplabel").textContent = "Waiting for the first game";
+      document.querySelector("#players tbody").textContent = "";
+      $("playersNote").textContent = "";
+    }
+    renderLog(c);
+    drawMap(animate);
+  }
+
+  function setStep(k, animate) {
+    var n = cur().steps.length;
+    view.step = Math.max(n ? 1 : 0, Math.min(n, k));
+    render(animate);
+  }
+
+  function switchView() {
+    stopPlay(); remember();
+    hoverId = null; pinId = null; shown = new Map();
+    gNodes.selectAll("*").remove(); gEdges.selectAll("*").remove();
+    view.step = cur().steps.length;
+    render(true);
+  }
+
+  document.querySelectorAll("#players th[data-key] button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      view.sort = b.parentNode.dataset.key; remember();
+      var st = curStep(); if (st) renderPlayers(st, cur());
+    });
+  });
+
+  // ---- playback ----
+  var timer = null;
+  function stopPlay() { if (timer) clearTimeout(timer); timer = null; $("play").textContent = "Play"; }
+  function tick() {
+    var n = cur().steps.length;
+    if (view.step >= n) { stopPlay(); return; }
+    setStep(view.step + 1, true);
+    timer = setTimeout(tick, 1100);
+  }
+  $("play").addEventListener("click", function () {
+    if (timer) { stopPlay(); return; }
+    $("play").textContent = "Pause";
+    if (view.step >= cur().steps.length) setStep(1, true);
+    timer = setTimeout(tick, 1100);
+  });
+  $("prev").addEventListener("click", function () { stopPlay(); setStep(view.step - 1, true); });
+  $("next").addEventListener("click", function () { stopPlay(); setStep(view.step + 1, true); });
+  $("game").addEventListener("input", function (ev) { stopPlay(); setStep(+ev.target.value, true); });
+
+  var rq = null;
+  if (window.ResizeObserver) {
+    var lastW = $("mapbox").clientWidth;
+    new ResizeObserver(function () {
+      var w = $("mapbox").clientWidth;
+      if (Math.abs(w - lastW) < 2) return;
+      lastW = w;
+      if (rq) cancelAnimationFrame(rq);
+      rq = requestAnimationFrame(function () { shown = new Map(); gNodes.selectAll("*").remove(); gEdges.selectAll("*").remove(); drawMap(false); });
+    }).observe($("mapbox"));
+  }
+
+  view.step = cur().steps.length;
+  render(false);
+})();
+</script>

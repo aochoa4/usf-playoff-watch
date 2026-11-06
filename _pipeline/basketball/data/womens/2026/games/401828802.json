@@ -1,0 +1,341 @@
+{
+ "event_id": "401828802",
+ "date": "2025-12-30",
+ "tip_utc": "2025-12-31T02:00Z",
+ "opponent": "Portland Pilots",
+ "opponent_short": "Portland",
+ "opponent_id": "2501",
+ "site": "H",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 67,
+ "opp_score": 64,
+ "result": "W",
+ "check": {
+  "box_assists": 18,
+  "pbp_assists": 17,
+  "matches_box": false,
+  "box_fgm": 27,
+  "pbp_made_fg": 27,
+  "assist_text_without_ids": 0,
+  "name_checks": 17,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5314917": {
+   "name": "Natasa Tausova",
+   "short": "N. Tausova",
+   "jersey": "12",
+   "position": "F",
+   "starter": true,
+   "minutes": "26",
+   "points": "14",
+   "assists": "3",
+   "dnp": false
+  },
+  "5314913": {
+   "name": "Noelia Mourino",
+   "short": "N. Mourio",
+   "jersey": "3",
+   "position": "F",
+   "starter": true,
+   "minutes": "21",
+   "points": "4",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314915": {
+   "name": "Aina Cargol",
+   "short": "A. Cargol",
+   "jersey": "9",
+   "position": "G",
+   "starter": true,
+   "minutes": "35",
+   "points": "9",
+   "assists": "6",
+   "dnp": false
+  },
+  "5241784": {
+   "name": "Candy Edokpaigbe",
+   "short": "C. Edokpaigbe",
+   "jersey": "23",
+   "position": "G",
+   "starter": true,
+   "minutes": "37",
+   "points": "12",
+   "assists": "0",
+   "dnp": false
+  },
+  "5107763": {
+   "name": "Mara Neira",
+   "short": "M. Neira",
+   "jersey": "2",
+   "position": "G",
+   "starter": true,
+   "minutes": "24",
+   "points": "16",
+   "assists": "3",
+   "dnp": false
+  },
+  "4705117": {
+   "name": "Sol Castro",
+   "short": "S. Castro",
+   "jersey": "24",
+   "position": "F",
+   "starter": false,
+   "minutes": "19",
+   "points": "4",
+   "assists": "1",
+   "dnp": false
+  },
+  "5314914": {
+   "name": "Meghan McIntyre",
+   "short": "M. McIntyre",
+   "jersey": "4",
+   "position": "G",
+   "starter": false,
+   "minutes": "22",
+   "points": "0",
+   "assists": "4",
+   "dnp": false
+  },
+  "5174314": {
+   "name": "Paula Tirado",
+   "short": "P. Tirado",
+   "jersey": "22",
+   "position": "G",
+   "starter": false,
+   "minutes": "14",
+   "points": "8",
+   "assists": "0",
+   "dnp": false
+  },
+  "4899726": {
+   "name": "Olivia Williams",
+   "short": "O. Williams",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": "2",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5314918": {
+   "name": "Sophia Priestley",
+   "short": "S. Priestley",
+   "jersey": "32",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5178456": {
+   "name": "Nevaeh Ferrara Horne",
+   "short": "N. Ferrara Horne",
+   "jersey": "7",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5178411": {
+   "name": "Michelle Ugwah",
+   "short": "M. Ugwah",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "5314916": {
+   "name": "Amy Pateman",
+   "short": "A. Pateman",
+   "jersey": "10",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 116518161,
+   "period": 1,
+   "clock": "7:35",
+   "passer": "5314917",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Natasa Tausova assists)"
+  },
+  {
+   "seq": 116518416,
+   "period": 1,
+   "clock": "6:22",
+   "passer": "5314914",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Meghan McIntyre assists)"
+  },
+  {
+   "seq": 116519497,
+   "period": 1,
+   "clock": "0:49",
+   "passer": "5314914",
+   "scorer": "5314917",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Natasa Tausova makes 10-foot jumper (Meghan McIntyre assists)"
+  },
+  {
+   "seq": 116519587,
+   "period": 1,
+   "clock": "0:17",
+   "passer": "5314915",
+   "scorer": "5314917",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Natasa Tausova makes layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 116520055,
+   "period": 2,
+   "clock": "9:20",
+   "passer": "5107763",
+   "scorer": "5314917",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Natasa Tausova makes 22-foot three point jumper (Mara Neira assists)"
+  },
+  {
+   "seq": 116520561,
+   "period": 2,
+   "clock": "6:36",
+   "passer": "5314914",
+   "scorer": "5314915",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Aina Cargol makes 25-foot three point jumper (Meghan McIntyre assists)"
+  },
+  {
+   "seq": 116521369,
+   "period": 2,
+   "clock": "3:22",
+   "passer": "5314915",
+   "scorer": "5314917",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Natasa Tausova makes layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 116521694,
+   "period": 2,
+   "clock": "0:43",
+   "passer": "5314917",
+   "scorer": "4705117",
+   "points": 2,
+   "shot": "JumpShot",
+   "text": "Sol Castro makes 11-foot jumper (Natasa Tausova assists)"
+  },
+  {
+   "seq": 116522747,
+   "period": 3,
+   "clock": "9:24",
+   "passer": "5107763",
+   "scorer": "5314915",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Aina Cargol makes 23-foot three point jumper (Mara Neira assists)"
+  },
+  {
+   "seq": 116523211,
+   "period": 3,
+   "clock": "6:46",
+   "passer": "5314914",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 26-foot three point jumper (Meghan McIntyre assists)"
+  },
+  {
+   "seq": 116523237,
+   "period": 3,
+   "clock": "6:29",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 24-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 116523337,
+   "period": 3,
+   "clock": "5:54",
+   "passer": "5314915",
+   "scorer": "5107763",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Mara Neira makes 24-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 116524472,
+   "period": 3,
+   "clock": "1:51",
+   "passer": "5314917",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Natasa Tausova assists)"
+  },
+  {
+   "seq": 116525377,
+   "period": 4,
+   "clock": "9:14",
+   "passer": "5314913",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Noelia Mourio assists)"
+  },
+  {
+   "seq": 116525996,
+   "period": 4,
+   "clock": "7:22",
+   "passer": "5314915",
+   "scorer": "5241784",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Candy Edokpaigbe makes layup (Aina Cargol assists)"
+  },
+  {
+   "seq": 116527133,
+   "period": 4,
+   "clock": "2:31",
+   "passer": "5314915",
+   "scorer": "5314917",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Natasa Tausova makes 24-foot three point jumper (Aina Cargol assists)"
+  },
+  {
+   "seq": 116527429,
+   "period": 4,
+   "clock": "0:33",
+   "passer": "5107763",
+   "scorer": "5314915",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Aina Cargol makes layup (Mara Neira assists)"
+  }
+ ]
+}

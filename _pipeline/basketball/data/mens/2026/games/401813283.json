@@ -1,0 +1,353 @@
+{
+ "event_id": "401813283",
+ "date": "2025-12-21",
+ "tip_utc": "2025-12-21T23:00Z",
+ "opponent": "Morgan State Bears",
+ "opponent_short": "Morgan St",
+ "opponent_id": "2415",
+ "site": "H",
+ "conference_game": false,
+ "season_type": 2,
+ "usf_score": 94,
+ "opp_score": 64,
+ "result": "W",
+ "check": {
+  "box_assists": 16,
+  "pbp_assists": 16,
+  "matches_box": true,
+  "box_fgm": 29,
+  "pbp_made_fg": 29,
+  "assist_text_without_ids": 0,
+  "name_checks": 16,
+  "name_mismatches": []
+ },
+ "roster": {
+  "5105410": {
+   "name": "Guillermo Diaz-Graham",
+   "short": "G. Diaz Graham",
+   "jersey": "25",
+   "position": "F",
+   "starter": true,
+   "minutes": "18",
+   "points": "7",
+   "assists": "2",
+   "dnp": false
+  },
+  "4683767": {
+   "name": "Mookie Cook",
+   "short": "M. Cook",
+   "jersey": "1",
+   "position": "F",
+   "starter": true,
+   "minutes": "14",
+   "points": "14",
+   "assists": "1",
+   "dnp": false
+  },
+  "5176425": {
+   "name": "Ryan Beasley",
+   "short": "R. Beasley",
+   "jersey": "0",
+   "position": "G",
+   "starter": true,
+   "minutes": "27",
+   "points": "10",
+   "assists": "3",
+   "dnp": false
+  },
+  "5037875": {
+   "name": "Tyrone Riley IV",
+   "short": "T. Riley IV",
+   "jersey": "5",
+   "position": "G",
+   "starter": true,
+   "minutes": "24",
+   "points": "10",
+   "assists": "2",
+   "dnp": false
+  },
+  "4702764": {
+   "name": "Vukasin Masic",
+   "short": "V. Masic",
+   "jersey": "7",
+   "position": "G",
+   "starter": true,
+   "minutes": "14",
+   "points": "0",
+   "assists": "2",
+   "dnp": false
+  },
+  "5176426": {
+   "name": "Junjie Wang",
+   "short": "J. Wang",
+   "jersey": "35",
+   "position": "F",
+   "starter": false,
+   "minutes": "15",
+   "points": "5",
+   "assists": "0",
+   "dnp": false
+  },
+  "5174624": {
+   "name": "David Fuchs",
+   "short": "D. Fuchs",
+   "jersey": "8",
+   "position": "F",
+   "starter": false,
+   "minutes": "25",
+   "points": "23",
+   "assists": "1",
+   "dnp": false
+  },
+  "5241062": {
+   "name": "Veniamin Abosi",
+   "short": "V. Abosi",
+   "jersey": "14",
+   "position": "F",
+   "starter": false,
+   "minutes": "15",
+   "points": "5",
+   "assists": "3",
+   "dnp": false
+  },
+  "4433208": {
+   "name": "Saba Gigiberia",
+   "short": "S. Gigiberia",
+   "jersey": "10",
+   "position": "C",
+   "starter": false,
+   "minutes": "2",
+   "points": "2",
+   "assists": "0",
+   "dnp": false
+  },
+  "5313125": {
+   "name": "Weilun Zhao",
+   "short": "W. Zhao",
+   "jersey": "23",
+   "position": "G",
+   "starter": false,
+   "minutes": "4",
+   "points": "3",
+   "assists": "0",
+   "dnp": false
+  },
+  "5313124": {
+   "name": "Sean Blakely Drummond",
+   "short": "S. Blakely Drummond",
+   "jersey": "21",
+   "position": "G",
+   "starter": false,
+   "minutes": "2",
+   "points": "0",
+   "assists": "0",
+   "dnp": false
+  },
+  "5107971": {
+   "name": "Aidan Braccia",
+   "short": "A. Braccia",
+   "jersey": "2",
+   "position": "G",
+   "starter": false,
+   "minutes": "17",
+   "points": "0",
+   "assists": "1",
+   "dnp": false
+  },
+  "5101799": {
+   "name": "Legend Smiley",
+   "short": "L. Smiley",
+   "jersey": "13",
+   "position": "G",
+   "starter": false,
+   "minutes": "23",
+   "points": "15",
+   "assists": "1",
+   "dnp": false
+  },
+  "4875213": {
+   "name": "Ndewedo Newbury",
+   "short": "N. Newbury",
+   "jersey": "3",
+   "position": "F",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  },
+  "4433614": {
+   "name": "Isa Silva",
+   "short": "I. Silva",
+   "jersey": "12",
+   "position": "G",
+   "starter": false,
+   "minutes": null,
+   "points": null,
+   "assists": null,
+   "dnp": true
+  }
+ },
+ "assists": [
+  {
+   "seq": 116296800,
+   "period": 1,
+   "clock": "16:52",
+   "passer": "4683767",
+   "scorer": "5176425",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Ryan Beasley makes layup (Mookie Cook assists)"
+  },
+  {
+   "seq": 116297839,
+   "period": 1,
+   "clock": "11:51",
+   "passer": "5241062",
+   "scorer": "5105410",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Guillermo Diaz Graham makes 25-foot three point jumper (Veniamin Abosi assists)"
+  },
+  {
+   "seq": 116297894,
+   "period": 1,
+   "clock": "11:13",
+   "passer": "4702764",
+   "scorer": "5105410",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "Guillermo Diaz Graham makes 2-foot alley oop dunk (Vukasin Masic assists)"
+  },
+  {
+   "seq": 116299108,
+   "period": 1,
+   "clock": "7:29",
+   "passer": "5037875",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs makes 4-foot dunk (Tyrone Riley IV assists)"
+  },
+  {
+   "seq": 116299476,
+   "period": 1,
+   "clock": "6:47",
+   "passer": "5241062",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs makes 4-foot dunk (Veniamin Abosi assists)"
+  },
+  {
+   "seq": 116299629,
+   "period": 1,
+   "clock": "6:03",
+   "passer": "5037875",
+   "scorer": "5176425",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Ryan Beasley makes 25-foot three point jumper (Tyrone Riley IV assists)"
+  },
+  {
+   "seq": 116300291,
+   "period": 1,
+   "clock": "2:41",
+   "passer": "5101799",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs makes 3-foot dunk (Legend Smiley assists)"
+  },
+  {
+   "seq": 116301670,
+   "period": 2,
+   "clock": "19:06",
+   "passer": "5176425",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "David Fuchs makes layup (Ryan Beasley assists)"
+  },
+  {
+   "seq": 116301966,
+   "period": 2,
+   "clock": "17:09",
+   "passer": "5176425",
+   "scorer": "5101799",
+   "points": 3,
+   "shot": "JumpShot",
+   "text": "Legend Smiley makes 24-foot three point jumper (Ryan Beasley assists)"
+  },
+  {
+   "seq": 116302194,
+   "period": 2,
+   "clock": "16:02",
+   "passer": "5107971",
+   "scorer": "5176426",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Junjie Wang makes layup (Aidan Braccia assists)"
+  },
+  {
+   "seq": 116302203,
+   "period": 2,
+   "clock": "14:54",
+   "passer": "4702764",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "David Fuchs makes layup (Vukasin Masic assists)"
+  },
+  {
+   "seq": 116302364,
+   "period": 2,
+   "clock": "13:47",
+   "passer": "5176425",
+   "scorer": "4433208",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Saba Gigiberia makes layup (Ryan Beasley assists)"
+  },
+  {
+   "seq": 116302884,
+   "period": 2,
+   "clock": "12:58",
+   "passer": "5105410",
+   "scorer": "5176426",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Junjie Wang makes layup (Guillermo Diaz Graham assists)"
+  },
+  {
+   "seq": 116303620,
+   "period": 2,
+   "clock": "9:04",
+   "passer": "5241062",
+   "scorer": "5037875",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Tyrone Riley IV makes layup (Veniamin Abosi assists)"
+  },
+  {
+   "seq": 116304165,
+   "period": 2,
+   "clock": "5:47",
+   "passer": "5105410",
+   "scorer": "5174624",
+   "points": 2,
+   "shot": "DunkShot",
+   "text": "David Fuchs makes 2-foot alley oop dunk (Guillermo Diaz Graham assists)"
+  },
+  {
+   "seq": 116304296,
+   "period": 2,
+   "clock": "4:07",
+   "passer": "5174624",
+   "scorer": "4683767",
+   "points": 2,
+   "shot": "LayUpShot",
+   "text": "Mookie Cook makes layup (David Fuchs assists)"
+  }
+ ]
+}
